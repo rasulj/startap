@@ -2,7 +2,7 @@
 import { FunctionComponent, useState } from 'react'
 import Header from './header/header'
 import { LayautProps } from './layouts.props'
-import { Box } from '@chakra-ui/react'
+import { Box, Container } from '@chakra-ui/react'
 import Sidebar from './sidebar/sidebar'
 
 
@@ -14,7 +14,11 @@ const Layout = ({children ,...props}:LayautProps) => {
     <Box maxW={"full"} overflow={"hidden"}>
   <Header onToggle={onTogle}/>
   <Sidebar  toggle={toggle}/>
-  <Box mt={'11vh'} pl={{ base: 0, lg: '320px' }} transition={'all .4s ease'} >{children} </Box>
+  <Box mt={'11vh'} pl={{ base: 0, lg: '320px' }} transition={'all .4s ease'} >
+    <Container maxW={'container.lg'}>
+      {children}
+    </Container>
+     </Box>
     </Box>
   )
 }

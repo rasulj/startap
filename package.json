@@ -1,5 +1,5 @@
 {
-"name": "startup",
+	"name": "startup",
 	"version": "0.1.0",
 	"private": true,
 	"scripts": {
