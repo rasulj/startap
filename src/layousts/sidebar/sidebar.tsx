@@ -1,15 +1,15 @@
 import { Box, Button, Container, HStack, Icon, Text, useColorModeValue } from '@chakra-ui/react';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
+import { useRouter } from "next/router";
 import { navigation } from 'src/config/constants';
 import { SidebarProps } from './sidebar.props';
 
 const Sidebar = ({ toggle }: SidebarProps): JSX.Element => {
 	const router = useRouter();
-
+    console.log(router)
 	return (
 		<Box
-		zIndex={99}
+		zIndex={1001}
 			w={{ base: 'full', lg: '300px' }}
 			h={'90vh'}
 			bg={useColorModeValue('gray.50', 'gray.900')}

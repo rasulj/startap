@@ -4,6 +4,7 @@ import Header from './header/header'
 import { LayautProps } from './layouts.props'
 import { Box, Container } from '@chakra-ui/react'
 import Sidebar from './sidebar/sidebar'
+import Footer from './footer/footer'
 
 
 const Layout = ({children ,...props}:LayautProps) => {
@@ -19,6 +20,7 @@ const Layout = ({children ,...props}:LayautProps) => {
       {children}
     </Container>
      </Box>
+     <Footer/>
     </Box>
   )
 }

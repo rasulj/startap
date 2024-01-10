@@ -1,7 +1,8 @@
 import Carousel from "react-multi-carousel"
 import SectionTitle from "../section-title/section-title"
-import { Box, Icon,  Text,  useColorModeValue } from "@chakra-ui/react"
-import { categories, responsive } from "src/config/constants"
+import { Box, Icon,  Stack,  Text,  useColorModeValue } from "@chakra-ui/react"
+import { categories,  } from "src/config/constants"
+import { categoryCarousel } from "src/config/carusel"
 
 
 
@@ -11,9 +12,8 @@ import { categories, responsive } from "src/config/constants"
   return (
   <>
     <SectionTitle title='Top categories' subtitle='Learn our courses with high rating' />
-   <Carousel responsive={responsive}
+   <Carousel responsive={categoryCarousel}
     showDots={false} arrows={false} autoPlay autoPlaySpeed={2000} infinite
-  
      >
     { categories.map(item =>(
       <Box key={item.id}
@@ -25,8 +25,10 @@ import { categories, responsive } from "src/config/constants"
          <Text mt={2} fontSize={'large'}> { item.name}</Text>
       </Box>
     ))}
+    
    </Carousel>
   </>
+  
   )
 }
 export default Categories
