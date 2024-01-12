@@ -1,4 +1,4 @@
-import { Divider, Flex, Heading, HStack, Icon, Image, Stack, Text } from '@chakra-ui/react';
+import { Divider, Flex, Heading, HStack, Icon, Image, Stack, Text, useColorModeValue } from '@chakra-ui/react';
 import Carousel from 'react-multi-carousel';
 import { CourseType } from 'src/interfaces/course.interface';
 import SectionTitle from '../section-title/section-title';
@@ -7,16 +7,21 @@ import { CiViewList } from 'react-icons/ci';
 import { AiOutlineClockCircle } from 'react-icons/ai';
 import { SiGoogleanalytics } from 'react-icons/si';
 import { courseCarousel } from 'src/config/carusel';
+import { useTranslation } from 'react-i18next';
 
 
 
 const PopularCourses = () => {
+const {t}= useTranslation()
   return (
     <>
-     <SectionTitle title='Explore Featured Courses' subtitle='10,000+ unique online course list designs' />
+     <SectionTitle title={t("popular_courses_title",{ns:'home'})} subtitle={t("popular_courses_description",{ns:'home'})} />
      <Carousel responsive={courseCarousel} showDots={false} arrows={true} autoPlay={true} autoPlaySpeed={5000} infinite>
        { data.map(item =>(
-        <Stack key={item.title} spacing={3} p={3} cursor={'pointer'} > 
+        <Stack key={item.title} spacing={3} p={3} 
+		cursor={'pointer'}
+		 
+		 > 
          <Image src={item.image} alt={item.title} borderRadius={'lg'} objectFit={'cover'} h={'210px'} w={'300px'}/>
            <HStack>
             <Text color={'#e59819'}> {item.reviewAvarage.toFixed(1)}</Text>

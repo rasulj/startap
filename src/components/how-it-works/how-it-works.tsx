@@ -1,17 +1,19 @@
-import { Flex, SimpleGrid, Stack, Text, useColorModeValue } from '@chakra-ui/react';
+import { Flex, Icon, SimpleGrid, Stack, Text, useColorModeValue } from '@chakra-ui/react';
 import { Fragment } from 'react';
-import { FinishRightIcon, OnlineCourseIcon, OnlineLearningIcon, OnlineStudentIcon, RightLineIcon } from 'src/icons';
 import SectionTitle from '../section-title/section-title';
+import { useTranslation } from 'react-i18next';
+import {  howItWorks } from 'src/config/constants';
 
-const howItWorks = () => {
+const HowItWorks = () => {
+	const{t} =useTranslation()
 	const backgroundColor = useColorModeValue('gray.200', 'gray.700');
 
 	return (
 		<>
-			<SectionTitle textAlign={'center'} title='How it works?' subtitle='10,000+ unique online course list designs' />
+			<SectionTitle textAlign={'center'} title={t("how_it_works_title",{ns:'home'})} subtitle={t("how_it_works_description",{ns:'home'})} />
 
 			<SimpleGrid mt={10} columns={5} spacing={10} alignItems={'center'}>
-				{data.map((item, idx) => {
+				{howItWorks.map((item, idx) => {
 					const odd = idx % 2;
 
 					return (
@@ -26,12 +28,14 @@ const howItWorks = () => {
 										backgroundColor={backgroundColor}
 										borderRadius={'full'}
 									>
-										{item.icon}
+										<Icon as={item.icon} w={"50px"} h={"50px"} />
 									</Flex>
-									<Text textAlign={'center'}>{item.title}</Text>
+									<Text textAlign={'center'}>{t(item.title, { ns: 'home' })}</Text>
 								</Stack>
 							) : (
-								<Stack justify={'center'}>{item.icon}</Stack>
+								<Stack justify={'center'}>
+									<Icon as={item.icon}  w={"141px"} h={"21px"}/>
+									</Stack>
 							)}
 						</Fragment>
 					);
@@ -41,13 +45,7 @@ const howItWorks = () => {
 	);
 };
 
-export default howItWorks;
-const data = [
-	{ title: 'Signup Platform', icon: <OnlineCourseIcon /> },
-	{ icon: <RightLineIcon /> },
-	{ title: 'Find Courses', icon: <OnlineLearningIcon /> },
-	{ icon: <FinishRightIcon /> },
-	{ title: 'Learn Relaxing', icon: <OnlineStudentIcon /> },
-];
+export default HowItWorks;
+
 
 
