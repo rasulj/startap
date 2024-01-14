@@ -20,7 +20,7 @@ const Newsletter = () => {
 							w={'full'}
 							bg={'white'}
 							color={'gray.900'}
-							placeholder={t("newsletter_placeholder",{ns:'home'})}
+							placeholder={t("newsletter_placeholder",{ns:'home'})|| ''}
 							_placeholder={{ color: 'gray.500' }}
 						/>
 						<Button pos={'absolute'} right={2} top={2} colorScheme={'facebook'} zIndex={999}>

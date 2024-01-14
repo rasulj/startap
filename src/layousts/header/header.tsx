@@ -56,8 +56,8 @@ const Header = ({ onToggle }: HeaderProps) => {
 							as={Button}
 							rightIcon={<TbWorld />}
 							textTransform={'capitalize'}
-							colorScheme={'facebook'}
-							variant={'solid'}
+							colorScheme={"gray"}
+							variant={'outline'}
 						>
 							{i18n.resolvedLanguage}
 						</MenuButton>
