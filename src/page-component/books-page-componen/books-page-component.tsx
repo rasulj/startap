@@ -5,7 +5,7 @@ import SectionTitle from 'src/components/section-title/section-title';
 import { booksCategory } from 'src/config/constants';
 import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
-import { withLayout } from 'src/layousts/layouts';
+import { withLayout } from 'src/layousts/layout';
 
 const BooksPageComponent = () => {
 	const [filter, setFilter] = useState<string>('all-categories');
