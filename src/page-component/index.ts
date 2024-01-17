@@ -3,3 +3,4 @@ export { default as CoursesPageComponent} from './courses-page-component/courses
 export { default as BooksPageComponent} from './books-page-componen/books-page-component'
 export { default as ArticlePageComponent } from './article-page-component/article-page-component';
 export { default as ArticleDetailedComponent } from './article-page-component/article-detailed-component';
+export { default as AboutPageComponent } from './about-page-component/about-page-component'
