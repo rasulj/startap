@@ -7,4 +7,5 @@ export { default as AboutPageComponent } from './about-page-component/about-page
 export { default as ContactPageComponent} from './contact-page-component/contact-page-component'
 export{default as PricingPageComponent} from './pricing-page-component/pricing-page-component'
 export { default as FaqPageComponent} from './faq-page-component/faq-page-component'
-
+export { default as AuthPageComponent} from './auth-page-component/auth-page-component'
+export { default as AuthNavbarComponent} from './auth-page-component/auth-navbar-component'
