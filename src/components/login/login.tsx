@@ -14,7 +14,6 @@ import {
 	Text,
 	useColorModeValue,
 } from '@chakra-ui/react';
-import Link from 'next/link';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';

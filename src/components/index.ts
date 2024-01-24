@@ -14,3 +14,7 @@ export { default as Register } from './register/register';
 export{ default as Login} from './login/login'
 export{ default as SocialMedia} from './social.media/social.media'
 export { default as AccountRecovery} from './account-recovery/account-recovery'
+export { default as Review} from './review/review'
+export { default as Overview} from './overview/overview'
+export { default as Mentor} from './mentor/mentor'
+export { default as Curriculum} from './curriculum/curriculum'
