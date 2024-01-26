@@ -330,3 +330,20 @@ export const avatars = [
 		url: 'https://bit.ly/code-beast',
 	},
 ];
+export const voiceLanguages = [
+	{
+		language: 'en',
+		codes: 'en-US',
+		voiceUrl: 'Google US English',
+	},
+	{
+		language: 'tr',
+		codes: 'tr-TR',
+		voiceUrl: 'Yelda',
+	},
+	{
+		language: 'ru',
+		codes: 'ru-RU',
+		voiceUrl: 'Milena',
+	},
+];

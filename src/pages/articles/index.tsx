@@ -2,13 +2,18 @@ import { GetServerSideProps } from 'next';
 import { ArticleType } from 'src/interfaces/article.interface';
 import { Language } from 'src/interfaces/constants.interface';
 import { withLayout } from 'src/layousts/layout';
+import Seo from 'src/layousts/seo/seo';
 import { ArticlePageComponent } from 'src/page-component';
 import { Articles } from 'src/services/articel.service';
 
 
 
 const ArticlePage = ({ articles }: ArticlesPageProps) => {
-	return <ArticlePageComponent artciles={articles} />;
+
+	return <Seo metaTitle={'Sammi | Articles'} >
+		<ArticlePageComponent artciles={articles} />
+	</Seo>
+	
 };
 
 export default withLayout(ArticlePage);
