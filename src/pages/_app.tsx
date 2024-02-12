@@ -10,6 +10,11 @@ import { Client, HydrationProvider} from "react-hydration-provider";
 import Router from 'next/router';
 import { useEffect } from 'react';
 import NProgress from 'nprogress';
+import { Provider } from 'react-redux';
+import { store } from 'src/store/store';
+
+
+
 NProgress.configure({ showSpinner: false });
 
 
@@ -30,13 +35,16 @@ export default function App({ Component, pageProps }: AppProps):JSX.Element {
 	}, []);
 
   return ( <HydrationProvider>
-              <I18nextProvider i18n={i18n}>
+	<Provider store={store}>
+		  <I18nextProvider i18n={i18n}>
                   <ChakraBaseProvider theme={theme}>
                     <Client>
                       <Component {...pageProps} />
                     </Client>
                  </ChakraBaseProvider> 
              </I18nextProvider>
+	</Provider>
+            
         </HydrationProvider>
        
          )
