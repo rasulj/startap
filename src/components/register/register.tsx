@@ -21,11 +21,28 @@ import { useTranslation } from 'react-i18next';
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 import { useShowPassword } from 'src/hooks/useShowPassword';
 import { RegisterProps } from './register.props';
+import { useDispatch, useSelector } from 'react-redux';
+import { allActions } from 'src/store/root.action';
+import { useActions } from 'src/hooks/useActions';
+import { Form, Formik } from 'formik';
+import TextField from '../text-field/text-field';
+import { InterfaceEmailAndPassword } from 'src/store/user/user.interface';
+import { AuthValidation } from 'src/validations/auth.validation';
+import ErrorAlert from '../error-alert/error-alert';
+import { useState } from 'react';
+import { RootState } from 'src/store/store';
+import { useTypedSelector } from 'src/hooks/useTypedSelector';
 
 const Register = ({ onNavigateStateComponent }: RegisterProps) => {
 	const { show, toggleShow, showConfirm, toggleShowConfirm } = useShowPassword();
 	const { t } = useTranslation();
+ const {register}= useActions()
+const {error , isLoading}= useTypedSelector(state => state.user)
 
+ const onSubmit = (formData:InterfaceEmailAndPassword)=>{
+ register({email:formData.email , password:formData.password})
+ 
+}
 	return (
 		<Stack spacing={4}>
 			<Heading
@@ -41,31 +58,32 @@ const Register = ({ onNavigateStateComponent }: RegisterProps) => {
 			<Text color={'gray.500'} fontSize={{ base: 'sm', sm: 'md' }}>
 				{t('register_description', { ns: 'global' })}
 			</Text>
-			<FormControl isRequired>
-				<FormLabel>{t('login_input_email_label', { ns: 'global' })}</FormLabel>
-				<Input focusBorderColor='facebook.500' type='text' placeholder={'info@sammi.ac'} h={14} />
-			</FormControl>
-			<Flex gap={4}>
-				<FormControl isRequired>
-					<FormLabel>{t('login_input_password_label', { ns: 'global' })}</FormLabel>
-					<InputGroup>
-						<Input focusBorderColor='facebook.500' type={!show ? 'password' : 'text'} placeholder={'****'} h={14} />
-						<InputRightElement pt={4}>
+			
+			<Formik onSubmit={onSubmit} initialValues={{email:'' ,password:'' ,confirmPassword: ''}}  validationSchema={AuthValidation.register()}>
+				<Form>
+				<>{error && <ErrorAlert title={error as string} />}</>
+					
+					
+					<TextField name='email' type='text' label={t('login_input_email_label', { ns: 'global' })} />
+	                 	<Flex gap={4} >
+							<TextField name='password' type={!show ? 'password' : 'text'} 
+							label={t('login_input_password_label', { ns: 'global' })}
+							placeholder={'****'}
+							>
+								<InputRightElement pt={4}>
 							<Icon as={!show ? AiOutlineEye : AiOutlineEyeInvisible} cursor={'pointer'} onClick={toggleShow} />
-						</InputRightElement>
-					</InputGroup>
-				</FormControl>
-				<FormControl isRequired>
-					<FormLabel>{t('register_input_confirm_password_label', { ns: 'global' })}</FormLabel>
-					<InputGroup>
-						<Input focusBorderColor='facebook.500' type={!showConfirm ? 'password' : 'text'} placeholder={'****'} h={14} />
-						<InputRightElement pt={4}>
-							<Icon as={!showConfirm ? AiOutlineEye : AiOutlineEyeInvisible} cursor={'pointer'} onClick={toggleShowConfirm} />
-						</InputRightElement>
-					</InputGroup>
-				</FormControl>
-			</Flex>
-			<HStack justify={'space-between'}>
+						    </InputRightElement>
+							</TextField>
+							<TextField  name='confirmPassword' type={!showConfirm ? 'password' : 'text'} 
+							label={t('register_input_confirm_password_label', { ns: 'global' })}
+							placeholder={'****'}
+							>
+								<InputRightElement pt={4}>
+							<Icon as={!show ? AiOutlineEye : AiOutlineEyeInvisible} cursor={'pointer'} onClick={toggleShowConfirm} />
+						    </InputRightElement>
+							</TextField>
+						</Flex>	
+							<HStack justify={'space-between'}my={5}>
 				<Checkbox colorScheme={'facebook'}>{t('auth_remember_me', { ns: 'global' })}</Checkbox>
 				<Link href={'/account-recovery'}>
 					<Box as={'a'} color={'teal.500'} _hover={{ textDecoration: 'underline' }}>
@@ -74,14 +92,19 @@ const Register = ({ onNavigateStateComponent }: RegisterProps) => {
 				</Link>
 			</HStack>
 			<Button
+		    	type='submit'
 				w={'full'}
 				bgGradient='linear(to-r, facebook.400,gray.400)'
 				color={'white'}
 				_hover={{ bgGradient: 'linear(to-r, facebook.500,gray.500)', boxShadow: 'xl' }}
-				h={14}
+				h={14}	
+				isLoading={isLoading}
+				loadingText={'Loading...'}
 			>
 				{t('register_btn', { ns: 'global' })}
 			</Button>
+				</Form>
+			</Formik>
 			<Text>
 				{t('register_already_have_account', { ns: 'global' })}{' '}
 				<Box

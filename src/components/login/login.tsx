@@ -18,14 +18,24 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 import { LoginProps } from './login.props';
+import { useActions } from 'src/hooks/useActions';
+import { Form, Formik } from 'formik';
+import TextField from '../text-field/text-field';
+import { AuthValidation } from 'src/validations/auth.validation';
+import { InterfaceEmailAndPassword } from 'src/store/user/user.interface';
+import ErrorAlert from '../error-alert/error-alert';
+import { useTypedSelector } from 'src/hooks/useTypedSelector';
 
 const Login = ({ onNavigateStateComponent }: LoginProps) => {
 	const [show, setShow] = useState<boolean>(false);
 
 	const { t } = useTranslation();
-
+    const {error ,isLoading} = useTypedSelector( state => state.user)
 	const toggleShow = () => setShow(prev => !prev);
-
+ const { login} = useActions()
+	const onSubmit = (formData:InterfaceEmailAndPassword)=>{
+   login({email:formData.email , password:formData.password})
+	}
 	return (
 		<Stack spacing={4}>
 			<Heading
@@ -41,20 +51,16 @@ const Login = ({ onNavigateStateComponent }: LoginProps) => {
 			<Text color={'gray.500'} fontSize={{ base: 'sm', sm: 'md' }}>
 				{t('login_description', { ns: 'global' })}
 			</Text>
-			<FormControl isRequired>
-				<FormLabel>{t('login_input_email_label', { ns: 'global' })}</FormLabel>
-				<Input focusBorderColor='facebook.500' type='text' placeholder={'info@sammi.ac'} h={14} />
-			</FormControl>
-			<FormControl isRequired>
-				<FormLabel>{t('login_input_password_label', { ns: 'global' })}</FormLabel>
-				<InputGroup>
-					<Input focusBorderColor='facebook.500' type={!show ? 'password' : 'text'} placeholder={'****'} h={14} />
-					<InputRightElement pt={4}>
+			<Formik initialValues={{email:'' ,password:''}} onSubmit={onSubmit} validationSchema={AuthValidation.login}>
+				<Form>
+						<>{error && <ErrorAlert title={error as string} />}</>
+					<TextField name='email' label={t('login_input_email_label', { ns: 'global' })} type='email'  placeholder={'info@sammi.ac'}/>
+					<TextField name='password' label={t('login_input_password_label', { ns: 'global' })} type={!show ? 'password' : 'text'}   placeholder={'******'}>
+						<InputRightElement pt={4}>
 						<Icon as={!show ? AiOutlineEye : AiOutlineEyeInvisible} cursor={'pointer'} onClick={toggleShow} />
 					</InputRightElement>
-				</InputGroup>
-			</FormControl>
-			<HStack justify={'space-between'}>
+					</TextField>
+	  			    <HStack justify={'space-between'} my={5}>
 				<Checkbox colorScheme={'facebook'}>{t('auth_remember_me', { ns: 'global' })}</Checkbox>
 				
 					<Box as={'a'} color={'teal.500'} _hover={{ textDecoration: 'underline' }} 
@@ -62,16 +68,22 @@ const Login = ({ onNavigateStateComponent }: LoginProps) => {
 						{t('auth_forgot_password', { ns: 'global' })}
 					</Box>
 			
-			</HStack>
-			<Button
-				w={'full'}
-				bgGradient='linear(to-r, facebook.400,gray.400)'
-				color={'white'}
-				_hover={{ bgGradient: 'linear(to-r, facebook.500,gray.500)', boxShadow: 'xl' }}
-				h={14}
-			>
+	      			</HStack>
+					<Button
+						w={'full'}
+						bgGradient='linear(to-r, facebook.400,gray.400)'
+							color={'white'}
+						_hover={{ bgGradient: 'linear(to-r, facebook.500,gray.500)', boxShadow: 'xl' }}
+							h={14}
+							type='submit'
+							isLoading={isLoading}
+							loadingText='Loading ...'
+						>
 				{t('login_btn', { ns: 'global' })}
 			</Button>
+				</Form>
+			</Formik>
+		
 			<Text>
 				{t('login_not_account_yet', { ns: 'global' })}{' '}
 				<Box
