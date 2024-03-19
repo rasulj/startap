@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { errorCatch } from 'src/helpers/api-helper';
 import { AuthService } from 'src/services/auth.service';
-import { AuthUserResponse, InterfaceEmailAndPassword } from './user.interface';
+import { AuthUserResponse, InterfaceEmailAndOtp, InterfaceEmailAndPassword } from './user.interface';
 
 export const register = createAsyncThunk<AuthUserResponse, InterfaceEmailAndPassword>(
 	'auth/register',
@@ -26,7 +26,40 @@ export const login = createAsyncThunk<AuthUserResponse, InterfaceEmailAndPasswor
 		}
 	}
 );
+export const sendOtp = createAsyncThunk<"Success", {email:string}>(
+	'mail/send-otp',
+	async ({email}, thunkApi) => {
+		try {
+			const response = await AuthService.sendOtp(email);
+			return "Success"
+		} catch (error) {
+			return thunkApi.rejectWithValue(errorCatch(error));
+		}
+	}
+);
+export const sendVerificationCode = createAsyncThunk<'Success'| unknown, { email: string }>(
+	'auth/verification-code',
+	async ({ email }, thunkApi) => {
+		try {
+			const response = await AuthService.sendOtp(email);
+			return response.data;
+		} catch (error) {
+			return thunkApi.rejectWithValue(errorCatch(error));
+		}
+	}
+);
 
+export const verifyVerificationCode = createAsyncThunk<'Success', InterfaceEmailAndOtp>(
+	'auth/verify-code',
+	async ({ email, otpVerification }, thunkApi) => {
+		try {
+			const response = await AuthService.verifyOtp(email, otpVerification);
+			return response.data;
+		} catch (error) {
+			return thunkApi.rejectWithValue(errorCatch(error));
+		}
+	}
+);
 export const logout = createAsyncThunk('auth/logout', () => {
 	AuthService.logout();
 });

@@ -4,45 +4,49 @@ import {
 	Button,
 	Checkbox,
 	Flex,
-	FormControl,
-	FormLabel,
 	Heading,
 	HStack,
 	Icon,
-	Input,
-	InputGroup,
 	InputRightElement,
 	Stack,
 	Text,
 	useColorModeValue,
+	useToast,
 } from '@chakra-ui/react';
 import Link from 'next/link';
 import { useTranslation } from 'react-i18next';
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 import { useShowPassword } from 'src/hooks/useShowPassword';
 import { RegisterProps } from './register.props';
-import { useDispatch, useSelector } from 'react-redux';
-import { allActions } from 'src/store/root.action';
 import { useActions } from 'src/hooks/useActions';
 import { Form, Formik } from 'formik';
 import TextField from '../text-field/text-field';
 import { InterfaceEmailAndPassword } from 'src/store/user/user.interface';
 import { AuthValidation } from 'src/validations/auth.validation';
 import ErrorAlert from '../error-alert/error-alert';
-import { useState } from 'react';
-import { RootState } from 'src/store/store';
+
 import { useTypedSelector } from 'src/hooks/useTypedSelector';
+import { useRouter } from 'next/router';
 
 const Register = ({ onNavigateStateComponent }: RegisterProps) => {
 	const { show, toggleShow, showConfirm, toggleShowConfirm } = useShowPassword();
 	const { t } = useTranslation();
- const {register}= useActions()
-const {error , isLoading}= useTypedSelector(state => state.user)
 
- const onSubmit = (formData:InterfaceEmailAndPassword)=>{
- register({email:formData.email , password:formData.password})
- 
-}
+  const {pendingRegister,sendVerificationCode}= useActions()
+  const {error , isLoading}= useTypedSelector(state => state.user)
+
+const router = useRouter()
+
+ const toast = useToast()
+const onSubmit = async (formData: InterfaceEmailAndPassword) => {
+		const { email, password } = formData;
+		const response =  await sendVerificationCode({ email });
+		const result: any = await response;
+		if (result.payload === 'Success') {
+			pendingRegister({ email, password });
+			!isLoading && onNavigateStateComponent('verification');
+		}
+	};
 	return (
 		<Stack spacing={4}>
 			<Heading
@@ -109,7 +113,7 @@ const {error , isLoading}= useTypedSelector(state => state.user)
 				{t('register_already_have_account', { ns: 'global' })}{' '}
 				<Box
 					as={'span'}
-					onClick={() => onNavigateStateComponent('login')}
+					onClick={() => onNavigateStateComponent('verification')}
 					color={'teal.500'}
 					cursor={'pointer'}
 					_hover={{ textDecoration: 'underline' }}

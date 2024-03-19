@@ -36,7 +36,7 @@ const AuthPageComponent = () => {
 				case "account-recovery":
 					return <AccountRecovery onNavigateStateComponent={onNavigateStateComponent}/>
 			case 'verification':
-				return <Verification />;
+				return <Verification  />;
 		}
 	};
 

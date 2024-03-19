@@ -1,6 +1,7 @@
 import { useTranslation } from "react-i18next";
 import Seo from "src/layousts/seo/seo";
-import { AuthPageComponent } from "src/page-component"
+import { AuthPageComponent } from "src/page-component";
+
 
 
 const Auth = () => {

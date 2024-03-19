@@ -58,12 +58,12 @@ const ArticleDetailedComponent = ({ article }: ArticleDetailedProps) => {
 		setMyVoice(currentVoice);
 	}, [voices, router]);
 
-	console.log(voices);
 
 	return (
 		<>
 			<Card>
 				<CardBody>
+					
 					<Box
 						w={'full'}
 						h={{ base: '30vh', lg: '50vh' }}

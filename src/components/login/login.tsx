@@ -12,7 +12,9 @@ import {
 	InputRightElement,
 	Stack,
 	Text,
+	Toast,
 	useColorModeValue,
+	useToast,
 } from '@chakra-ui/react';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -25,6 +27,7 @@ import { AuthValidation } from 'src/validations/auth.validation';
 import { InterfaceEmailAndPassword } from 'src/store/user/user.interface';
 import ErrorAlert from '../error-alert/error-alert';
 import { useTypedSelector } from 'src/hooks/useTypedSelector';
+import { useRouter } from 'next/router';
 
 const Login = ({ onNavigateStateComponent }: LoginProps) => {
 	const [show, setShow] = useState<boolean>(false);
@@ -33,8 +36,15 @@ const Login = ({ onNavigateStateComponent }: LoginProps) => {
     const {error ,isLoading} = useTypedSelector( state => state.user)
 	const toggleShow = () => setShow(prev => !prev);
  const { login} = useActions()
+
+ const router = useRouter()
+  
+ const toast = useToast()
 	const onSubmit = (formData:InterfaceEmailAndPassword)=>{
-   login({email:formData.email , password:formData.password})
+        login({email:formData.email , password:formData.password})
+		router.push('/')
+		toast({title:'Succesfully logget in',status:'info',isClosable:true ,position:'top-right'})
+
 	}
 	return (
 		<Stack spacing={4}>
