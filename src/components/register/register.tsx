@@ -102,7 +102,7 @@ const onSubmit = async (formData: InterfaceEmailAndPassword) => {
 				_hover={{ bgGradient: 'linear(to-r, facebook.500,gray.500)', boxShadow: 'xl' }}
 				h={14}	
 				isLoading={isLoading}
-				loadingText={'Loading...'}
+				loadingText={`${t('loading', { ns: 'global' })}`}
 			>
 				{t('register_btn', { ns: 'global' })}
 			</Button>

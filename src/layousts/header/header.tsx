@@ -20,11 +20,12 @@ import Link from 'next/link';
 import { HeaderProps } from './header.props';
 import { language } from 'src/config/constants';
 import { useTranslation } from 'react-i18next';
-import { TbFileSettings,  } from 'react-icons/tb';
+import { TbFileSettings, TbWorld,  } from 'react-icons/tb';
 import { useRouter } from 'next/router';
 import { AiOutlineLogin } from 'react-icons/ai';
 import { useAuth } from 'src/hooks/useAuth';
 import { useActions } from 'src/hooks/useActions';
+import { BsFillMoonFill, BsFillSunFill } from 'react-icons/bs';
 
 const Header = ({ onToggle }: HeaderProps) => {
 	const { toggleColorMode, colorMode } = useColorMode();
@@ -69,11 +70,41 @@ const logoutHandler = () => {
 					</Link>
 				</HStack>
 				<HStack>
-				
+				<Menu placement='bottom'>
+						<MenuButton
+							as={Button}
+							rightIcon={<TbWorld />}
+							textTransform={'capitalize'}
+							colorScheme={'gray'}
+							variant={'outline'}
+							display={{ base: 'none', md: 'block' }}
+						>
+							{i18n.resolvedLanguage}
+						</MenuButton>
+						<MenuList p={0}>
+							{language.map(item => (
+								<MenuItem
+									key={item.lng}
+									onClick={() => onLanguage(item.lng)}
+									icon={<item.icon />}
+									backgroundColor={i18n.resolvedLanguage === item.lng ? 'facebook.500' : ''}
+								>
+									{item.nativeLng}
+								</MenuItem>
+							))}
+						</MenuList>
+					</Menu>
+						<IconButton
+						aria-label='color-mode'
+						onClick={toggleColorMode}
+						icon={colorMode == 'light' ? <BsFillMoonFill /> : <BsFillSunFill />}
+						colorScheme={'facebook'}
+						variant={'outline'}
+					/>
 				{user ? (
 						<Menu>
 							<MenuButton as={Button} rounded={'full'} variant={'link'} cursor={'pointer'} minW={0}>
-								<Avatar backgroundColor={'facebook.500'} />
+								<Avatar backgroundColor={'facebook.500'} src={user.avatar} />
 							</MenuButton>
 							<MenuList p={0} m={0}>
 								<MenuItem
