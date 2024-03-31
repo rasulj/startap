@@ -32,7 +32,7 @@ const Register = ({ onNavigateStateComponent }: RegisterProps) => {
 	const { show, toggleShow, showConfirm, toggleShowConfirm } = useShowPassword();
 	const { t } = useTranslation();
 
-  const {pendingRegister,sendVerificationCode}= useActions()
+  const {pendingRegister,sendVerificationCode ,clearError}= useActions()
   const {error , isLoading}= useTypedSelector(state => state.user)
 
 const router = useRouter()
@@ -64,7 +64,7 @@ const onSubmit = async (formData: InterfaceEmailAndPassword) => {
 			
 			<Formik onSubmit={onSubmit} initialValues={{email:'' ,password:'' ,confirmPassword: ''}}  validationSchema={AuthValidation.register()}>
 				<Form>
-				<>{error && <ErrorAlert title={error as string} />}</>
+				<>{error && <ErrorAlert title={error as string} clearHandler={clearError} />}</>
 					
 					
 					<TextField name='email' type='text' label={t('login_input_email_label', { ns: 'global' })} />

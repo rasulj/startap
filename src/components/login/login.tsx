@@ -35,7 +35,7 @@ const Login = ({ onNavigateStateComponent }: LoginProps) => {
 	const { t } = useTranslation();
     const {error ,isLoading} = useTypedSelector( state => state.user)
 	const toggleShow = () => setShow(prev => !prev);
- const { login} = useActions()
+ const { login ,clearError} = useActions()
 
  const router = useRouter()
   
@@ -67,7 +67,7 @@ const Login = ({ onNavigateStateComponent }: LoginProps) => {
 			</Text>
 			<Formik initialValues={{email:'' ,password:''}} onSubmit={onSubmit} validationSchema={AuthValidation.login}>
 				<Form>
-						<>{error && <ErrorAlert title={error as string} />}</>
+						<>{error && <ErrorAlert title={error as string} clearHandler={clearError} />}</>
 					<TextField name='email' label={t('login_input_email_label', { ns: 'global' })} type='email'  placeholder={'info@sammi.ac'}/>
 					<TextField name='password' label={t('login_input_password_label', { ns: 'global' })} type={!show ? 'password' : 'text'}   placeholder={'******'}>
 						<InputRightElement pt={4}>

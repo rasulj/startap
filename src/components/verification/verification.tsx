@@ -20,7 +20,7 @@ import ErrorAlert from '../error-alert/error-alert';
 
  const Verification = () => {
 	const { t } = useTranslation();
-	const { verifyVerificationCode, register } = useActions();
+	const { verifyVerificationCode, register ,clearError} = useActions();
 	const { error, isLoading, user } = useTypedSelector(state => state.user);
 	const router = useRouter();
 	const toast = useToast();
@@ -59,7 +59,7 @@ import ErrorAlert from '../error-alert/error-alert';
 			<Text color={'gray.500'} fontSize={{ base: 'sm', sm: 'md' }}>
 				{t('verification_description', { ns: 'global' })}
 			</Text>
-      	<>{error && <ErrorAlert title={error as string} />}</>
+      	<>{error && <ErrorAlert title={error as string} clearHandler={clearError}/>}</>
 			<Formik onSubmit={onSubmit} initialValues={{ otp: '' }} validationSchema={AuthValidation.otp}>
 				{formik => (
 					<Form>

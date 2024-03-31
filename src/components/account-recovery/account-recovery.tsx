@@ -33,7 +33,7 @@ import { useTypedSelector } from 'src/hooks/useTypedSelector';
 const AccountRecovery = ({ onNavigateStateComponent }: AccountRecoveryProps) => {
 	const [progress, setProgress] = useState<33.33 | 66.66 | 100>(33.33);
 	const [step, setStep] = useState< 1 | 2 | 3 >(1);
-  const {sendVerificationCode , verifyVerificationCode , editProfilePassword}= useActions()
+  const {sendVerificationCode , verifyVerificationCode , editProfilePassword,clearError}= useActions()
   const {error , isLoading}= useTypedSelector(state => state.user)
 	const { show, toggleShow, showConfirm, toggleShowConfirm } = useShowPassword();
 	const [email , setEmail] = useState<string>('')
@@ -64,7 +64,7 @@ const AccountRecovery = ({ onNavigateStateComponent }: AccountRecoveryProps) => 
 				</Text>
 			</Heading>
 			<Text>{t('account_recovery_description_form1', { ns: 'global' })}</Text>
-				<>{error && <ErrorAlert title={error as string} />}</>
+				<>{error && <ErrorAlert title={error as string} clearHandler={clearError} />}</>
 			<Formik onSubmit={onForm1Submit} initialValues={{email:''}} validationSchema={AuthValidation.onlyEmail}>
 					
 			<Form>
@@ -113,7 +113,7 @@ const AccountRecovery = ({ onNavigateStateComponent }: AccountRecoveryProps) => 
 				</Text>
 			</Heading>
 			<Text>{t('account_recovery_description_form2', { ns: 'global' })}</Text>
-			<>{error && <ErrorAlert title={error as string} />}</>
+			<>{error && <ErrorAlert title={error as string} clearHandler={clearError}/>}</>
 				<Formik onSubmit={onForm2Submit} initialValues={{ otp: '' }} validationSchema={AuthValidation.otp}>
 	{formik => (
 					<Form>
