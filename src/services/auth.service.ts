@@ -1,7 +1,7 @@
 import axios from 'axios';
 import Cookies from 'js-cookie';
-import { API_URL, getAuthUrl, getMailUrl,} from 'src/config/auth.config';
-import { removeTokensCookie, saveStorage } from 'src/helpers/auth-helper';
+import { API_URL, getAuthUrl, getMailUrl, getUserUrl} from 'src/config/auth.config';
+import { removeTokensCookie,saveTokenCookies } from 'src/helpers/auth-helper';
 import { AuthUserResponse } from 'src/store/user/user.interface';
 
 export const AuthService = {
@@ -12,7 +12,7 @@ export const AuthService = {
 		});
 
 		if (response.data.accessToken) {
-			saveStorage(response.data);
+			saveTokenCookies(response.data);
 		}
 
 		return response;
@@ -25,14 +25,19 @@ export const AuthService = {
 		});
 
 		if (response.data.accessToken) {
-			saveStorage(response.data);
+			saveTokenCookies(response.data);
 		}
 
 		return response;
 	},
+
+		async checkUser(email: string, ) {
+		const response = await axios.post<'user' | 'no-user'>(`${API_URL}${getAuthUrl('check-user')}`, {email,});
+		return response.data;
+	},
 	
-	async sendOtp(email: string) {
-		const response = await axios.post<'Success'>(`${API_URL}${getMailUrl('send-otp')}`, { email });
+	async sendOtp(email: string ,isUser?:boolean) {
+		const response = await axios.post<'Success'>(`${API_URL}${getMailUrl('send-otp')}`, { email , isUser });
 		return response;
 	},
 
@@ -51,12 +56,20 @@ export const AuthService = {
 		localStorage.removeItem('user');
 	},
 
+		async editProfilePassword(email: string, password: string) {
+		const response = await axios.put<'Success'>(`${API_URL}${getUserUrl('edit-password')}`, {
+			email,
+			password,
+		});
+
+		return response;
+	},
 	async getNewTokens() {
-		const refreshToken = Cookies.get('refreshToken');
+		const refreshToken = Cookies.get('refresh');
 		const response = await axios.post(`${API_URL}${getAuthUrl('access')}`, { refreshToken });
 
 		if (response.data.accessToken) {
-			saveStorage(response.data);
+			saveTokenCookies(response.data);
 		}
 
 		return response;

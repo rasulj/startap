@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { checkAuth, login, logout, register, sendVerificationCode, verifyVerificationCode } from './user.actions';
+import { checkAuth, editProfilePassword, login, logout, register, sendVerificationCode, verifyVerificationCode } from './user.actions';
 import { InterfaceEmailAndPassword, UserIntialStateType } from './user.interface';
 
 const initialState: UserIntialStateType = {
@@ -72,6 +72,18 @@ export const userSlice = createSlice({
 			.addCase(login.rejected, (state, { payload }) => {
 				state.isLoading = false;
 				state.user = null;
+				state.error = payload;
+			})
+			.addCase(editProfilePassword.pending, state => {
+				state.isLoading = true;
+				state.error = null;
+			})
+			.addCase(editProfilePassword.fulfilled, state => {
+				state.isLoading = false;
+				state.error = null;
+			})
+			.addCase(editProfilePassword.rejected, (state, { payload }) => {
+				state.isLoading = false;
 				state.error = payload;
 			})
 			.addCase(logout.fulfilled, state => {

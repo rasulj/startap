@@ -29,4 +29,10 @@ export const AuthValidation = {
 				.min(6, 'Verification code should be 6 digits number'),
 		});
 	},
+	onlyEmail(){
+			return Yup.object({
+			email: Yup.string().email('Email is invalid').required('Email is required'),
+	
+		});
+	}
 };

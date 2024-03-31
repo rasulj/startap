@@ -1,4 +1,5 @@
 import {
+	Avatar,
 	Box,
 	Button,
 	Flex,
@@ -13,26 +14,32 @@ import {
 	useColorModeValue,
 } from '@chakra-ui/react';
 import { DarkLogo, LightLogo } from 'src/icons';
-import { BsFillMoonFill, BsFillSunFill } from 'react-icons/bs';
+import {  IoIosLogOut} from 'react-icons/io';
 import { BiMenuAltLeft, BiUserCircle } from 'react-icons/bi';
 import Link from 'next/link';
 import { HeaderProps } from './header.props';
 import { language } from 'src/config/constants';
 import { useTranslation } from 'react-i18next';
-import { TbWorld } from 'react-icons/tb';
+import { TbFileSettings,  } from 'react-icons/tb';
 import { useRouter } from 'next/router';
 import { AiOutlineLogin } from 'react-icons/ai';
+import { useAuth } from 'src/hooks/useAuth';
+import { useActions } from 'src/hooks/useActions';
 
 const Header = ({ onToggle }: HeaderProps) => {
 	const { toggleColorMode, colorMode } = useColorMode();
 	const { i18n, t } = useTranslation();
+	const { logout} = useActions()
 	const router = useRouter();
-
+ const { user }= useAuth()
 	const onLanguage = (lng: string) => {
 		router.replace(router.asPath);
 		i18n.changeLanguage(lng);
 	};
-
+const logoutHandler = () => {
+		logout();
+		router.push('/auth');
+	};
 	return (
 		<Box
 			zIndex={1001}
@@ -62,60 +69,51 @@ const Header = ({ onToggle }: HeaderProps) => {
 					</Link>
 				</HStack>
 				<HStack>
-					{/* <IconButton
-						aria-label='support'
-						icon={<MdOutlineContactSupport />}
-						colorScheme={'facebook'}
-						variant={'ghost'}
-					/> */}
-					<Menu placement='bottom'>
-						<MenuButton
-							as={Button}
-							rightIcon={<TbWorld />}
-							textTransform={'capitalize'}
-							colorScheme={'gray'}
-							variant={'outline'}
-						>
-							{i18n.resolvedLanguage}
-						</MenuButton>
-						<MenuList p={0}>
-							{language.map(item => (
+				
+				{user ? (
+						<Menu>
+							<MenuButton as={Button} rounded={'full'} variant={'link'} cursor={'pointer'} minW={0}>
+								<Avatar backgroundColor={'facebook.500'} />
+							</MenuButton>
+							<MenuList p={0} m={0}>
 								<MenuItem
-									key={item.lng}
-									onClick={() => onLanguage(item.lng)}
-									icon={<item.icon />}
-									backgroundColor={
-										i18n.resolvedLanguage === item.lng ? 'facebook.500' : ''
-									}
+									h={14}
+									onClick={() => router.push('/setting')}
+									fontWeight={'bold'}
+									icon={<TbFileSettings fontSize={17} />}
 								>
-									{item.nativeLng}
+									Settings
 								</MenuItem>
-							))}
-						</MenuList>
-					</Menu>
-					<IconButton
-						aria-label='color-mode'
-						onClick={toggleColorMode}
-						icon={colorMode == 'light' ? <BsFillMoonFill /> : <BsFillSunFill />}
-						colorScheme={'facebook'}
-						variant={'outline'}
-					/>
-					<Button
-						display={{ base: 'none', md: 'flex' }}
-						rightIcon={<BiUserCircle />}
-						onClick={() => router.push('/auth')}
-						colorScheme={'facebook'}
-					>
-						{t('login', { ns: 'layout' })}
-					</Button>
-					<IconButton
-						display={{ base: 'flex', md: 'none' }}
-						aria-label='login'
-						onClick={() => router.push('/auth')}
-						icon={<AiOutlineLogin />}
-						colorScheme={'facebook'}
-						variant={'outline'}
-					/>
+								<MenuItem
+									h={14}
+									onClick={logoutHandler}
+									fontWeight={'bold'}
+									icon={<IoIosLogOut fontSize={17} />}
+								>
+									Logout
+								</MenuItem>
+							</MenuList>
+						</Menu>
+					) : (
+						<>
+							<Button
+								display={{ base: 'none', md: 'flex' }}
+								rightIcon={<BiUserCircle />}
+								onClick={() => router.push('/auth')}
+								colorScheme={'facebook'}
+							>
+								{t('login', { ns: 'layout' })}
+							</Button>
+							<IconButton
+								display={{ base: 'flex', md: 'none' }}
+								aria-label='login'
+								onClick={() => router.push('/auth')}
+								icon={<AiOutlineLogin />}
+								colorScheme={'facebook'}
+								variant={'outline'}
+							/>
+						</>
+					)}
 				</HStack>
 			</Flex>
 		</Box>

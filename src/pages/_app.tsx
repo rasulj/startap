@@ -12,13 +12,14 @@ import { useEffect } from 'react';
 import NProgress from 'nprogress';
 import { Provider } from 'react-redux';
 import { store } from 'src/store/store';
-
+import { SessionProvider } from "next-auth/react"
+import AuthProvider from 'src/provider/auth.provider';
 
 
 NProgress.configure({ showSpinner: false });
 
 
-export default function App({ Component, pageProps }: AppProps):JSX.Element {
+export default function App({ Component, pageProps:{ session, ...pageProps } }: AppProps):JSX.Element {
 	useEffect(() => {
 		const handleRouteStart = () => NProgress.start();
 		const handleRouteDone = () => NProgress.done();
@@ -36,13 +37,18 @@ export default function App({ Component, pageProps }: AppProps):JSX.Element {
 
   return ( <HydrationProvider>
 	<Provider store={store}>
-		  <I18nextProvider i18n={i18n}>
+		<SessionProvider session={session}>
+     <I18nextProvider i18n={i18n}>
                   <ChakraBaseProvider theme={theme}>
                     <Client>
-                      <Component {...pageProps} />
+						<AuthProvider>
+						 <Component {...pageProps} />	
+						</AuthProvider>
                     </Client>
                  </ChakraBaseProvider> 
              </I18nextProvider>
+		</SessionProvider>
+		
 	</Provider>
             
         </HydrationProvider>

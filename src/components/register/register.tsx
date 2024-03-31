@@ -40,12 +40,11 @@ const router = useRouter()
  const toast = useToast()
 const onSubmit = async (formData: InterfaceEmailAndPassword) => {
 		const { email, password } = formData;
-		const response =  await sendVerificationCode({ email });
-		const result: any = await response;
-		if (result.payload === 'Success') {
-			pendingRegister({ email, password });
-			!isLoading && onNavigateStateComponent('verification');
-		}
+		sendVerificationCode({ email ,isUser:false ,callbac:()=>{
+                    pendingRegister({ email, password });
+			onNavigateStateComponent('verification');
+		} });
+		
 	};
 	return (
 		<Stack spacing={4}>
