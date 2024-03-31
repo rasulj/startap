@@ -1,12 +1,15 @@
 import { Alert, AlertIcon, AlertTitle, Icon } from '@chakra-ui/react'
 import { ErrorAlertProps } from './error-alert.props'
 import { AiFillCloseCircle } from 'react-icons/ai'
+import { useTranslation } from 'react-i18next'
 
 const ErrorAlert = ({title,clearHandler}:ErrorAlertProps) => {
+
+const { t } = useTranslation();
   return (
     <Alert status='error' position={'relative'} >
   <AlertIcon />
-  <AlertTitle>{title}</AlertTitle>
+  <AlertTitle>{t(title, { ns: 'global' })}</AlertTitle>
   	<Icon
 				onClick={clearHandler}
 				pos={'absolute'}

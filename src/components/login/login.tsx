@@ -44,7 +44,7 @@ const Login = ({ onNavigateStateComponent }: LoginProps) => {
 	const onSubmit = (formData:InterfaceEmailAndPassword)=>{
 
         login({email:formData.email , password:formData.password ,callback:()=>{		
-		toast({title:'Succesfully logget in',status:'info',isClosable:true ,position:'top-right'})
+		toast({title: `${t('successfully_logged', { ns: 'global' })}`,status:'info',isClosable:true ,position:'top-right'})
 		router.push('/')
 		}})
 	

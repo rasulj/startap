@@ -82,7 +82,7 @@ const logoutHandler = () => {
 									fontWeight={'bold'}
 									icon={<TbFileSettings fontSize={17} />}
 								>
-									Settings
+								{t('settings', { ns: 'global' })}
 								</MenuItem>
 								<MenuItem
 									h={14}
@@ -90,7 +90,7 @@ const logoutHandler = () => {
 									fontWeight={'bold'}
 									icon={<IoIosLogOut fontSize={17} />}
 								>
-									Logout
+									{t("logout", { ns: 'global' })}
 								</MenuItem>
 							</MenuList>
 						</Menu>
