@@ -1,4 +1,5 @@
 import { AiFillAmazonCircle, AiOutlineDashboard, AiOutlineDollar } from 'react-icons/ai';
+import { TeachVal1Icon, TeachVal2Icon, TeachVal3Icon,} from 'src/icons'
 import { FaApplePay, FaBookReader, FaDraftingCompass, FaQuestionCircle } from 'react-icons/fa';
 import { CiViewList } from 'react-icons/ci';
 import { MdImportContacts, MdOutlineContactMail } from 'react-icons/md';
@@ -6,6 +7,7 @@ import { AnnouncementIcons, CodingIcons, DesignIcons, EngIcons, FinishRightIcon,
 import { SiAmd, SiCisco, SiLogitech, SiSpotify } from 'react-icons/si';
 import TurkIcon from 'src/icons/turk';
 import { CourseType } from 'src/interfaces/course.interface';
+
 
 export const navigation = [
 	{
@@ -345,5 +347,22 @@ export const voiceLanguages = [
 		language: 'ru',
 		codes: 'ru-RU',
 		voiceUrl: 'Milena',
+	},
+];
+export const teachValues = [
+	{
+		title: 'teach_your_way',
+		description: 'teach_your_way_description',
+		icon: TeachVal1Icon,
+	},
+	{
+		title: 'inspire_learners',
+		description: 'inspire_learners_ddescription',
+		icon: TeachVal2Icon,
+	},
+	{
+		title: 'get_rewarded',
+		description: 'get_rewarded_description',
+		icon: TeachVal3Icon,
 	},
 ];

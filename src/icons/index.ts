@@ -13,4 +13,11 @@ export { default as RightLineIcon } from './right-line';
 export { default as FinishRightIcon } from './finesh-right-line';
 export { default as OnlineLearningIcon } from './online-learning';
 export { default as OnlineCourseIcon } from './online-courses';
-export { default as OnlineStudentIcon } from './online-student';
+export { default as TeachVal1Icon} from './teach-val-1';
+export { default as TeachVal2Icon } from './teach-val-1';
+export { default as TeachVal3Icon} from './teach-val-1';
+export { default as   PlanCurriculumIcon  } from './plan-curriculum';
+export { default as LaunchCourseIcon } from './launch-course';
+export { default as RecordVideoIcon } from './record-video';
+export { default as OnlineStudentIcon} from './online-student'
+
