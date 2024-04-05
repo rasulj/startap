@@ -3,8 +3,8 @@ const nextConfig = {
   reactStrictMode: false,
   swcMinify: true,
   images:{
-    domains:[ ],
-    dangerouslyAllowSVG:true 
+  domains: ['media.graphassets.com'],
+		dangerouslyAllowSVG: true,
 
   }
 }

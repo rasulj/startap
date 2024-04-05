@@ -12,3 +12,11 @@ export { default as AuthNavbarComponent} from './auth-page-component/auth-navbar
 export{ default as DetailedCourseComponent} from './courses-page-component/detailed-course-component'
 export { default as BecomeInstructorPageComponent} from './become-instructor-page-component/becomeInstructor-page-pomponent'
 export { default as StudentsPageComponent } from './instructor-page-component/students-page-component';
+export { default as InstructorCoursesPageComponent } from './instructor-page-component/courses-page-component';
+export { default as InstructorStudentsPageComponent } from './instructor-page-component/students-page-component';
+export { default as InstructorCreateCourseComponent } from './instructor-page-component/create-course-component';
+
+
+
+
+
