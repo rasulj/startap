@@ -1,8 +1,9 @@
-import { AiFillAmazonCircle, AiOutlineDashboard, AiOutlineDollar } from 'react-icons/ai';
+import { AiFillAmazonCircle, AiFillEdit, AiOutlineDashboard, AiOutlineDollar } from 'react-icons/ai';
 import { TeachVal1Icon, TeachVal2Icon, TeachVal3Icon,} from 'src/icons'
-import { FaApplePay, FaBookReader, FaDraftingCompass, FaQuestionCircle } from 'react-icons/fa';
+import { FaApplePay, FaBookReader, FaDraftingCompass, FaFirstdraft, FaListAlt, FaQuestionCircle, FaUserGraduate } from 'react-icons/fa';
 import { CiViewList } from 'react-icons/ci';
-import { MdImportContacts, MdOutlineContactMail } from 'react-icons/md';
+import {RiMoneyDollarBoxLine} from 'react-icons/ri' 
+import { MdImportContacts, MdOutlineContactMail, MdOutlineCreateNewFolder } from 'react-icons/md';
 import { AnnouncementIcons, CodingIcons, DesignIcons, EngIcons, FinishRightIcon, LaptopIcons, OnlineCourseIcon, OnlineLearningIcon, OnlineStudentIcon, PersonIcons, PrintIcons, RightLineIcon, RusIcons, UzbIcons } from 'src/icons';
 import { SiAmd, SiCisco, SiLogitech, SiSpotify } from 'react-icons/si';
 import TurkIcon from 'src/icons/turk';
@@ -364,5 +365,38 @@ export const teachValues = [
 		title: 'get_rewarded',
 		description: 'get_rewarded_description',
 		icon: TeachVal3Icon,
+	},
+];
+
+export const instructorSidebar = [
+	{
+		name: 'Students',
+		icon: FaUserGraduate,
+		route: 'students',
+	},
+	{
+		name: 'Courses',
+		icon: FaListAlt,
+		route: 'courses',
+	},
+	{
+		name: 'Create course',
+		icon: MdOutlineCreateNewFolder,
+		route: 'create-course',
+	},
+	{
+		name: 'Edit courses',
+		icon: AiFillEdit,
+		route: 'edit-courses',
+	},
+	{
+		name: 'Draft courses',
+		icon: FaFirstdraft,
+		route: 'draft-courses',
+	},
+	{
+		name: 'Revenue',
+		icon: RiMoneyDollarBoxLine,
+		route: 'revenue',
 	},
 ];
