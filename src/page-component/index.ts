@@ -15,8 +15,8 @@ export { default as StudentsPageComponent } from './instructor-page-component/st
 export { default as InstructorCoursesPageComponent } from './instructor-page-component/courses-page-component';
 export { default as InstructorStudentsPageComponent } from './instructor-page-component/students-page-component';
 export { default as InstructorCreateCourseComponent } from './instructor-page-component/create-course-component';
-
-
+export{default as InstructorEditCourseCard} from './instructor-page-component/edit-course-page-component'
+export { default as EditDetailedCoursePageComponent} from './instructor-page-component/edit-detailed-course-page-component'
 
 
 
