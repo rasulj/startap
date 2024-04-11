@@ -24,7 +24,7 @@ import { useShowPassword } from 'src/hooks/useShowPassword';
 import { AccountRecoveryProps } from './account-recovery.props';
 import { Form, Formik } from 'formik';
 import { AuthValidation } from 'src/validations/auth.validation';
-import TextField from '../text-field/text-field';
+import TextField from '../text-filed/text-filed';
 import ErrorAlert from '../error-alert/error-alert';
 import { useActions } from 'src/hooks/useActions';
 import { useTypedSelector } from 'src/hooks/useTypedSelector';

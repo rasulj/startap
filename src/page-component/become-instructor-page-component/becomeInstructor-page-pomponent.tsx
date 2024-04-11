@@ -33,7 +33,7 @@ import { useTranslation } from 'react-i18next';
 import { GoVerified } from 'react-icons/go';
 import { ErrorAlert } from 'src/components';
 import SectionTitle from 'src/components/section-title/section-title';
-import TextFiled from 'src/components/text-field/text-field';
+import TextFiled from 'src/components/text-filed/text-filed';
 import { teachValues } from 'src/config/constants';
 import { useActions } from 'src/hooks/useActions';
 import { useTypedSelector } from 'src/hooks/useTypedSelector';

@@ -22,7 +22,7 @@ export{ default as ErrorAlert} from './error-alert/error-alert'
 export{ default as InstructorCoursesCard} from './instructor-courses-card/instructor-courses-card'
 export { default as InstructorEditCourseCard } from './instructor-courses-card/instructor-edit-cours-card'
 export { default as DraftCourseCard } from './draft-course-component/darft-course-card';
-
+export { default as InstructorManagecourse} from './instructor-manage-course/instructor-manage-course'
 export{ default as StatsCard} from './status-card/status-card'
 
 

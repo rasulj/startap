@@ -22,7 +22,7 @@ import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 import { LoginProps } from './login.props';
 import { useActions } from 'src/hooks/useActions';
 import { Form, Formik } from 'formik';
-import TextField from '../text-field/text-field';
+import TextField from '../text-filed/text-filed';
 import { AuthValidation } from 'src/validations/auth.validation';
 import { InterfaceEmailAndPassword } from 'src/store/user/user.interface';
 import ErrorAlert from '../error-alert/error-alert';

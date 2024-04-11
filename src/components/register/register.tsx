@@ -20,7 +20,7 @@ import { useShowPassword } from 'src/hooks/useShowPassword';
 import { RegisterProps } from './register.props';
 import { useActions } from 'src/hooks/useActions';
 import { Form, Formik } from 'formik';
-import TextField from '../text-field/text-field';
+import TextField from '../text-filed/text-filed';
 import { InterfaceEmailAndPassword } from 'src/store/user/user.interface';
 import { AuthValidation } from 'src/validations/auth.validation';
 import ErrorAlert from '../error-alert/error-alert';
