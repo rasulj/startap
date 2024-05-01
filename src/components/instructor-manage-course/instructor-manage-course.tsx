@@ -17,25 +17,37 @@ import { useActions } from 'src/hooks/useActions';
 import { FileService } from 'src/services/file.service';
 import {InstructorManageCourseProps,SubmitValuesInterface,} from './instructor-manage-course.props';
 import TextField from '../text-filed/text-filed';
+import { useTypedSelector } from 'src/hooks/useTypedSelector';
+import ErrorAlert from '../error-alert/error-alert';
+import { useTranslation } from 'react-i18next';
 
 
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 
 const InstructorManageCourse = ({ submitHandler, titleBtn }: InstructorManageCourseProps) => {
+
 	const [file, setFile] = useState<File>();
-const { createCourse } = useActions();
+	const [errorFile, setErrorFile] = useState('');
+     const {error ,isLoading} = useTypedSelector(state => state.course)
+    const {t} = useTranslation()
+	const { clearCourseError, startLoading } = useActions();
 	const handleChange = (file: File) => {
 		setFile(file);
 	};
 
 const onSubmit = async (formValues: FormikValues) => {
-		if (file) {
+	const previewImage: string = ''
+		if (!file) {
+			setErrorFile("preview image is requried")
+			return
+			}
 			const formData = new FormData();
+			startLoading()
 			formData.append('image', file as File);
-			await FileService.fileUpload(formData, 'preview-image');
-		}
-		const data = formValues as SubmitValuesInterface;
-		createCourse({ ...data, callback: () => console.log('Success') });
+       const response = await FileService.fileUpload(formData, 'preview-image');
+	
+		const data = { ...formValues, previewImage: response.url } as SubmitValuesInterface
+	
 		submitHandler(data);
 	};
 	return (
@@ -91,11 +103,18 @@ const onSubmit = async (formValues: FormikValues) => {
 											</Text>
 										)}
 									</Box>
+										<>
+										{error && (
+											<ErrorAlert title={error as string} clearHandler={clearCourseError} />
+										)}
+									</>
 									<Button
 										w={'full'}
 										type={'submit'}
 										h={14}
 										colorScheme={'facebook'}
+										isLoading={isLoading}
+										loadingText={`${t('loading', { ns: 'global' })}`}
 										rightIcon={<GiSave />}
 									>
 										{titleBtn}

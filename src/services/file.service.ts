@@ -1,9 +1,10 @@
 import axios from 'axios';
 import { API_URL, getFileUrl } from 'src/config/api.config';
+import { Url } from 'url';
 
 export const FileService = {
 	async fileUpload(formData: FormData, folder: string = 'default') {
-		const response = await axios.post(
+		const response = await axios.post<{url:string}>(
 			`${API_URL}${getFileUrl('save')}?folder=${folder}`,
 			formData,
 			{

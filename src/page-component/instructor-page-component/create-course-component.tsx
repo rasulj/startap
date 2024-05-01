@@ -1,21 +1,37 @@
-import {
-	Divider,
-} from '@chakra-ui/react';
+import {Divider, useToast} from '@chakra-ui/react';
+
 import dynamic from 'next/dynamic';
+import { useRouter } from 'next/router';
 
 import 'react-quill/dist/quill.snow.css';
 import { InstructorManagecourse } from 'src/components';
 import { SubmitValuesInterface } from 'src/components/instructor-manage-course/instructor-manage-course.props';
 import SectionTitle from 'src/components/section-title/section-title';
+import { useActions } from 'src/hooks/useActions';
 
 
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 
 const CreateCourseComponent = () => {
 
+	const toast = useToast();
+	const router = useRouter();
 
+const {createCourse} = useActions()
 	const onSubmit = (data: SubmitValuesInterface) => {
-		console.log(data);
+
+		createCourse({
+			...data,
+			callback: () => {
+				toast({
+					title: 'Successfully created',
+					description: 'You can customize your curriculum for your course',
+					position: 'top-right',
+					isClosable: true,
+				});
+				router.push('/instructor/courses');
+			},
+		});
 	};
 	return (
 		<>

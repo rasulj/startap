@@ -18,7 +18,7 @@ const CoursesPageComponent = () => {
 							w={'full'}
 							bg={'white'}
 							color={'gray.900'}
-							placeholder={t("search_input_placeholder",{ns:'course'}) || 'search...'}
+							placeholder={t("search_input_placeholder",{ns:'coursesы'}) || 'search...'}
 							_placeholder={{ color: 'gray.500' }}
 						/>
 						<Button pos={'absolute'} right={2} top={2} colorScheme={'facebook'} zIndex={999}>
