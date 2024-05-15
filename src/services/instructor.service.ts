@@ -17,7 +17,7 @@ export const InstructorService = {
 				Authorization: `Bearer ${token}`,
 			},
 		});
-      console.log(response);
+     
 	  
 		return response.data;
 	},

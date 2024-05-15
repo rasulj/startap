@@ -5,6 +5,9 @@ import Header from '../header/header'
 import Footer from '../footer/footer'
 import { LayautProps } from '../layouts.props'
 import InstructorSidebar from '../sidebar/instructor-sidebar'
+import InstructorProvider from 'src/provider/instructor.provider'
+import { InstructorProvideProps } from './instructor.props'
+
 
 
 
@@ -28,10 +31,14 @@ const Layout: FC<LayautProps>= ({children }) => {
 
 export default Layout 
 
-export const withInstructorLayout = <T extends Record< string,unknown>>(Component:FunctionComponent<T>)=>{
+export const withInstructorLayout = <T extends Record< string,unknown> & InstructorProvideProps> (Component:FunctionComponent<T>)=>{
  return function withLayoutComponent(props:T){
+  console.log('props' , props);
+  
     return <Layout>
-    <Component {...props}/>
+    <InstructorProvider course={props.course} courses={props.courses}>
+					<Component {...props} />
+				</InstructorProvider>
         </Layout>
  }
 }

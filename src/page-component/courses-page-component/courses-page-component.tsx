@@ -1,14 +1,16 @@
 import { Accordion, AccordionButton, AccordionIcon, AccordionItem, AccordionPanel, Box, Button, Flex,  Input, Radio, RadioGroup, Stack, Text, useColorModeValue } from "@chakra-ui/react"
 import ReactStars from "react-stars"
 import SectionTitle from "src/components/section-title/section-title"
-import { courses, coursesFilter } from "src/config/constants"
+import {  coursesFilter } from "src/config/constants"
 import { FilterItemPRrops } from "./courses-page-props"
 import { AllCoursesCard } from "src/components"
 import { useTranslation } from "react-i18next"
+import { useTypedSelector } from "src/hooks/useTypedSelector"
 
 
 const CoursesPageComponent = () => {
 	const {t} = useTranslation()
+	const { courses } = useTypedSelector(state => state.instructor);
   return (
     <>
     <SectionTitle  title={t("title",{ns:'courses'})} subtitle={t("description",{ns:'courses'})}/>
@@ -18,7 +20,7 @@ const CoursesPageComponent = () => {
 							w={'full'}
 							bg={'white'}
 							color={'gray.900'}
-							placeholder={t("search_input_placeholder",{ns:'coursesы'}) || 'search...'}
+							placeholder={t("search_input_placeholder",{ns:'courses'}) || 'search...'}
 							_placeholder={{ color: 'gray.500' }}
 						/>
 						<Button pos={'absolute'} right={2} top={2} colorScheme={'facebook'} zIndex={999}>

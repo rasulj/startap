@@ -43,9 +43,10 @@ const InstructorCoursesCard: FC<InstructoCoursesCardProps> = ({ item }): JSX.Ele
 			<Box w={'30%'} h={'300px'} position={'relative'}>
 				<Image
 					fill
-					src={item.image}
+					src={`${process.env.NEXT_PUBLIC_API_SERVICE}/${item.previewImage}`}
 					alt={item.title}
 					style={{ objectFit: 'cover', borderRadius: '10px' }}
+				
 				/>
 			</Box>
 		</HStack>

@@ -12,6 +12,7 @@ export interface CourseType{
 		reviewAvarage: number,
 		reviewCount:number,
 		author:AuthorType
+		previewImage:string
 }
 export interface AuthorType{
     	firstName: string
