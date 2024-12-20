@@ -154,4 +154,4 @@ const Blur = (props: IconProps) => {
 			<circle cx='426.5' cy='-0.5' r='101.5' fill='#4299E1' />
 		</Icon>
 	);
-};
+};	

@@ -8,6 +8,7 @@ import { InstructorManagecourse } from 'src/components';
 import { SubmitValuesInterface } from 'src/components/instructor-manage-course/instructor-manage-course.props';
 import SectionTitle from 'src/components/section-title/section-title';
 import { useActions } from 'src/hooks/useActions';
+import { CourseType } from 'src/interfaces/course.interface';
 
 
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
@@ -18,8 +19,7 @@ const CreateCourseComponent = () => {
 	const router = useRouter();
 
 const {createCourse} = useActions()
-	const onSubmit = (data: SubmitValuesInterface) => {
-
+	const onSubmit = (data:CourseType) => {
 		createCourse({
 			...data,
 			callback: () => {

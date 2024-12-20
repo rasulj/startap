@@ -5,6 +5,9 @@ import { InstructorCoursesPageComponent } from 'src/page-component';
 import { InstructorService } from 'src/services/instructor.service';
 
 const Courses: NextPage <CoursesPageType> = ({courses}) => {
+
+
+	
 	return <InstructorCoursesPageComponent />;
 };
 

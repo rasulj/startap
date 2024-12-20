@@ -53,9 +53,6 @@ export const sendVerificationCode = createAsyncThunk<'Success'| unknown, { email
 );
 
 
-
-
-	
 export const editProfilePassword = createAsyncThunk<
 	'Success',
 	{ email: string; password: string; callback: () => void }

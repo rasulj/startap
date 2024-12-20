@@ -11,7 +11,8 @@ const TextField = ({label,type, children, placeholder,disabled, ...props}:TextFi
    	<FormControl mt={15} isRequired isInvalid={!!meta.touched && !!meta.error}>
 					<FormLabel>{label}</FormLabel>
 					<InputGroup >
-						<Input focusBorderColor='facebook.500' type={type} placeholder={placeholder} h={14} disabled={disabled} {...field}/>
+						<Input focusBorderColor='facebook.500'
+						 type={type} placeholder={placeholder} h={14} disabled={disabled} {...field}/>
 						{children}
 					</InputGroup>
                     

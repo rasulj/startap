@@ -1,18 +1,22 @@
-
-
-
 export interface CourseType{
-    	image: string,
-		slug:string
-		title: string,
-		lessonCount: number,
-		totalHour: number
-		level: string,
-		price: number
-		reviewAvarage: number,
-		reviewCount:number,
-		author:AuthorType
-		previewImage:string
+	slug: string;
+	previewImage: string;
+	title: string;
+	lessonCount: number;
+	totalHour: number;
+	level: string;
+	price: number;
+	reviewAvarage: number;
+	reviewCount: number;
+	author: AuthorType;
+	tags: string[];
+	requirements: string[];
+	learn: string[];
+	exerpt: string;
+	description: string;
+	category: string;
+	_id: string;
+	   
 }
 export interface AuthorType{
     	firstName: string

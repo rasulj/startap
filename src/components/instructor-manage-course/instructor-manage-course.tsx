@@ -1,9 +1,9 @@
 
 
-import { Box, Button, Flex, FormLabel, Stack, Text } from '@chakra-ui/react';
+import { Box, Button, Flex, FormLabel, Icon, Stack, Text } from '@chakra-ui/react';
 import { Form, Formik, FormikValues } from 'formik';
 import dynamic from 'next/dynamic';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FileUploader } from 'react-drag-drop-files';
 import { GiSave } from 'react-icons/gi';
 import 'react-quill/dist/quill.snow.css';
@@ -20,14 +20,21 @@ import TextField from '../text-filed/text-filed';
 import { useTypedSelector } from 'src/hooks/useTypedSelector';
 import ErrorAlert from '../error-alert/error-alert';
 import { useTranslation } from 'react-i18next';
+import { FaTimes } from 'react-icons/fa';
+import Image from 'next/image';
+import { loadImage } from 'src/helpers/image.helper';
+import { CourseType } from 'src/interfaces/course.interface';
 
 
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 
-const InstructorManageCourse = ({ submitHandler, titleBtn }: InstructorManageCourseProps) => {
+const InstructorManageCourse = ({ submitHandler, titleBtn ,courseValues}: InstructorManageCourseProps) => {
 
-	const [file, setFile] = useState<File>();
+	
 	const [errorFile, setErrorFile] = useState('');
+	const [file, setFile] = useState<File | string | null>();
+	const [initialValues, setInitialValues] = useState(manageCourseValues);
+
      const {error ,isLoading} = useTypedSelector(state => state.course)
     const {t} = useTranslation()
 	const { clearCourseError, startLoading } = useActions();
@@ -35,27 +42,41 @@ const InstructorManageCourse = ({ submitHandler, titleBtn }: InstructorManageCou
 		setFile(file);
 	};
 
+
+
 const onSubmit = async (formValues: FormikValues) => {
-	const previewImage: string = ''
+	
 		if (!file) {
 			setErrorFile("preview image is requried")
 			return
 			}
-			const formData = new FormData();
-			startLoading()
+			let imageUrel = file
+			if( typeof file !== 'string'){
+           	startLoading()
+			 const formData = new FormData();
+		
 			formData.append('image', file as File);
        const response = await FileService.fileUpload(formData, 'preview-image');
-	
-		const data = { ...formValues, previewImage: response.url } as SubmitValuesInterface
+	       imageUrel = response.url
+		const data = { ...formValues, previewImage:imageUrel } as CourseType
 	
 		submitHandler(data);
+			}
+			
 	};
+		useEffect(() => {
+		if (courseValues) {
+			setInitialValues(courseValues);
+			setFile(courseValues.previewImage);
+		}
+	}, [courseValues]);
 	return (
 		<>
 			<Formik
 				onSubmit={onSubmit}
-				initialValues={manageCourseValues}
+				initialValues={initialValues}
 				validationSchema={CourseValidation.create}
+				enableReinitialize
 			>
 				{formik => (
 					<Form>
@@ -73,6 +94,7 @@ const onSubmit = async (formValues: FormikValues) => {
 										<TagField
 											label='What will students learn in your course?'
 											name='learn'
+											values={formik.values.learn}
 											placeholder='Full project...'
 											formik={formik}
 											errorMessage={ formik.touched.requirements ? (formik.errors.requirements as string):''}
@@ -80,6 +102,7 @@ const onSubmit = async (formValues: FormikValues) => {
 										<TagField
 											label='Requirements'
 											name='requirements'
+											values={formik.values.requirements}
 											placeholder='Basic JavaScript...'
 											formik={formik}
 											errorMessage={ formik.touched.requirements ? (formik.errors.requirements as string):''}
@@ -143,25 +166,50 @@ const onSubmit = async (formValues: FormikValues) => {
 									/>
 									<TagField
 										label='Course tags'
+											values={formik.values.tags}
 										name='tags'
 										placeholder='JavaScript...'
 										formik={formik}
 										errorMessage={ formik.touched.requirements ? (formik.errors.requirements as string):''}
 									/>
-									<Box>
-										<FormLabel>
+									<FormLabel>
 											Course preview image{' '}
 											<Box as={'span'} color={'red.300'}>
 												*
 											</Box>
 										</FormLabel>
-										<FileUploader
-											handleChange={handleChange}
-											name='file'
-											types={['JPG', 'PNG', 'GIF']}
-											style={{ minWidth: '100%' }}
-										/>
-									</Box>
+
+									{ file ? (<Box pos={'relative'} w={'full'} h={200}>
+											<Image src={typeof file === 'string'? loadImage(file as string): URL.createObjectURL(file)}
+												alt={'preview image'}
+												fill
+												style={{ objectFit: 'cover', borderRadius: '8px' }}
+											/>
+											<Icon
+												as={FaTimes}
+												fontSize={20}
+												pos={'absolute'}
+												right={2}
+												top={2}
+												cursor={'pointer'}
+												onClick={() => setFile(null)}
+											/>
+										</Box>) :(
+												<Box>
+											<FileUploader
+												handleChange={handleChange}
+												name='file'
+												types={['JPG', 'PNG', 'GIF']}
+												style={{ minWidth: '100%' }}
+											/>
+											{errorFile && (
+												<Text mt={2} fontSize='14px' color='red.500'>
+													{errorFile}
+												</Text>
+											)}
+										</Box>
+										)  }
+									
 								</Stack>
 							</Box>
 						</Flex>
@@ -173,3 +221,5 @@ const onSubmit = async (formValues: FormikValues) => {
 };
 
 export default InstructorManageCourse;
+
+ 
