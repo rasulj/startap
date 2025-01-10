@@ -14,9 +14,11 @@ import {
 import Image from 'next/image';
 import { DraftCourseCard } from 'src/components';
 import SectionTitle from 'src/components/section-title/section-title';
-import { courses } from 'src/config/constants';
+import { useTypedSelector } from 'src/hooks/useTypedSelector';
+
 
 const DraftCourseComponent = () => {
+	const {courses} =useTypedSelector(state => state.instructor)
 	return (
 		<>
 			<Card>
@@ -42,16 +44,16 @@ const DraftCourseComponent = () => {
 					<TabPanels>
 						<TabPanel>
 							<Grid gridTemplateColumns={'1fr 1fr'} gap={4}>
-								{courses
-									.map(item => <DraftCourseCard key={item.slug} item={item} status={'Draft'} />)
-									.splice(0, 2)}
+								{courses.filter(c => !c.isActive)
+									.map(item => <DraftCourseCard key={item.slug} item={item} />)
+									}
 							</Grid>
 						</TabPanel>
 						<TabPanel>
 							<Grid gridTemplateColumns={'1fr 1fr'} gap={4}>
-								{courses
-									.map(item => <DraftCourseCard key={item.slug} item={item} status={'Active'} />)
-									.splice(0, 2)}
+								{courses.filter(c => c.isActive)
+									.map(item => <DraftCourseCard key={item.slug} item={item}  />)
+									}
 							</Grid>
 						</TabPanel>
 					</TabPanels>

@@ -21,4 +21,14 @@ export const CourseService = {
 		return response.data;
 	},
 
+		async draftCourse( id:string) {
+		const response = await $axios.put(`${getCourseUrl('draft')}/${id}`);
+   
+		return response.data;
+	},
+	async activateCourse( id:string) {
+		const response = await $axios.put(`${getCourseUrl('activate')}/${id}`);
+   
+		return response.data;
+	},
 };
