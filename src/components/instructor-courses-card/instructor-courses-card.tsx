@@ -32,7 +32,7 @@ if(isAgree){
 						isClosable: true,
 					});
 					setTimeout(()=>{
-						router.reload()
+						router.replace(router.asPath)
 					},1500)
 	}})
 }
@@ -64,7 +64,7 @@ if(isAgree){
 					<Button rightIcon={<VscOpenPreview />}>Preview</Button>
 					<Button rightIcon={<FiEdit2 />} onClick={()=> router.push(`/instructor/edit-courses/${item.slug}`)}> Edit</Button>
 					<Button rightIcon={<BsTrash />} onClick={onDelete}>Delete</Button>
-					<Button rightIcon={<HiOutlineStatusOnline />}>Status</Button>
+					<Button rightIcon={<HiOutlineStatusOnline />} >curriculum</Button>
 				</HStack>
 			</Stack>
 			<Box w={'30%'} h={'300px'} position={'relative'}>

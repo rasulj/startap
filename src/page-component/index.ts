@@ -19,4 +19,4 @@ export{default as InstructorEditCourseCard} from './instructor-page-component/ed
 export { default as EditDetailedCoursePageComponent} from './instructor-page-component/edit-detailed-course-page-component'
 export { default as DraftCourseComponent} from './instructor-page-component/draft-course-component'
 export { default as RevenuePageComponent } from './instructor-page-component/revenue-page-component';
-
+export { default as CurriculumPageComponent}from "./instructor-page-component/curriculum-page-component"

@@ -54,7 +54,7 @@ const InstructorEditCourseCard: FC<InstructoCoursesCardProps> = ({ item }): JSX.
 						Edit
 					</Button>
 					<Button rightIcon={<BsTrash />}>Delete</Button>
-					<Button rightIcon={<HiOutlineStatusOnline />}>Status</Button>
+					<Button rightIcon={<HiOutlineStatusOnline />} onClick={() => router.push(`/instructor/curriculum/${item.slug}`)}> curriculum</Button>
 				</HStack>
 			</Stack>
 		</HStack>
