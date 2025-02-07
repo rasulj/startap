@@ -18,9 +18,9 @@ import {
 	useDisclosure,
 	useToast,
 } from '@chakra-ui/react';
-import { Console } from 'console';
+
 import Image from 'next/image';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { BsFillPlusCircleFill } from 'react-icons/bs';
 import { SectionForm } from 'src/components';
 import SectionAccordion from 'src/components/section-accordion/section-accordion';
@@ -35,13 +35,20 @@ const CurriculumPageComponent = () => {
  	const { getSection } = useActions();
 	const { pendingSection, sections } = useTypedSelector(state => state.section);
 	const toast = useToast();
+		const [sectionTitle, setSectionTitle] = useState<{ title: string; id: string } | null>({
+		title: '',
+		id: '',
+	});
 	useEffect(() => {
 		getSection({
 			courseId: course?._id,
 			callback: () => {},
 		});
 	}, [course]);
-
+	const onCreateSection = () => {
+		onOpen();
+		setSectionTitle(null);
+	};
 	return (
 		<>
 			<Card>
@@ -61,7 +68,7 @@ const CurriculumPageComponent = () => {
 				<CardBody>
 					<Flex mb={5} justify={'space-between'} align={'center'}>
 						<Text fontSize={'2xl'}>Create section</Text>
-						<Icon as={BsFillPlusCircleFill} w={6} h={6} cursor={'pointer'} onClick={onOpen} />
+						<Icon as={BsFillPlusCircleFill} w={6} h={6} cursor={'pointer'} onClick={onCreateSection} />
 					</Flex>
 				
 								{pendingSection ? (
@@ -73,7 +80,8 @@ const CurriculumPageComponent = () => {
 					) : (
 						<Accordion allowToggle>
 							{sections?.map(section => (
-								<SectionAccordion key={section.title} section={section} />
+								<SectionAccordion key={section.title} section={section}setSectionTitle={setSectionTitle}
+									onOpen={onOpen} />
 							))}
 						</Accordion>
 					)}
@@ -87,7 +95,7 @@ const CurriculumPageComponent = () => {
 					<ModalCloseButton />
 					<Divider />
 					<ModalBody pb={5}>
-						<SectionForm  onClose={onClose}/>
+						<SectionForm  onClose={onClose}  values={sectionTitle}/>
 					</ModalBody>
 				</ModalContent>
 			</Modal>
@@ -95,63 +103,3 @@ const CurriculumPageComponent = () => {
 	);
 };
 export default CurriculumPageComponent;
-// const sections = [
-// 	{
-// 		title: '#1 Modul. ReactJS asoslari',
-// 		lessons: [
-// 			{
-// 				name: '1-dars: ReactJS nima',
-// 			},
-// 			{
-// 				name: '1-dars: ReactJS nima',
-// 			},
-// 			{
-// 				name: '1-dars: ReactJS nima',
-// 			},
-// 			{
-// 				name: '1-dars: ReactJS nima',
-// 			},
-// 			{
-// 				name: '1-dars: ReactJS nima',
-// 			},
-// 			{
-// 				name: '1-dars: ReactJS nima',
-// 			},
-// 			{
-// 				name: '1-dars: ReactJS nima',
-// 			},
-// 			{
-// 				name: '1-dars: ReactJS nima',
-// 			},
-// 			{
-// 				name: '1-dars: ReactJS nima',
-// 			},
-// 			{
-// 				name: '1-dars: ReactJS nima',
-// 			},
-// 			{
-// 				name: '1-dars: ReactJS nima',
-// 			},
-// 			{
-// 				name: '1-dars: ReactJS nima',
-// 			},
-// 		],
-// 	},
-// 	{
-// 		title: '#2 Modul. VueJS asoslari',
-// 		lessons: [
-// 			{
-// 				name: '1-dars: VueJS nima',
-// 			},
-// 			{
-// 				name: '1-dars: VueJS nima',
-// 			},
-// 			{
-// 				name: '1-dars: VueJS nima',
-// 			},
-// 			{
-// 				name: '1-dars: VueJS nima',
-// 			},
-// 		],
-// 	},
-// ];

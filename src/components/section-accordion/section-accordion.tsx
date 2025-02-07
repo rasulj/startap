@@ -18,16 +18,17 @@ import LessonForm from '../lesson-form/lesson-forn';
 import { SectionAccordionProps } from './section-accordion-props';
 import { useActions } from 'src/hooks/useActions';
 import { useTypedSelector } from 'src/hooks/useTypedSelector';
-import ErrorAlert from '../error-alert/error-alert';
 
-const SectionAccordion = ({ section }:SectionAccordionProps) => {
+
+const SectionAccordion = ({ section ,onOpen,setSectionTitle}:SectionAccordionProps) => {
 	const { isOpen, onToggle } = useDisclosure();
 
- const { deleteSection, getSection } = useActions();
-	const { error, isLoading } = useTypedSelector(state => state.section);
+ const { deleteSection, getSection} = useActions();
+	const { isLoading } = useTypedSelector(state => state.section);
  const { course} = useTypedSelector( state => state.instructor)
 
  const toast = useToast()
+
 	const onDelete = () => {
 		const isAgree = confirm('Are you sure?');
 		if (isAgree) {
@@ -44,6 +45,10 @@ const SectionAccordion = ({ section }:SectionAccordionProps) => {
 			});
 		}
 	};
+const onEditSection = () => {
+		onOpen();
+		setSectionTitle({ title: section.title, id: section._id });
+	};
 return (
 		<AccordionItem>
 		
@@ -55,7 +60,7 @@ return (
 						{section.title}
 					</Flex>
 					<Flex fontSize={'15px'} align={'center'} gap={3}>
-						<Icon as={MdEdit} w={5} h={5} />
+						<Icon as={MdEdit} w={5} h={5} onClick={onEditSection} />
 						
 						<Icon as={MdDelete} w={5} h={5} onClick={onDelete} />
 						<AccordionIcon />

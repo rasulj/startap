@@ -5,32 +5,59 @@ import { useActions } from 'src/hooks/useActions';
 import { useTypedSelector } from 'src/hooks/useTypedSelector';
 import { SectionFormProps } from './section-props';
 import { useTranslation } from 'react-i18next';
+import { useEffect, useState } from 'react';
+import { CourseValidation } from 'src/validations/course.validation';
 
-const SectionForm = ({onClose}:SectionFormProps) => {
+const SectionForm = ({onClose ,values}:SectionFormProps) => {
 
-	const { createSection,getSection}= useActions()
+const [initialValues, setInitialValues] = useState<{ title: string }>({ title: '' });
+	const { createSection,getSection, editSection}= useActions()
+
 	const { course} = useTypedSelector( state => state.instructor)
-		const { isLoading} = useTypedSelector( state => state.section)
-   const  toast = useToast()
-   const {t}= useTranslation()
+
+	const { isLoading} = useTypedSelector( state => state.section)
+       const  toast = useToast()
+       const {t}= useTranslation()
 
 	const onSubmit = (formValues: FormikValues) => {
-        createSection({
-			 title: formValues.title,
-			courseId:course?._id as string,
-			callback:()=>{
-            toast({ title: 'Successfully created section', position: 'top-right', isClosable: true });
-			onClose()
-			getSection({
-					courseId: course?._id,
-					callback: () => {},
-				})
-			}
-		})
-		
+		if (values) {
+			editSection({
+				sectionId: values.id,
+				title: formValues.title,
+				callback: () => {
+					toast({ title: 'Successfully edited section', position: 'top-right', isClosable: true });
+					onClose();
+					getSection({
+						courseId: course?._id,
+						callback: () => {},
+					});
+				},
+			});
+		} else {
+			createSection({
+				title: formValues.title,
+				courseId: course?._id as string,
+				callback: () => {
+					toast({ title: 'Successfully created section', position: 'top-right', isClosable: true });
+					onClose();
+					getSection({
+						courseId: course?._id,
+						callback: () => {},
+					});
+				},
+			});
+		}
 	};
+
+	useEffect(() => {
+		setInitialValues({ title: values?.title as string });
+	}, [values]);
+       
+		
+
 	return (
-		<Formik onSubmit={onSubmit} initialValues={{ title: '' }}>
+		<Formik onSubmit={onSubmit} initialValues={initialValues} enableReinitialize validationSchema={CourseValidation.section}
+			>
 			<Form>
 				<TextFiled name='title' label='Title' />
 				<Button h={14} mt={4} w={'full'} colorScheme={'facebook'} type={'submit'}isLoading={isLoading}

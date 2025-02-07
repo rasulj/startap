@@ -8,6 +8,7 @@ export interface CourseIntialStateType {
 
 export interface CourseCreateBodyInterface extends CourseType{
 	callback: () => void;
+	sectionId: string
 }
 export interface ByIdBodyInterface {
 	courseId: string;
