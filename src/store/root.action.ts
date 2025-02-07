@@ -4,11 +4,16 @@ import * as courseActions from './course/course.action';
 import { courseSliceAction } from './course/course.slice';
 import * as instructorAction from './instructor/instructor.action'
 import { instructorSliceAction} from './instructor/instructor.slice'
+import * as sectionAction from './section/section.actions'
+import { sectionSliceAction} from './section/section.slice'
+
 
 export const allActions = { ...userActions ,
     ...userSliceAction ,
     ...instructorSliceAction,
     ...instructorAction ,
     ...courseActions,
-    ...courseSliceAction
+    ...courseSliceAction,
+    ... sectionAction,
+    ...sectionSliceAction
  }

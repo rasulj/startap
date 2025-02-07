@@ -33,7 +33,7 @@ export default Layout
 
 export const withInstructorLayout = <T extends Record< string,unknown> & InstructorProvideProps> (Component:FunctionComponent<T>)=>{
  return function withLayoutComponent(props:T){
-  console.log('props' , props);
+  
   
     return <Layout>
     <InstructorProvider course={props.course} courses={props.courses}>

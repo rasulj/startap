@@ -1,9 +1,5 @@
 import { CourseType } from "src/interfaces/course.interface";
 
-
-
-
-
 export interface InstructorIntialStateType {
      isLoading:boolean
      error: null | string | unknown,
