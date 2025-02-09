@@ -44,7 +44,7 @@ export const editSection = createAsyncThunk< 'Success',SectionBodyType>(
     
 );
 export const deleteSection = createAsyncThunk< 'Success',SectionBodyType>(
-    'section/delit',
+    'section/delite',
     async (body, thunkApi) => {
         try {
             const response = await SectionService.deleteSection(body);

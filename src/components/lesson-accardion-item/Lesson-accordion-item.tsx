@@ -1,10 +1,30 @@
-import { Collapse, Flex, Icon, Text, useColorModeValue, useDisclosure } from '@chakra-ui/react';
+import { Collapse, Flex, Icon, Text,  useColorModeValue, useDisclosure, useToast } from '@chakra-ui/react';
 import { FaEdit } from 'react-icons/fa';
 import { FiDelete } from 'react-icons/fi';
 import LessonForm from '../lesson-form/lesson-forn';
+import { LessonAccordionItemProps } from './lesson-accordion-item.props';
+import {  useActions } from 'src/hooks/useActions';
+import { useTypedSelector } from 'src/hooks/useTypedSelector';
 
-const LessonAccordionItem = ({ lesson }) => {
+const LessonAccordionItem = ({ lesson , sectionId }:LessonAccordionItemProps) => {
 	const { isOpen, onToggle } = useDisclosure();
+   const {deleteLesson, getSection}= useActions()
+    const { course} = useTypedSelector( state => state.instructor)
+   const toast = useToast()
+
+   const onDelete =()=>{
+
+	
+	deleteLesson({lessonId:lesson._id , sectionId,
+		callback:()=>{
+       toast({ title: 'Successfully deleted lesson', position: 'top-right', isClosable: true });
+					getSection({
+						courseId:course?._id,
+						callback: () => {},
+					});
+		}
+	})
+   }
 	return (
 		<>
 			<Flex
@@ -20,11 +40,11 @@ const LessonAccordionItem = ({ lesson }) => {
 					<Text>{lesson.name}</Text>
 				</Flex>
 				<Flex gap={3}>
-					<Icon as={FiDelete} cursor={'pointer'} />
+					<Icon as={FiDelete} cursor={'pointer'} onClick={onDelete} />
 				</Flex>
 			</Flex>
 			<Collapse in={isOpen} animateOpacity>
-				<LessonForm />
+				<LessonForm  sectionId={sectionId} values={lesson}  />
 			</Collapse>
 		</>
 	);

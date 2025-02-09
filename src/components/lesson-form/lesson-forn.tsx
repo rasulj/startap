@@ -1,16 +1,57 @@
-import { Box, Button, Flex, Stack, Text, useColorModeValue } from '@chakra-ui/react';
+import { Box, Button, Flex, Stack, Text, useColorModeValue, useToast } from '@chakra-ui/react';
 import { Form, Formik, FormikValues } from 'formik';
 import dynamic from 'next/dynamic';
 import 'react-quill/dist/quill.snow.css';
 import { editLessonModules } from 'src/config/editor.config';
 import TextAreaField from '../text-area-field/text-area-field';
 import TextFiled from '../text-filed/text-filed';
+import { LessonFormProps } from './lesson-form.props';
+import { LessonType } from 'src/interfaces/instructor.interface';
+import { useActions } from 'src/hooks/useActions';
+import { useTypedSelector } from 'src/hooks/useTypedSelector';
+import { manageLessonValues } from 'src/validations/course.validation';
+import { useTranslation } from 'react-i18next';
+import { useEffect, useState } from 'react';
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 
-const LessonForm = () => {
+const LessonForm = ({values,sectionId}:LessonFormProps) => { 
+
+	const [initialValues , setInitialValues]= useState(manageLessonValues)
+	const toast = useToast()
+  const {createLesson, getSection,editLesson}= useActions()
+const { course } = useTypedSelector(state => state.instructor);
+const { isLoading } = useTypedSelector(state => state.lesson);
+const {t}=useTranslation()
+
+
 	const onSubmit = (formValues: FormikValues) => {
-		console.log(formValues);
-	};
+		const data = formValues as LessonType
+       
+		  if(values){
+             editLesson({lessonId:values._id, ...data , callback:()=>{
+					getSection({
+						courseId: course?._id,
+						callback: () => {},
+					});
+			 }})
+		  }else{
+		  createLesson({ sectionId,...data,callback:()=>{
+			toast({ title: 'Successfully edited lesson', position: 'top-right', isClosable: true });
+					getSection({
+						courseId: course?._id,
+						callback: () => {},
+					});
+	  }})	
+		  }
+    
+	}
+
+useEffect(() => {
+		if (values?._id) {
+			setInitialValues(values);
+		}
+	}, [values]);
+	
 	return (
 		<Box
 			p={5}
@@ -19,7 +60,7 @@ const LessonForm = () => {
 			borderRadius={'lg'}
 			borderColor={useColorModeValue('gray.200', 'gray.500')}
 		>
-			<Formik onSubmit={onSubmit} initialValues={{ material: '' }}>
+			<Formik onSubmit={onSubmit} initialValues={initialValues} enableReinitialize>
 				{formik => (
 					<Form>
 						<Stack spacing={5}>
@@ -42,7 +83,10 @@ const LessonForm = () => {
 									</Text>
 								)}
 							</Box>
-							<Button h={14} mt={4} w={'full'} colorScheme={'facebook'} type={'submit'}>
+							<Button h={14} mt={4} w={'full'} colorScheme={'facebook'} type={'submit'}
+							isLoading={isLoading}
+								loadingText={`${t('loading', { ns: 'global' })}`}
+							>
 								Submit
 							</Button>
 						</Stack>
@@ -53,3 +97,4 @@ const LessonForm = () => {
 	);
 };
 export default LessonForm;
+

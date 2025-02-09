@@ -34,7 +34,7 @@ const SectionAccordion = ({ section ,onOpen,setSectionTitle}:SectionAccordionPro
 		if (isAgree) {
 			deleteSection({
 				sectionId: section._id,
-				courseId: course?._id,
+				courseId: course?._id, 
 				callback: () => {
 					toast({ title: 'Successfully deleted section', position: 'top-right', isClosable: true });
 					getSection({
@@ -49,6 +49,7 @@ const onEditSection = () => {
 		onOpen();
 		setSectionTitle({ title: section.title, id: section._id });
 	};
+	
 return (
 		<AccordionItem>
 		
@@ -69,7 +70,8 @@ return (
 			</AccordionButton>
 			<AccordionPanel pb={4}>
 				{section.lessons.map(lesson => (
-					<LessonAccordionItem key={lesson.name} lesson={lesson} />
+					
+					<LessonAccordionItem key={section._id} sectionId={section._id} lesson={lesson} />
 				))}
 				<Center>
 					<Button
@@ -82,7 +84,7 @@ return (
 					</Button>
 				</Center>
 				<Collapse in={isOpen} animateOpacity>
-					<LessonForm />
+					<LessonForm  sectionId={section._id}/>
 				</Collapse>
 			</AccordionPanel>
 		</AccordionItem>

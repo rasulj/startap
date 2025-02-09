@@ -25,6 +25,22 @@ export const manageCourseValues:Type  = {
 	tags: []
 };
 
+interface LessonTypeValues {
+	name: string;
+	embedVideo: string;
+	hour: number;
+	minute: number;
+	second: number;
+	material: string;
+}
+export const manageLessonValues: LessonTypeValues = {
+	name: '',
+	embedVideo: '',
+	hour: 0,
+	minute: 0,
+	second: 0,
+	material: '',
+};
 export const CourseValidation = {
 	create() {
 		return Yup.object({
