@@ -78,9 +78,9 @@ const CurriculumPageComponent = () => {
 							<Skeleton height='20px' />
 						</Stack>
 					) : (
-						<Accordion allowToggle>
-							{sections?.map(section => (
-								<SectionAccordion key={section.title} section={section}setSectionTitle={setSectionTitle}
+						<Accordion allowToggle  onDragOver={e => e.preventDefault()}>
+							{sections?.map((section,idx) => (
+								<SectionAccordion key={idx} sectionIdx={idx} section={section}setSectionTitle={setSectionTitle}
 									onOpen={onOpen} />
 							))}
 						</Accordion>

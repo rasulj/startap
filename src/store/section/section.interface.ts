@@ -7,6 +7,8 @@ export interface SectionBodyType{
     courseId?: string
     sectionId?:string
     callback:()=>void
+    sections?: string[];
+	lessons?: string[];
 
 }
 export interface SectionInitialStateType {

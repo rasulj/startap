@@ -12,6 +12,7 @@ import { useTypedSelector } from 'src/hooks/useTypedSelector';
 import { manageLessonValues } from 'src/validations/course.validation';
 import { useTranslation } from 'react-i18next';
 import { useEffect, useState } from 'react';
+
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 
 const LessonForm = ({values,sectionId}:LessonFormProps) => { 

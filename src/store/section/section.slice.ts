@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { createSection, deleteSection ,editSection,getSection } from './section.actions';
+import { createSection, deleteSection ,dragSection,editSection,getSection } from './section.actions';
 import { SectionInitialStateType } from './section.interface';
 
 const initialState: SectionInitialStateType = {
@@ -70,6 +70,19 @@ export const sectionSlice = createSlice({
                 state.isLoading = false;
                 state.error = payload;
             })
+            //////////
+            	.addCase(dragSection.pending, state => {
+				state.pendingSection = true;
+				state.error = null;
+			})
+			.addCase(dragSection.fulfilled, state => {
+				state.pendingSection = false;
+				state.error = null;
+			})
+			.addCase(dragSection.rejected, (state, { payload }) => {
+				state.pendingSection = false;
+				state.error = payload;
+			});
      
     },
 });
