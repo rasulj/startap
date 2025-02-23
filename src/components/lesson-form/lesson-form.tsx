@@ -15,33 +15,29 @@ import { useEffect, useState } from 'react';
 
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 
-const LessonForm = ({values,sectionId}:LessonFormProps) => { 
+const LessonForm = ({values,sectionId ,onToggle}:LessonFormProps) => { 
 
 	const [initialValues , setInitialValues]= useState(manageLessonValues)
 	const toast = useToast()
   const {createLesson, getSection,editLesson}= useActions()
 const { course } = useTypedSelector(state => state.instructor);
-const { isLoading } = useTypedSelector(state => state.lesson);
+const { isLoading } = useTypedSelector(state => state.section);
 const {t}=useTranslation()
 
 
-	const onSubmit = (formValues: FormikValues) => {
+	const onSubmit = (formValues: FormikValues , {resetForm}) => {
 		const data = formValues as LessonType
        
 		  if(values){
              editLesson({lessonId:values._id, ...data , callback:()=>{
-					getSection({
-						courseId: course?._id,
-						callback: () => {},
-					});
+				onToggle()			
+		        resetForm()
 			 }})
 		  }else{
 		  createLesson({ sectionId,...data,callback:()=>{
 			toast({ title: 'Successfully edited lesson', position: 'top-right', isClosable: true });
-					getSection({
-						courseId: course?._id,
-						callback: () => {},
-					});
+		onToggle()			
+		resetForm()
 	  }})	
 		  }
     

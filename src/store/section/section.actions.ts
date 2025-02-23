@@ -5,7 +5,7 @@ import { errorCatch } from "src/helpers/api.helper";
 import { SectionType } from "src/interfaces/instructor.interface";
 
 
-export const createSection = createAsyncThunk< 'Success',SectionBodyType>(
+export const createSection = createAsyncThunk< SectionType[],SectionBodyType>(
     'section/create',
     async (body, thunkApi) => {
         try {
@@ -30,7 +30,7 @@ export const getSection = createAsyncThunk< SectionType[],SectionBodyType>(
         }
     }
 );
-export const editSection = createAsyncThunk< 'Success',SectionBodyType>(
+export const editSection = createAsyncThunk< SectionType,SectionBodyType>(
     'section/edit',
     async (body, thunkApi) => {
         try {
@@ -43,7 +43,7 @@ export const editSection = createAsyncThunk< 'Success',SectionBodyType>(
     }
     
 );
-export const deleteSection = createAsyncThunk< 'Success',SectionBodyType>(
+export const deleteSection = createAsyncThunk< SectionType[],SectionBodyType>(
     'section/delite',
     async (body, thunkApi) => {
         try {

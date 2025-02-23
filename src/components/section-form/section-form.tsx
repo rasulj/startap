@@ -11,7 +11,7 @@ import { CourseValidation } from 'src/validations/course.validation';
 const SectionForm = ({onClose ,values}:SectionFormProps) => {
 
 const [initialValues, setInitialValues] = useState<{ title: string }>({ title: '' });
-	const { createSection,getSection, editSection}= useActions()
+	const { createSection, editSection}= useActions()
 
 	const { course} = useTypedSelector( state => state.instructor)
 
@@ -27,10 +27,7 @@ const [initialValues, setInitialValues] = useState<{ title: string }>({ title: '
 				callback: () => {
 					toast({ title: 'Successfully edited section', position: 'top-right', isClosable: true });
 					onClose();
-					getSection({
-						courseId: course?._id,
-						callback: () => {},
-					});
+				
 				},
 			});
 		} else {
@@ -40,10 +37,7 @@ const [initialValues, setInitialValues] = useState<{ title: string }>({ title: '
 				callback: () => {
 					toast({ title: 'Successfully created section', position: 'top-right', isClosable: true });
 					onClose();
-					getSection({
-						courseId: course?._id,
-						callback: () => {},
-					});
+				
 				},
 			});
 		}

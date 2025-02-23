@@ -15,7 +15,7 @@ import {
 import { AiOutlineMenu } from 'react-icons/ai';
 import { MdDelete, MdEdit } from 'react-icons/md';
 import LessonAccordionItem from '../lesson-accardion-item/Lesson-accordion-item';
-import LessonForm from '../lesson-form/lesson-forn';
+import LessonForm from '../lesson-form/lesson-form';
 import { SectionAccordionProps } from './section-accordion-props';
 import { useActions } from 'src/hooks/useActions';
 import { useTypedSelector } from 'src/hooks/useTypedSelector';
@@ -25,7 +25,7 @@ import { DragEvent } from 'react';
 const SectionAccordion = ({ section ,onOpen,setSectionTitle,sectionIdx}:SectionAccordionProps) => {
 	const { isOpen, onToggle } = useDisclosure();
 
- const { deleteSection, getSection , dragSection} = useActions();
+ const { deleteSection, dragSection} = useActions();
 
 	const {  sections ,isLoading} = useTypedSelector(state => state.section);
  const { course} = useTypedSelector( state => state.instructor)
@@ -40,10 +40,7 @@ const SectionAccordion = ({ section ,onOpen,setSectionTitle,sectionIdx}:SectionA
 				courseId: course?._id, 
 				callback: () => {
 					toast({ title: 'Successfully deleted section', position: 'top-right', isClosable: true });
-					getSection({
-						courseId: course?._id,
-						callback: () => {},
-					});
+				
 				},
 			});
 		}
@@ -56,7 +53,6 @@ const onEditSection = () => {
 	const onDragStartSection = (e: DragEvent<HTMLButtonElement>) => {
 		e.dataTransfer.setData('sectionIdx', String(sectionIdx));
 	};
-
 	const onDropSection = (e: DragEvent<HTMLButtonElement>) => {
 		const movingSectionIndex = Number(e.dataTransfer.getData('sectionIdx'));
 		const allSections = [...sections];
@@ -67,18 +63,11 @@ const onEditSection = () => {
 		dragSection({
 			sections: editedIdx,
 			courseId: course?._id,
-			callback: () => {
-				getSection({
-					courseId: course?._id,
-					callback: () => {},
-				});
-			},
+			callback: () => {},
 		});
 	};
-
 return (
 		<AccordionItem>
-
 			<AccordionButton h={14} p={2} fontWeight={'bold'} cursor={isLoading ? 'progress' : 'pointer'}
 			    draggable
 				onDragStart={onDragStartSection}
@@ -118,7 +107,7 @@ return (
 					</Button>
 				</Center>
 				<Collapse in={isOpen} animateOpacity>
-					<LessonForm  sectionId={section._id}/>
+					<LessonForm  sectionId={section._id} onToggle={onToggle}/>
 				</Collapse>
 			</AccordionPanel>
 		</AccordionItem>
