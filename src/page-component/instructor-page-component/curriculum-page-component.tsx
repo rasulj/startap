@@ -21,6 +21,7 @@ import {
 
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { BsFillPlusCircleFill } from 'react-icons/bs';
 import { SectionForm } from 'src/components';
 import SectionAccordion from 'src/components/section-accordion/section-accordion';
@@ -34,7 +35,9 @@ const CurriculumPageComponent = () => {
 	const { isOpen, onOpen, onClose } = useDisclosure();
  	const { getSection } = useActions();
 	const { pendingSection, sections } = useTypedSelector(state => state.section);
+    const{t}= useTranslation()
 	const toast = useToast();
+
 		const [sectionTitle, setSectionTitle] = useState<{ title: string; id: string } | null>({
 		title: '',
 		id: '',
@@ -58,7 +61,7 @@ const CurriculumPageComponent = () => {
 						<Stack>
 							<SectionTitle
 								title={course?.title as string}
-								subtitle={`Manage curriculum for your  course ${course?.title}`}
+								subtitle={t('curriculum_description')}
 							/>
 						</Stack>
 					</HStack>
@@ -67,7 +70,7 @@ const CurriculumPageComponent = () => {
 			<Card mt={10}>
 				<CardBody>
 					<Flex mb={5} justify={'space-between'} align={'center'}>
-						<Text fontSize={'2xl'}>Create section</Text>
+						<Text fontSize={'2xl'}>{t('create_section', { ns: 'instructor' })}</Text>
 						<Icon as={BsFillPlusCircleFill} w={6} h={6} cursor={'pointer'} onClick={onCreateSection} />
 					</Flex>
 				
@@ -91,7 +94,7 @@ const CurriculumPageComponent = () => {
 			<Modal isOpen={isOpen} onClose={onClose} isCentered>
 				<ModalOverlay />
 				<ModalContent>
-					<ModalHeader>Create section</ModalHeader>
+						<ModalHeader>{t('create_section', { ns: 'instructor' })}</ModalHeader>
 					<ModalCloseButton />
 					<Divider />
 					<ModalBody pb={5}>

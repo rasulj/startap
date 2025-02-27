@@ -2,22 +2,20 @@ import { Box, Button, Divider, Flex, Heading, HStack, Icon, Stack, Text, Toast }
 import Image from 'next/image';
 import { FC } from 'react';
 import { AiOutlineClockCircle } from 'react-icons/ai';
-import { BsTrash } from 'react-icons/bs';
 import { CiViewList } from 'react-icons/ci';
-import { FiEdit2 } from 'react-icons/fi';
-import { HiOutlineStatusOnline } from 'react-icons/hi';
 import { SiGoogleanalytics } from 'react-icons/si';
 import { VscOpenPreview } from 'react-icons/vsc';
 import { InstructoCoursesCardProps } from './instructor-courses-card.props';
 import { loadImage } from 'src/helpers/image.helper';
 import { useRouter } from 'next/router';
 import { useActions } from 'src/hooks/useActions';
+import { useTranslation } from 'react-i18next';
 
 const InstructorCoursesCard: FC<InstructoCoursesCardProps> = ({ item }): JSX.Element => {
 	
 	const { deleteCourse}= useActions()
 	const router = useRouter()
-	
+	const { t } = useTranslation();
 const onDelete = ()=>{
 const isAgree = confirm('Are you sure?')
 
@@ -31,9 +29,7 @@ if(isAgree){
 						position: 'top-right',
 						isClosable: true,
 					});
-					setTimeout(()=>{
-						router.replace(router.asPath)
-					},1500)
+				router.replace(router.asPath)
 	}})
 }
 }
@@ -48,11 +44,15 @@ if(isAgree){
 				<HStack>
 					<Flex align={'center'} gap={1}>
 						<Icon as={CiViewList} />
-						<Text>{item.lessonCount} lesson</Text>
+						<Text>
+							{item.lessonCount} {t('lessons', { ns: 'courses' })}
+						</Text>
 					</Flex>
 					<Flex align={'center'} gap={1}>
 						<Icon as={AiOutlineClockCircle} />
-						<Text>{item.totalHour} hours</Text>
+				<Text>
+							{item.totalHour} {t('hour', { ns: 'courses' })}
+						</Text>
 					</Flex>
 					<Flex align={'center'} gap={1}>
 						<Icon as={SiGoogleanalytics} />
@@ -61,10 +61,8 @@ if(isAgree){
 				</HStack>
 				<Divider />
 				<HStack>
-					<Button rightIcon={<VscOpenPreview />}>Preview</Button>
-					<Button rightIcon={<FiEdit2 />} onClick={()=> router.push(`/instructor/edit-courses/${item.slug}`)}> Edit</Button>
-					<Button rightIcon={<BsTrash />} onClick={onDelete}>Delete</Button>
-					<Button rightIcon={<HiOutlineStatusOnline />} >curriculum</Button>
+					<Button rightIcon={<VscOpenPreview />}   h={16} colorScheme={'facebook'} w={'full'}>{t('preview', { ns: 'instructor' })}</Button>
+				
 				</HStack>
 			</Stack>
 			<Box w={'30%'} h={'300px'} position={'relative'}>

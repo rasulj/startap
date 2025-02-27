@@ -20,6 +20,7 @@ import { SectionAccordionProps } from './section-accordion-props';
 import { useActions } from 'src/hooks/useActions';
 import { useTypedSelector } from 'src/hooks/useTypedSelector';
 import { DragEvent } from 'react';
+import { useTranslation } from 'react-i18next';
 
 
 const SectionAccordion = ({ section ,onOpen,setSectionTitle,sectionIdx}:SectionAccordionProps) => {
@@ -31,7 +32,7 @@ const SectionAccordion = ({ section ,onOpen,setSectionTitle,sectionIdx}:SectionA
  const { course} = useTypedSelector( state => state.instructor)
 
  const toast = useToast()
-
+const {t} = useTranslation()
 	const onDelete = () => {
 		const isAgree = confirm('Are you sure?');
 		if (isAgree) {
@@ -103,7 +104,9 @@ return (
 						_hover={{ textDecoration: 'underline' }}
 						onClick={onToggle}
 					>
-						{isOpen ? 'Close form' : 'Create lesson'}
+							{isOpen
+							? t('close_form', { ns: 'instructor' })
+							: t('create_lesson', { ns: 'instructor' })}
 					</Button>
 				</Center>
 				<Collapse in={isOpen} animateOpacity>

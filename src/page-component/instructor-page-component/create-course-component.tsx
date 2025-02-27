@@ -1,31 +1,24 @@
-import {Divider, useToast} from '@chakra-ui/react';
-
-import dynamic from 'next/dynamic';
+import { Divider, useToast } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
-
-import 'react-quill/dist/quill.snow.css';
-import { InstructorManagecourse } from 'src/components';
-import { SubmitValuesInterface } from 'src/components/instructor-manage-course/instructor-manage-course.props';
+import { useTranslation } from 'react-i18next';
+import { InstructorManagecourse, } from 'src/components';
 import SectionTitle from 'src/components/section-title/section-title';
 import { useActions } from 'src/hooks/useActions';
 import { CourseType } from 'src/interfaces/course.interface';
 
-
-const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
-
 const CreateCourseComponent = () => {
-
+	const { createCourse } = useActions();
 	const toast = useToast();
 	const router = useRouter();
+	const { t } = useTranslation();
 
-const {createCourse} = useActions()
-	const onSubmit = (data:CourseType) => {
+	const onSubmit = (data: CourseType) => {
 		createCourse({
 			...data,
-			callback: () => {
+			callback:() => {
 				toast({
-					title: 'Successfully created',
-					description: 'You can customize your curriculum for your course',
+					title: t('successfully_created_course', { ns: 'instructor' }),
+					description: t('successfully_created_course_description', { ns: 'instructor' }),
 					position: 'top-right',
 					isClosable: true,
 				});
@@ -33,16 +26,18 @@ const {createCourse} = useActions()
 			},
 		});
 	};
+
 	return (
 		<>
 			<SectionTitle
-				title='Create course'
-				subtitle="Note that when you're creating course it will be draft"
+				title={t('create_course_title', { ns: 'instructor' })}
+				subtitle={t('create_course_description', { ns: 'instructor' })}
 			/>
 			<Divider mt={5} />
-
-			<InstructorManagecourse titleBtn='Create course' submitHandler={onSubmit} />
-			
+			<InstructorManagecourse
+				titleBtn={t('create_course_btn', { ns: 'instructor' })}
+				submitHandler={onSubmit}
+			/>
 		</>
 	);
 };

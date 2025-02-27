@@ -7,6 +7,7 @@ import {  useActions } from 'src/hooks/useActions';
 import { useTypedSelector } from 'src/hooks/useTypedSelector';
 import { DragEvent } from 'react';
 import { LessonType, SectionType } from 'src/interfaces/instructor.interface';
+import { useTranslation } from 'react-i18next';
 
 const LessonAccordionItem = ({ lesson , sectionId ,lessonIdx}:LessonAccordionItemProps) => {
 	const { isOpen, onToggle } = useDisclosure();
@@ -14,12 +15,16 @@ const LessonAccordionItem = ({ lesson , sectionId ,lessonIdx}:LessonAccordionIte
     const { course} = useTypedSelector( state => state.instructor)
 		const { sections } = useTypedSelector(state => state.section);
    const toast = useToast()
-
+    const {t}= useTranslation()
    const onDelete =()=>{
 
 	deleteLesson({lessonId:lesson._id , sectionId,
 		callback:()=>{
-       toast({ title: 'Successfully deleted lesson', position: 'top-right', isClosable: true });
+        toast({
+						title: t('successfully_deleted', { ns: 'instructor' }),
+						position: 'top-right',
+						isClosable: true,
+					});
 
 		}
 	})

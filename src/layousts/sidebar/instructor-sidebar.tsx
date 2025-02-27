@@ -76,7 +76,7 @@ const InstructorSidebar: FC<SidebarProps> = ({ toggle }): JSX.Element => {
 					</MenuList>
 				</Menu>
 				<Text fontSize={'lg'} mt={10}>
-					Instructor admin
+				{t('instructor_admin', { ns: 'instructor' })}
 				</Text>
 				{instructorSidebar.map((item, idx) => {
 					const active =
@@ -96,37 +96,13 @@ const InstructorSidebar: FC<SidebarProps> = ({ toggle }): JSX.Element => {
 							>
 								<HStack gap={2}>
 									<Icon as={item.icon} />
-									<Text>{item.name}</Text>
+									<Text>{t(item.name, { ns: 'instructor' })}</Text>
 								</HStack>
 							</Button>
 						</Link>
 					);
 				})}
-				{/* {navigation.map((item, idx) => (
-					<Box key={idx} mt={10}>
-						<Text>{t(item.title, { ns: 'layout' })}</Text>
-						{item.links.map((nav, idx) => {
-							const active = `/${router.pathname.split('/')[1]}` == nav.route;
-							return (
-								<Link href={`${nav.route}`} key={idx}>
-									<Button
-										colorScheme={'facebook'}
-										variant={active ? 'solid' : 'ghost'}
-										w={'full'}
-										justifyContent={'flex-start'}
-										h={14}
-										mt={2}
-									>
-										<HStack gap={2}>
-											<Icon as={nav.icon} />
-											<Text>{t(nav.label, { ns: 'layout' })}</Text>
-										</HStack>
-									</Button>
-								</Link>
-							);
-						})}
-					</Box>
-				))} */}
+			
 			</Container>
 		</Box>
 	);

@@ -1,5 +1,5 @@
 {
-	"about_title": "О нас",
+"about_title": "О нас",
 	"about_descrption": "Makul bir fiyata ilgi çekici, derlenmiş kurslar sunmaya çalışıyoruz.",
 	"about_heading": "En iyi çevrimiçi kurslarla becerileriniz olan Sammi'ye hoş geldiniz",
 	"about_text_1": "Bu popüler kurslardan birini bir günden daha kısa sürede başlatabilir ve ücretsiz olarak bitirebilirsiniz! Aşağıdaki listeye göz atın. Kursu ücretsiz alın",
@@ -12,7 +12,7 @@
 	"contact_name": "İsim",
 	"contact_email": "E-posta adresi",
 	"contact_message": "İleti",
-	"contact_btn": "Send Message",
+	"contact_btn": "Mesaj gönder",
 	"pricing_title": "okumanız için",
 	"pricing_title_green": "doğru planlar",
 	"pricing_description": "Verimlilik için yukarıdaki planlardan herhangi birini seçebilir ve becerilerinizi birkaç kez artırabilirsiniz. Planımızı satın alarak, planınıza bağlı olarak 7/24 destek alabilir ve bir mentor ile görüşebilirsiniz.",
@@ -32,7 +32,7 @@
 	"faq_answer_6": "Sammi, hesabınızın ülkesine ve konumuna bağlı olarak birkaç farklı ödeme yöntemini destekler.",
 	"faq_question_7": "Satın aldığım bir kursu beğenmezsem ne olur?",
 	"faq_answer_7": "Memnun kalmanızı istiyoruz, böylece Udemy'de satın alınan tüm uygun kurslar 30 gün içinde iade edilebilir. Bir kurstan memnun kalmazsanız, talebin geri ödeme politikamızdaki yönergelere uygun olması koşuluyla geri ödeme talebinde bulunabilirsiniz.",
-    "auth_page_title_1": "Senior web tasarımcıları",
+	"auth_page_title_1": "Senior web tasarımcıları",
 	"auth_page_title_2": "Full-Stack Geliştiriciler",
 	"auth_page_you": "size",
 	"login_title": "Girmek",
@@ -93,8 +93,22 @@
 	"last_name_required": "Soyadı gereklidir",
 	"social_media": "Sosyal medya",
 	"social_media_required": "Sosyal medya bağlantısı gerekli",
-	"send_to_verify_btn": "Doğrulamak için gönder"
-
-
-
+	"send_to_verify_btn": "Doğrulamak için gönder",
+	"title_is_required": "Başlık gerekli",
+	"title_min_char": "Başlık minimum 8 karakter olmalıdır",
+	"exerpt_is_required": "alıntı gerekli",
+	"exerpt_min_char": "Alıntı en az 15 karakter olmalıdır",
+	"level_is_required": "Seviye gerekli",
+	"category_is_required": "Kategori gerekli",
+	"price_is_required": "Fiyat gerekli",
+	"course_tags_is_required": "Kurs etiketleri gerekli",
+	"requirements_is_required": "Gereksinimler gereklidir",
+	"learn_is_required": "Öğrenmek gerekli",
+	"description_is_required": "Açıklama gerekli",
+	"description_min_char": "Açıklama en az 100 karakter olmalıdır",
+	"name_is_required": "İsim gerekli",
+	"embed_video_is_required": "Göm Video gereklidir",
+	"hour_is_required": "saat gerekli",
+	"minute_is_required": "Dakika gerekli",
+	"second_is_required": "saniye gerekli"
 }

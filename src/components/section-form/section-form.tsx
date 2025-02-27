@@ -25,7 +25,11 @@ const [initialValues, setInitialValues] = useState<{ title: string }>({ title: '
 				sectionId: values.id,
 				title: formValues.title,
 				callback: () => {
-					toast({ title: 'Successfully edited section', position: 'top-right', isClosable: true });
+					toast({
+						title: t('successfully_edited', { ns: 'instructor' }),
+						position: 'top-right',
+						isClosable: true,
+					});
 					onClose();
 				
 				},
@@ -35,7 +39,11 @@ const [initialValues, setInitialValues] = useState<{ title: string }>({ title: '
 				title: formValues.title,
 				courseId: course?._id as string,
 				callback: () => {
-					toast({ title: 'Successfully created section', position: 'top-right', isClosable: true });
+						toast({
+						title: t('successfully_created_course', { ns: 'instructor' }),
+						position: 'top-right',
+						isClosable: true,
+					});
 					onClose();
 				
 				},
@@ -53,10 +61,10 @@ const [initialValues, setInitialValues] = useState<{ title: string }>({ title: '
 		<Formik onSubmit={onSubmit} initialValues={initialValues} enableReinitialize validationSchema={CourseValidation.section}
 			>
 			<Form>
-				<TextFiled name='title' label='Title' />
+				<TextFiled name='title' label={t('title', { ns: 'instructor' })}  />
 				<Button h={14} mt={4} w={'full'} colorScheme={'facebook'} type={'submit'}isLoading={isLoading}
 					loadingText={`${t('loading', { ns: 'global' })}`}>
-					Submit
+					S{t('search_input_btn', { ns: 'courses' })}
 				</Button>
 			</Form>
 		</Formik>

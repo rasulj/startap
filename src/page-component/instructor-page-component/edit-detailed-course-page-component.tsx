@@ -2,14 +2,13 @@ import {
 	Divider,
 	useToast,
 } from '@chakra-ui/react';
-import { callback } from 'chart.js/dist/helpers/helpers.core';
+
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
+import { useTranslation } from 'react-i18next';
 
 import 'react-quill/dist/quill.snow.css';
-
 import { InstructorManagecourse } from 'src/components';
-import { SubmitValuesInterface } from 'src/components/instructor-manage-course/instructor-manage-course.props';
 import SectionTitle from 'src/components/section-title/section-title';
 import { useActions } from 'src/hooks/useActions';
 import { useTypedSelector } from 'src/hooks/useTypedSelector';
@@ -19,6 +18,7 @@ import { CourseType } from 'src/interfaces/course.interface';
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 
 const EditDetailedCoursePageComponent = () => {
+	const { t } = useTranslation();
  const {editCourse} =useActions()
  const { course } = useTypedSelector(state => state.instructor);
 	const router = useRouter();
@@ -30,8 +30,7 @@ const onSubmit = (data:CourseType) => {
 			...data,
 			callback: () => {
 				toast({
-					title: 'Successfully edited ',
-			
+				title: t('successfully_edited', { ns: 'instructor' }),
 					position: 'top-right',
 					isClosable: true,
 				});
@@ -41,9 +40,10 @@ const onSubmit = (data:CourseType) => {
 	};
 	return (
 		<>
-			<SectionTitle title={`Edit course ${router.query.slug}`} subtitle={''} />
+			<SectionTitle title={`${t('edit_course_title', { ns: 'instructor' })} ${router.query.slug}`}
+				subtitle={''}/>
 			<Divider mt={5} />
-			<InstructorManagecourse titleBtn='Edit course'
+			<InstructorManagecourse titleBtn={t('edit_course_title', { ns: 'instructor' })}
 				submitHandler={onSubmit}
 				courseValues={course}/>
 				
