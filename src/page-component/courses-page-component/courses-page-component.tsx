@@ -11,6 +11,8 @@ import { useTypedSelector } from "src/hooks/useTypedSelector"
 const CoursesPageComponent = () => {
 	const {t} = useTranslation()
 	const { courses } = useTypedSelector(state => state.instructor);
+	console.log(courses);
+	
   return (
     <>
     <SectionTitle  title={t("title",{ns:'courses'})} subtitle={t("description",{ns:'courses'})}/>

@@ -16,11 +16,11 @@ export interface CourseType{
 	description: string;
 	category: string;
 	_id: string;
-isActive:boolean;
+   isActive:boolean;
+  language: string;
 	   
 }
 export interface AuthorType{
-    	firstName: string
-		lastName: string,
+    	fullName:string
 		avatar:string,
 }

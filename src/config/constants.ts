@@ -449,5 +449,6 @@ export const courseCategory = [
 	'Web Design',
 	'Graphic Design',
 ];
+export const courseLng =['uz','tr','ru','en']
 
 export const coursePrice = [10, 20, 30, 40, 50];

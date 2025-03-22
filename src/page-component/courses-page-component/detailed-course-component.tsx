@@ -101,7 +101,7 @@ const DetailedCourseComponent = () => {
 									<Image
 										w={'full'}
 										h={'300px'}
-										src={course?.image}
+										src={course?.previewImage}
 										alt={course?.title}
 										style={{ objectFit: 'cover', borderRadius: '8px' }}
 									/>

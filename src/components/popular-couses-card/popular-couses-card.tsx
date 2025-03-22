@@ -1,46 +1,57 @@
-import { Divider, Flex, HStack, Heading, Icon, Image, Stack, Text } from "@chakra-ui/react"
+import { Avatar, Box, Divider, Flex, HStack, Heading, Icon,  Stack, Text } from "@chakra-ui/react"
 import ReactStars from "react-stars"
 import { PopularCousesCardProps } from "./popular-couses-card.props"
 import { SiGoogleanalytics } from "react-icons/si"
 import { AiOutlineClockCircle } from "react-icons/ai"
 import { CiViewList } from "react-icons/ci"
+import Image from "next/image"
+import { loadImage } from "src/helpers/image.helper"
 
 
 
-const PopularCousesCard = ({courses}:PopularCousesCardProps):JSX.Element => {
+const PopularCousesCard = ({item}:PopularCousesCardProps):JSX.Element => {
+	
+	
   return (
-    <Stack key={courses.title} spacing={3} p={3} 
+    <Stack key={item.title} spacing={3} p={3} 
 		cursor={'pointer'}
 		 
 		 > 
-         <Image src={courses.image} alt={courses.title} borderRadius={'lg'} objectFit={'cover'} h={'210px'} w={'300px'}/>
+       <Box pos={'relative'} w={'full'} h={'210px'}>
+ 				<Image
+ 					src={loadImage(item.previewImage)}
+ 					alt={item.title}
+ 					fill
+ 					style={{ objectFit: 'cover', borderRadius: '10px' }}
+ 				/>
+ 			</Box>
            <HStack>
-            <Text color={'#e59819'}> {courses.reviewAvarage.toFixed(1)}</Text>
-            <ReactStars edit={false} value={courses.reviewAvarage} color2={'#e59819'}/>
-            <Text opacity={'.8'}>( {courses.reviewCount})</Text>
+            <Text color={'#e59819'}> 4</Text>
+            <ReactStars edit={false} value={2} color2={'#e59819'}/>
+            <Text opacity={'.8'}> 2</Text>
            </HStack>
-           	<Heading fontSize={'xl'}>{courses.title}</Heading>
+           	<Heading fontSize={'xl'}>{item.title}</Heading>
 						<HStack>
 							<Flex align={'center'} gap={1}>
 								<Icon as={CiViewList} />
-								<Text boxSize={'fit-content'}> {courses.lessonCount} Lesson</Text>
+								<Text boxSize={'fit-content'}> {item.lessonCount} Lesson</Text>
 							</Flex>
 							<Flex align={'center'} gap={1}>
 								<Icon as={AiOutlineClockCircle} />
-								<Text>{courses.totalHour} Hour</Text>
+								<Text>{item.totalHour} Hour</Text>
 							</Flex>
 							<Flex align={'center'} gap={1}>
 								<Icon as={SiGoogleanalytics} />
-								<Text>{courses.level}</Text>
+								<Text>{item.level}</Text>
 							</Flex>
 						</HStack>
 						<Divider />
               <Flex justifyContent={'space-between'} alignItems={'center'}>
                 <HStack>
-                  <Image src={courses.author.avatar} alt={courses.author.firstName} h={'50px'} w={"50px"} borderRadius={'full'}/>
-                  <Text> {courses.author.firstName} {courses.author.lastName[0]}.</Text>
+                 <Avatar src={item.author.avatar} name={item.author.fullName} />
+ 					<Text>{item.author.fullName}</Text>
                 </HStack>
-                  <Text> {courses.price.toLocaleString('en-US',{style:'currency', currency:'USD'})}</Text>
+                  <Text> {item.price.toLocaleString('en-US',{style:'currency', currency:'USD'})}</Text>
               </Flex>
         </Stack>
   )

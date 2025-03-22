@@ -1,8 +1,12 @@
-  import React from 'react'
+  import { GetServerSideProps } from 'next'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
+import { CourseType } from 'src/interfaces/course.interface'
+import { InstructorType } from 'src/interfaces/instructor.interface'
 import { withLayout } from 'src/layousts/layout'
 import Seo from 'src/layousts/seo/seo'
 import { HomePageComponent } from 'src/page-component'
+import { AppService } from 'src/services/app.service'
   
   const Home = () => {
  	const { t } = useTranslation();
@@ -18,3 +22,18 @@ import { HomePageComponent } from 'src/page-component'
   }
   
   export default withLayout(Home)
+
+  export const getServerSideProps: GetServerSideProps<MainPageProps> = async ({ req }) => {
+ 	const response = await AppService.getMainPageSource(req.cookies.i18next);
+  console.log(response);
+  
+ 	return {
+ 		props: { courses: response.courses,  instructors: response.instructors},
+ 	};
+ };
+ 
+ interface MainPageProps {
+ 	courses: CourseType[];
+	instructors: InstructorType[]
+ 
+ }

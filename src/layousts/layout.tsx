@@ -1,10 +1,11 @@
 
 import { FunctionComponent, useState } from 'react'
 import Header from './header/header'
-import { LayautProps } from './layouts.props'
+import { AppProviderProps, LayautProps } from './layouts.props'
 import { Box, Container } from '@chakra-ui/react'
 import Sidebar from './sidebar/sidebar'
 import Footer from './footer/footer'
+import AppProvider from 'src/provider/app.provider'
 
 
 const Layout = ({children ,...props}:LayautProps) => {
@@ -27,10 +28,13 @@ const Layout = ({children ,...props}:LayautProps) => {
 
 export default Layout 
 
-export const withLayout = <T extends Record< string,unknown>>(Component:FunctionComponent<T>)=>{
+export const withLayout = <T extends Record< string,unknown>& AppProviderProps>(Component:FunctionComponent<T>)=>{
  return function withLayoutComponent(props:T){
     return <Layout>
-    <Component {...props}/>
+      <AppProvider courses={props.courses} course={props.course} instructors={props.instructors}>
+         <Component {...props}/>
+      </AppProvider>
+   
         </Layout>
  }
 }

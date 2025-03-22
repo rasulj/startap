@@ -10,7 +10,7 @@ import { useRouter } from 'next/router';
 const AllCoursesCard = ({ course }: AllCoursesCardProps) => {
 
 	const router = useRouter()
-
+  
 	const onDetailedCourse = ()=> router.push(`/courses/${course.slug}`)
 	return (
 		<>
@@ -26,17 +26,17 @@ const AllCoursesCard = ({ course }: AllCoursesCardProps) => {
 					/>
 					<Stack>
 						<HStack>
-							<Text color={'#e59819'}>{course.reviewAvarage.toFixed(1)}</Text>
-							<ReactStars edit={false} value={course.reviewAvarage} color2={'#e59819'} />
-							<Text opacity={'.8'}>({course.reviewCount})</Text>
+							<Text color={'#e59819'}>{course?.reviewAvarage.toFixed(1)}</Text>
+							<ReactStars edit={false} value={course?.reviewAvarage} color2={'#e59819'} />
+							<Text opacity={'.8'}>({course?.reviewCount})</Text>
 						</HStack>
 						<Heading fontSize={'xl'}>{course.title}</Heading>
 						<Text>Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium nostrum laboriosam est ut.</Text>
 						<Flex gap={2} fontSize={'14px'} direction={{ base: 'column', sm: 'row' }}>
 							<HStack align={'center'}>
-								<Image src={course.author.avatar} alt={course.author.firstName} w={50} h={50} borderRadius={'full'} />
+								<Image src={course.author.avatar} alt={course.author.fullName} w={50} h={50} borderRadius={'full'} />
 								<Text>
-									{course.author.firstName} {course.author.lastName[0]}.
+									{course.author.fullName}.
 								</Text>
 							</HStack>
 							<HStack>

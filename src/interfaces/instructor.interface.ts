@@ -3,11 +3,10 @@ import { CourseType } from 'src/interfaces/course.interface';
 
 
 export interface InstructorType {
-	firstName: string;
-	lastName: string;
-	email: string;
-	socialMedia: string;
-
+    fullName: string;
+ 	avatar: string;
+ 	coursesCount: number;
+ 	studentsCount: number;
 }
 export interface InstructorProvideProps {
 	courses: CourseType[];

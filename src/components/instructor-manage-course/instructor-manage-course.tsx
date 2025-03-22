@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react';
 import { FileUploader } from 'react-drag-drop-files';
 import { GiSave } from 'react-icons/gi';
 import 'react-quill/dist/quill.snow.css';
-import { courseCategory, courseLevel, coursePrice } from 'src/config/constants';
+import { courseCategory, courseLevel, courseLng, coursePrice } from 'src/config/constants';
 import { editorModules } from 'src/config/editor.config';
 import { CourseValidation, manageCourseValues } from 'src/validations/course.validation';
 import SelectField from '../select-field/select-field';
@@ -70,6 +70,7 @@ const onSubmit = async (formValues: FormikValues) => {
 			setFile(courseValues.previewImage);
 		}
 	}, [courseValues]);
+
 	return (
 		<>
 			<Formik
@@ -90,7 +91,7 @@ const onSubmit = async (formValues: FormikValues) => {
 										height={'150px'}
 										label={t('excerpt', { ns: 'instructor' }) || 'Exerpt'}
 									/>
-									<Flex gap={4}>
+								
 										<TagField
 											label={t('what_students_will_learn', { ns: 'instructor' })}
 											name='learn'
@@ -107,7 +108,14 @@ const onSubmit = async (formValues: FormikValues) => {
 											formik={formik}
 											errorMessage={ formik.touched.requirements ? (formik.errors.requirements as string):''}
 										/>
-									</Flex>
+								<TagField
+										label={t('course_tags', { ns: 'instructor' })}
+											values={formik.values.tags}
+										name='tags'
+										placeholder='JavaScript...'
+										formik={formik}
+										errorMessage={ formik.touched.requirements ? (formik.errors.requirements as string):''}
+									/>
 									<Box>
 										<FormLabel mb={3}>
 											Description{' '}
@@ -153,6 +161,12 @@ const onSubmit = async (formValues: FormikValues) => {
 										arrOptions={courseLevel}
 									/>
 									<SelectField
+										name='language'
+										label={t('language', { ns: 'instructor' })}
+										placeholder='-'
+										arrOptions={courseLng}
+									/>
+									<SelectField
 										name='category'
 										label={t('category', { ns: 'instructor' })}
 										placeholder='-'
@@ -164,14 +178,7 @@ const onSubmit = async (formValues: FormikValues) => {
 										placeholder='-'
 										arrOptions={coursePrice}
 									/>
-									<TagField
-										label={t('course_tags', { ns: 'instructor' })}
-											values={formik.values.tags}
-										name='tags'
-										placeholder='JavaScript...'
-										formik={formik}
-										errorMessage={ formik.touched.requirements ? (formik.errors.requirements as string):''}
-									/>
+									
 									<FormLabel>
 											Course preview image{' '}
 											<Box as={'span'} color={'red.300'}>

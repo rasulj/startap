@@ -64,7 +64,7 @@ const [initialValues, setInitialValues] = useState<{ title: string }>({ title: '
 				<TextFiled name='title' label={t('title', { ns: 'instructor' })}  />
 				<Button h={14} mt={4} w={'full'} colorScheme={'facebook'} type={'submit'}isLoading={isLoading}
 					loadingText={`${t('loading', { ns: 'global' })}`}>
-					S{t('search_input_btn', { ns: 'courses' })}
+					{t('search_input_btn', { ns: 'courses' })}
 				</Button>
 			</Form>
 		</Formik>
