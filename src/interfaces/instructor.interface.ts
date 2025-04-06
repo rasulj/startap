@@ -7,6 +7,8 @@ export interface InstructorType {
  	avatar: string;
  	coursesCount: number;
  	studentsCount: number;
+	totalCourses: number;
+ 	job: string;
 }
 export interface InstructorProvideProps {
 	courses: CourseType[];

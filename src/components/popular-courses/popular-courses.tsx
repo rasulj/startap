@@ -13,7 +13,7 @@ const PopularCourses = () => {
 const {t}= useTranslation()
 
 const { courses } = useTypedSelector(state => state.course);
-console.log(courses);
+
 
   return (
     <>

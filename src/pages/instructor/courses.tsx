@@ -16,6 +16,8 @@ export default withInstructorLayout(Courses);
 export const getServerSideProps: GetServerSideProps<CoursesPageType> = async ({ req }) => {
 	
 	const courses = await InstructorService.getAllCourses(req.cookies.refresh);
+	
+	
 	return {
 		props: { courses },
 	};

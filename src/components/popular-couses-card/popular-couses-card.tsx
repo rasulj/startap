@@ -11,6 +11,7 @@ import { loadImage } from "src/helpers/image.helper"
 
 const PopularCousesCard = ({item}:PopularCousesCardProps):JSX.Element => {
 	
+	console.log(item);
 	
   return (
     <Stack key={item.title} spacing={3} p={3} 
@@ -56,5 +57,6 @@ const PopularCousesCard = ({item}:PopularCousesCardProps):JSX.Element => {
         </Stack>
   )
 }
+// item.avatar ? loadImage(item.avatar) : '/images/altimag.webp'
 
 export default PopularCousesCard

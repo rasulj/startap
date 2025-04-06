@@ -32,7 +32,7 @@ const Register = ({ onNavigateStateComponent }: RegisterProps) => {
 	const { show, toggleShow, showConfirm, toggleShowConfirm } = useShowPassword();
 	const { t } = useTranslation();
 
-  const {pendingRegister,sendVerificationCode ,clearError}= useActions()
+  const {pendingRegister,register,sendVerificationCode ,clearError}= useActions()
   const {error , isLoading}= useTypedSelector(state => state.user)
 
 const router = useRouter()
@@ -40,10 +40,13 @@ const router = useRouter()
  const toast = useToast()
 const onSubmit = async (formData: InterfaceEmailAndPassword) => {
 		const { email, password } = formData;
-		sendVerificationCode({ email ,isUser:false ,callbac:()=>{
-                    pendingRegister({ email, password });
-			onNavigateStateComponent('verification');
-		} });
+		 pendingRegister({ email, password }); 
+			onNavigateStateComponent('login');
+			register({ email, password ,callback:()=>{}})
+		// sendVerificationCode({ email ,isUser:false ,callbac:()=>{
+        //             pendingRegister({ email, password });
+		// 	onNavigateStateComponent('login');
+		// } });
 		
 	};
 	return (
@@ -71,7 +74,7 @@ const onSubmit = async (formData: InterfaceEmailAndPassword) => {
 	                 	<Flex gap={4} >
 							<TextField name='password' type={!show ? 'password' : 'text'} 
 							label={t('login_input_password_label', { ns: 'global' })}
-							placeholder={'****'}
+							placeholder={'****'} 
 							>
 								<InputRightElement pt={4}>
 							<Icon as={!show ? AiOutlineEye : AiOutlineEyeInvisible} cursor={'pointer'} onClick={toggleShow} />
@@ -112,7 +115,7 @@ const onSubmit = async (formData: InterfaceEmailAndPassword) => {
 				{t('register_already_have_account', { ns: 'global' })}{' '}
 				<Box
 					as={'span'}
-					onClick={() => onNavigateStateComponent('verification')}
+					onClick={() => onNavigateStateComponent('login')}
 					color={'teal.500'}
 					cursor={'pointer'}
 					_hover={{ textDecoration: 'underline' }}

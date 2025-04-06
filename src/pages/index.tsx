@@ -23,17 +23,16 @@ import { AppService } from 'src/services/app.service'
   
   export default withLayout(Home)
 
-  export const getServerSideProps: GetServerSideProps<MainPageProps> = async ({ req }) => {
- 	const response = await AppService.getMainPageSource(req.cookies.i18next);
-  console.log(response);
-  
- 	return {
- 		props: { courses: response.courses,  instructors: response.instructors},
- 	};
- };
- 
- interface MainPageProps {
- 	courses: CourseType[];
-	instructors: InstructorType[]
- 
- }
+ export const getServerSideProps: GetServerSideProps<MainPageProps> = async ({ req }) => {
+
+	const response = await AppService.getMainPageSource(req.cookies.i18next);
+	 
+	return {
+		props: { courses: response.courses, instructors: response.instructors },
+	};
+};
+
+interface MainPageProps {
+	courses: CourseType[];
+	instructors: InstructorType[];
+}

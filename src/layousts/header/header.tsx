@@ -26,6 +26,7 @@ import { AiOutlineLogin } from 'react-icons/ai';
 import { useAuth } from 'src/hooks/useAuth';
 import { useActions } from 'src/hooks/useActions';
 import { BsFillMoonFill, BsFillSunFill } from 'react-icons/bs';
+import { RiAdminFill } from 'react-icons/ri';
 
 const Header = ({ onToggle }: HeaderProps) => {
 	const { toggleColorMode, colorMode } = useColorMode();
@@ -107,6 +108,17 @@ const logoutHandler = () => {
 								<Avatar backgroundColor={'facebook.500'} src={user.avatar} />
 							</MenuButton>
 							<MenuList p={0} m={0}>
+
+									{user.role === 'INSTRUCTOR' && (
+ 									<MenuItem
+ 										h={14}
+ 										onClick={() => router.push('/instructor')}
+ 										fontWeight={'bold'}
+ 										icon={<RiAdminFill fontSize={17} />}
+ 									>
+ 										{t('instructor_admin', { ns: 'instructor' })}
+ 									</MenuItem>
+ 								)}
 								<MenuItem
 									h={14}
 								//	onClick={() => router.push('/setting')}

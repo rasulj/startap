@@ -4,28 +4,33 @@ import { CourseType } from 'src/interfaces/course.interface';
 import { InstructorType } from 'src/interfaces/instructor.interface';
 
 interface Props {
-    children: ReactNode;
-    courses: CourseType[];
-    course: CourseType;
-    instructors:InstructorType[]
+	children: ReactNode;
+	courses: CourseType[];
+	course: CourseType;
+	instructors: InstructorType[];
 }
 
-const AppProvider: FC<Props> = ({ children, course, courses ,instructors }): JSX.Element => {
-    const { getCourse ,getCourses,getInstructors} = useActions();
-       
-    useEffect(() => {    
-            getCourses(courses);
-            getInstructors(instructors)
-        
-           
-        if (course) {
-            getCourse(course);
-        } 
+const AppProvider: FC<Props> = ({ children, course, courses, instructors }): JSX.Element => {
+	const { getCourses, getCourse, getInstructors } = useActions();
+       console.log(courses);
+	      console.log(instructors);
+	useEffect(() => {
+		if (courses !== undefined) {
+			getCourses(courses);
+		} else {
+			getCourses([]);
+		}
+		if (instructors) {
+			getInstructors(instructors);
+		} else {
+			getCourses([]);
+		}
+		if (course) {
+			getCourse(course);
+		}
+	}, [courses, course]);
 
-        
-    }, [courses, course]);
-
-    return <>{children}</>;
+	return <>{children}</>;
 };
 
 export default AppProvider;

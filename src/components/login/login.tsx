@@ -79,7 +79,7 @@ const Login = ({ onNavigateStateComponent }: LoginProps) => {
 				
 					<Box as={'a'} color={'teal.500'} _hover={{ textDecoration: 'underline' }} 
 					onClick={()=> onNavigateStateComponent('account-recovery')}>
-						{t('auth_forgot_password', { ns: 'global' })}
+						{t('auth_forgot_password', { ns: 'global' }) }
 					</Box>
 			
 	      			</HStack>

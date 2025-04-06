@@ -27,40 +27,43 @@ export const editCourse = createAsyncThunk<'Success', CourseCreateBodyInterface>
 			return thunkApi.rejectWithValue(errorCatch(error));
 		}
 	}
-	
 );
+
 export const deleteCourse = createAsyncThunk<'Success', ByIdBodyInterface>(
 	'course/delete',
 	async (body, thunkApi) => {
 		try {
-			const response = await CourseService.deleteCourse( body.courseId);
+			const response = await CourseService.deleteCourse(body.courseId);
 			body.callback();
 			return response;
 		} catch (error) {
 			return thunkApi.rejectWithValue(errorCatch(error));
 		}
 	}
-	
 );
+
 export const activateCourse = createAsyncThunk<'Success', ByIdBodyInterface>(
 	'course/activate',
 	async (body, thunkApi) => {
 		try {
-			const response = await CourseService.activateCourse( body.courseId);
+			const response = await CourseService.activateCourse(body.courseId);
 			body.callback();
 			return response;
 		} catch (error) {
 			return thunkApi.rejectWithValue(errorCatch(error));
 		}
-	});
-	export const draftCourse = createAsyncThunk<'Success', ByIdBodyInterface>(
+	}
+);
+
+export const draftCourse = createAsyncThunk<'Success', ByIdBodyInterface>(
 	'course/draft',
 	async (body, thunkApi) => {
 		try {
-			const response = await CourseService.draftCourse( body.courseId);
+			const response = await CourseService.draftCourse(body.courseId);
 			body.callback();
 			return response;
 		} catch (error) {
 			return thunkApi.rejectWithValue(errorCatch(error));
 		}
-	})
+	}
+);

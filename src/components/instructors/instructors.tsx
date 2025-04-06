@@ -35,7 +35,7 @@ const Instructors = () => {
 							<Heading fontSize={'xl'}>
 								{item.fullName} 
 							</Heading>
-							<Text color={'gray.500'}>??????</Text>
+							<Text color={'gray.500'}>{item.fullName}</Text>
 							<HStack opacity={'.6'}>
 								<Flex align={'center'} gap={1}>
 									<Icon as={FaUserGraduate} />
@@ -43,7 +43,7 @@ const Instructors = () => {
 								</Flex>
 								<Flex align={'center'} gap={1}>
 									<Icon as={AiOutlinePlayCircle} />
-									<Text> 100 courses</Text>
+									<Text> {item.totalCourses}  courses</Text>
 								</Flex>
 							</HStack>
 						</Stack>

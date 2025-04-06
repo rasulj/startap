@@ -28,8 +28,10 @@ const Layout = ({children ,...props}:LayautProps) => {
 
 export default Layout 
 
-export const withLayout = <T extends Record< string,unknown>& AppProviderProps>(Component:FunctionComponent<T>)=>{
+export const withLayout = <T extends Record< string,unknown> & AppProviderProps>(Component:FunctionComponent<T>)=>{
+
  return function withLayoutComponent(props:T){
+
     return <Layout>
       <AppProvider courses={props.courses} course={props.course} instructors={props.instructors}>
          <Component {...props}/>

@@ -33,8 +33,9 @@ import { useTranslation } from 'react-i18next';
 import { GoVerified } from 'react-icons/go';
 import { ErrorAlert } from 'src/components';
 import SectionTitle from 'src/components/section-title/section-title';
+import SelectField from 'src/components/select-field/select-field';
 import TextFiled from 'src/components/text-filed/text-filed';
-import { teachValues } from 'src/config/constants';
+import { courseLng, teachValues } from 'src/config/constants';
 import { useActions } from 'src/hooks/useActions';
 import { useTypedSelector } from 'src/hooks/useTypedSelector';
 import { LaunchCourseIcon, PlanCurriculumIcon, RecordVideoIcon } from 'src/icons';
@@ -50,6 +51,7 @@ const BecomeInstructorPageComponent = () => {
   const{isLoading ,error } = useTypedSelector( state => state.instructor)
 
 	const onSubmit = (formData) => {
+	
 		
 		 applyInstructor({...formData, callback:()=>{
 				toast({
@@ -156,7 +158,7 @@ const BecomeInstructorPageComponent = () => {
 				</CardBody>
 			</Card>
 
-			<Modal isOpen={isOpen} onClose={onClose} size={'4xl'} isCentered={true}>
+			<Modal isOpen={isOpen} onClose={onClose} size={'3xl'} isCentered={true}>
 				<ModalOverlay />
 				<ModalContent>
 					<ModalHeader fontSize={'2xl'}>
@@ -193,6 +195,17 @@ const BecomeInstructorPageComponent = () => {
 										placeholder={'info@sammi.ac'}
 										type={'email'}
 									/>
+										<TextFiled
+ 										name={'job'}
+ 										label={t('label_job', { ns: 'instructor' })}
+ 										placeholder={'Senior software engineer'}
+ 									/>
+										<SelectField
+ 										name='language'
+ 										label={t('language', { ns: 'instructor' })}
+ 										placeholder='-'
+ 										arrOptions={courseLng}
+ 									/>
 									<TextFiled
 										name={'socialMedia'}
 										label={`${t('social_media', { ns: 'global' })} (YouTube)`}
