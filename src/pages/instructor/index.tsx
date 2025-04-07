@@ -1,6 +1,6 @@
 import { GetServerSideProps } from 'next'
 import React from 'react'
-import { withInstructorLayout } from 'src/layousts/instructor'
+import { withInstructorLayout } from 'src/layouts/instructor'
 
 const InstructorPage = () => {
   return (

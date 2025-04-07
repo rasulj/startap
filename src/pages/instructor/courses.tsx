@@ -1,6 +1,6 @@
 import { GetServerSideProps, NextPage } from 'next';
 import { CourseType } from 'src/interfaces/course.interface';
-import { withInstructorLayout } from 'src/layousts/instructor';
+import { withInstructorLayout } from 'src/layouts/instructor';
 import { InstructorCoursesPageComponent } from 'src/page-component';
 import { InstructorService } from 'src/services/instructor.service';
 

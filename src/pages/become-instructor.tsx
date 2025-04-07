@@ -1,4 +1,4 @@
-import { withLayout } from "src/layousts/layout"
+import { withLayout } from "src/layouts/layout"
 import { BecomeInstructorPageComponent } from "src/page-component"
 
 

@@ -1,7 +1,7 @@
 import { GetServerSideProps } from 'next'
 import React from 'react'
 import { CourseType } from 'src/interfaces/course.interface'
-import { withInstructorLayout } from 'src/layousts/instructor'
+import { withInstructorLayout } from 'src/layouts/instructor'
 import { CurriculumPageComponent } from 'src/page-component'
 import { InstructorService } from 'src/services/instructor.service'
 

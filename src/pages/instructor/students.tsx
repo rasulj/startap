@@ -1,5 +1,5 @@
 import { GetServerSideProps, NextPage } from 'next';
-import { withInstructorLayout } from 'src/layousts/instructor';
+import { withInstructorLayout } from 'src/layouts/instructor';
 import StudentsPageComponent from 'src/page-component/instructor-page-component/students-page-component';
 import { AuthService } from 'src/services/auth.service';
 

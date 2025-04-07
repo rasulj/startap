@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import Seo from "src/layousts/seo/seo";
+import Seo from "src/layouts/seo/seo";
 import { AuthPageComponent } from "src/page-component";
 
 

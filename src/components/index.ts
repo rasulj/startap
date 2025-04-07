@@ -27,6 +27,7 @@ export{ default as StatsCard} from './status-card/status-card'
 export{ default as LessonAccordionItem} from './lesson-accardion-item/Lesson-accordion-item'
 export{ default as LessonForm} from "./lesson-form/lesson-form"
 export{ default as SectionForm} from "./section-form/section-form"
+export { default as AdminInstructorTable } from './admin-instructor-table/admin-instructor-table';
 
 
 

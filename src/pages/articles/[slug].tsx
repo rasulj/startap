@@ -1,8 +1,8 @@
 import { GetServerSideProps } from 'next';
 import { ArticleType } from 'src/interfaces/article.interface';
 import { Language } from 'src/interfaces/constants.interface';
-import { withLayout } from 'src/layousts/layout';
-import Seo from 'src/layousts/seo/seo';
+import { withLayout } from 'src/layouts/layout';
+import Seo from 'src/layouts/seo/seo';
 import { ArticleDetailedComponent } from 'src/page-component';
 import { Articles } from 'src/services/articel.service';
 

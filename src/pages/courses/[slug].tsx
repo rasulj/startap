@@ -1,7 +1,7 @@
 
 import { useRouter } from 'next/router'
-import { withLayout } from 'src/layousts/layout'
-import Seo from 'src/layousts/seo/seo'
+import { withLayout } from 'src/layouts/layout'
+import Seo from 'src/layouts/seo/seo'
 import { DetailedCourseComponent } from 'src/page-component'
 
 const DetailedCoursePage = () => {

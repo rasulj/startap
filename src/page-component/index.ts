@@ -20,3 +20,8 @@ export { default as EditDetailedCoursePageComponent} from './instructor-page-com
 export { default as DraftCourseComponent} from './instructor-page-component/draft-course-component'
 export { default as RevenuePageComponent } from './instructor-page-component/revenue-page-component';
 export { default as CurriculumPageComponent}from "./instructor-page-component/curriculum-page-component"
+export { default as AdminBooksPageComponent } from './admin-page-component/books-page-component';
+ export { default as AdminCoursesPageComponent } from './admin-page-component/courses-page-component';
+ export { default as InstructorPageComponent } from './admin-page-component/instructor-page-component';
+ export { default as UserPageComponent } from './admin-page-component/user-page-component'
+ 

@@ -1,7 +1,7 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next';
-import { withLayout } from 'src/layousts/layout'
-import Seo from 'src/layousts/seo/seo';
+import { withLayout } from 'src/layouts/layout'
+import Seo from 'src/layouts/seo/seo';
 import { CoursesPageComponent } from 'src/page-component'
 
 const Courses = () => {
