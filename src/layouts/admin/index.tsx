@@ -2,6 +2,8 @@ import { Box, Container } from '@chakra-ui/react';
  import { FC, FunctionComponent } from 'react';
 import { LayautProps } from '../layouts.props';
 import AdminSidebar from '../sidebar/admin-sidebat';
+import {AdminProps} from './admin.props';
+import AdminProvider from 'src/provider/admin.provider';
  
  const Layout: FC<LayautProps> = ({ children }): JSX.Element => {
  	return (
@@ -16,14 +18,15 @@ import AdminSidebar from '../sidebar/admin-sidebat';
  
  export default Layout;
  
- export const withAdminLayout = <T extends Record<string, unknown>>(
+export const withAdminLayout = <T extends Record<string, unknown> & AdminProps>(
  	Component: FunctionComponent<T>
  ) => {
  	return function withLayoutComponent(props: T): JSX.Element {
  		return (
  			<Layout>
- 				<Component {...props} />
+ 				<AdminProvider courses={props.courses} instructors={props.instructors} users={props.users}>
+ 					<Component {...props} />
+ 				</AdminProvider>
  			</Layout>
  		);
- 	};
- };
+ 	};}

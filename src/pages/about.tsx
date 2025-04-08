@@ -1,6 +1,7 @@
 import { useTranslation } from "react-i18next"
 import { withLayout } from "src/layouts/layout"
 import Seo from "src/layouts/seo/seo"
+
 import { AboutPageComponent } from "src/page-component"
 
 
