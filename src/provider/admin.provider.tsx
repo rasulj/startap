@@ -12,23 +12,25 @@ import { FC, ReactNode, useEffect } from 'react';
  }
  
  const AdminProvider: FC<Props> = ({ children, courses, instructors, users }): JSX.Element => {
- 	const { getCourses, getInstructors, getUsers } = useActions();
- 
+ 	const { getAdminCourses, getAdminInstructors, getAdminUsers } = useActions();
+    
+	
  	useEffect(() => {
+		 console.log(instructors);
  		if (courses?.length) {
- 			getCourses(courses);
+ 			getAdminCourses(courses);
  		} else {
- 			getCourses([]);
+ 			getAdminCourses([]);
  		}
  		if (instructors?.length) {
- 			getInstructors(instructors);
+ 			getAdminInstructors(instructors);
  		} else {
- 			getInstructors([]);
+ 			getAdminInstructors([]);
  		}
  		if (users?.length) {
- 			getUsers(users);
+ 			getAdminUsers(users);
  		} else {
- 			getUsers([]);
+ 			getAdminUsers([]);
  		}
  	}, [courses, instructors, users]);
  

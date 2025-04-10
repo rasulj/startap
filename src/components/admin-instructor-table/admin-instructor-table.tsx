@@ -12,8 +12,10 @@ import {
  } from '@chakra-ui/react';
  import { AiOutlineFieldNumber, AiOutlineReload } from 'react-icons/ai';
  import { instructorUsers } from 'src/config/constants';
+import { AdminCourseCardProps } from '../admin-course-card/admin-cours-card.props';
+import { AdminInstructorProps } from './admin-instructor-table.props';
  
- const AdminInstructorTable = () => {
+ const AdminInstructorTable  = ({instructors ,approved}:AdminInstructorProps) => {
  	return (
  		<TableContainer>
  			<Table variant='striped' colorScheme='teal'>
@@ -35,21 +37,24 @@ import {
  					</Tr>
  				</Thead>
  				<Tbody>
- 					{instructorUsers.map((user, idx) => (
+ 					{instructors.map((user, idx) => (
  						<Tr key={idx}>
  							<Td>{idx + 1}</Td>
- 							<Td>{user.email}</Td>
+ 							<Td>{user.author.email}</Td>
  							<Td>{user.fullName}</Td>
- 							<Td>{user.job}</Td>
+ 							<Td>{user.jop}</Td>
  							<Td>{user.socialMedia}</Td>
  							<Td>
  								<ButtonGroup variant='outline'>
- 									<Button size={'sm'} colorScheme='facebook'>
- 										Appr
- 									</Button>
- 									<Button size={'sm'} colorScheme={'red'}>
- 										Del
- 									</Button>
+ 									{approved ? (
+ 										<Button size={'sm'} colorScheme={'red'}>
+ 											Del
+ 										</Button>
+ 									) : (
+ 										<Button size={'sm'} colorScheme='facebook'>
+ 											Appr
+ 										</Button>
+ 									)}
  								</ButtonGroup>
  							</Td>
  						</Tr>

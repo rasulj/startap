@@ -12,9 +12,13 @@ import {
  } from '@chakra-ui/react';
  import { AdminInstructorTable } from 'src/components';
  import SectionTitle from 'src/components/section-title/section-title';
+import { useTypedSelector } from 'src/hooks/useTypedSelector';
  import { RecordVideoIcon } from 'src/icons';
  
  const InstructorPageComponent = () => {
+	const { instructors } = useTypedSelector(state => state.admin);
+	console.log(instructors);
+	
  	return (
  		<>
  			<Card mt={10}>
@@ -37,10 +41,11 @@ import {
  					</TabList>
  					<TabPanels>
  						<TabPanel>
- 							<AdminInstructorTable />
+							
+ 							<AdminInstructorTable instructors={instructors.filter( i => i.approved)}  approved={true}/>
  						</TabPanel>
  						<TabPanel>
- 							<AdminInstructorTable />
+ 							<AdminInstructorTable  instructors={instructors.filter( i => !i.approved)}  approved={false}/>
  						</TabPanel>
  					</TabPanels>
  				</Tabs>

@@ -1,5 +1,5 @@
 import axios from 'axios';
- import { API_URL, getCourseUrl } from 'src/config/api.config';
+ import { API_URL, getAdminUrl, getCourseUrl } from 'src/config/api.config';
  import { CourseType } from 'src/interfaces/course.interface';
  
  export const AdminService = {
@@ -10,4 +10,12 @@ import axios from 'axios';
  
  		return data;
  	},
+	async getAllInstructors(token?:string){
+		const {data} = await axios.get(`${API_URL}${getAdminUrl('all-instructors')}`,{
+			headers: {
+				Authorization: `Bearer ${token}`,
+			},
+		})
+		return data
+	}
  };

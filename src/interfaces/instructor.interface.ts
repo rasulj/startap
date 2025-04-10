@@ -1,5 +1,6 @@
 
 import { CourseType } from 'src/interfaces/course.interface';
+import { UserType } from './user.interface';
 
 
 export interface InstructorType {
@@ -8,7 +9,12 @@ export interface InstructorType {
  	coursesCount: number;
  	studentsCount: number;
 	totalCourses: number;
- 	job: string;
+ 	jop: string;
+	approved:boolean
+	socialMedia: string;
+ 	author: UserType;
+ 
+
 }
 export interface InstructorProvideProps {
 	courses: CourseType[];

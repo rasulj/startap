@@ -14,7 +14,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
  
  export const adminSlice = createSlice({
  	name: 'admin',
- 	initialState,
+ 	initialState, 
  	reducers: {
  		startLoading: state => {
  			state.isLoading = true;
@@ -22,13 +22,13 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
  		clearCourseError: state => {
  			state.error = null;
  		},
- 		getCourses: (state, action: PayloadAction<CourseType[]>) => {
+ 		getAdminCourses: (state, action: PayloadAction<CourseType[]>) => {
  			state.courses = action.payload;
  		},
- 		getInstructors: (state, action: PayloadAction<InstructorType[]>) => {
+ 		getAdminInstructors: (state, action: PayloadAction<InstructorType[]>) => {
  			state.instructors = action.payload;
  		},
- 		getUsers: (state, action: PayloadAction<UserType[]>) => {
+ 		getAdminUsers: (state, action: PayloadAction<UserType[]>) => {
  			state.users = action.payload;
  		},
  	},
