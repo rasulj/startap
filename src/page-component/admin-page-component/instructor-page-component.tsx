@@ -17,7 +17,7 @@ import { useTypedSelector } from 'src/hooks/useTypedSelector';
  
  const InstructorPageComponent = () => {
 	const { instructors } = useTypedSelector(state => state.admin);
-	console.log(instructors);
+	
 	
  	return (
  		<>
