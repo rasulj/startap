@@ -13,7 +13,7 @@ export interface InstructorType {
 	approved:boolean
 	socialMedia: string;
  	author: UserType;
- 
+      _id: string;
 
 }
 export interface InstructorProvideProps {

@@ -9,13 +9,52 @@ import {
  	Th,
  	Thead,
  	Tr,
+	  useToast,
  } from '@chakra-ui/react';
  import { AiOutlineFieldNumber, AiOutlineReload } from 'react-icons/ai';
- import { instructorUsers } from 'src/config/constants';
-import { AdminCourseCardProps } from '../admin-course-card/admin-cours-card.props';
 import { AdminInstructorProps } from './admin-instructor-table.props';
- 
+import { useTranslation } from 'react-i18next';
+import { useTypedSelector } from 'src/hooks/useTypedSelector';
+import { useRouter } from 'next/router';
+import { useActions } from 'src/hooks/useActions';
+
  const AdminInstructorTable  = ({instructors ,approved}:AdminInstructorProps) => {
+  
+	const { approveInstructor,  clearAdminError,deleteInstructor  } = useActions();
+ 	const { isLoading, error } = useTypedSelector(state => state.admin);
+ 	const { t } = useTranslation();
+ 	const router = useRouter();
+ 	const toast = useToast();
+ 
+ 	const approveInstructorHandler = (instructorId: string) => {
+ 		approveInstructor({
+ 			instructorId,
+ 			callback: () => {
+ 				router.replace(router.asPath);
+ 				toast({
+ 					title: 'Successfully approve',
+ 					status: 'success',
+ 					position: 'top-right',
+ 					isClosable: true,
+ 				});
+ 			},
+ 		});
+ 	};
+ 
+ 	const deleteInstructorHandler = (instructorId: string) => {
+ 		deleteInstructor({
+ 			instructorId,
+ 			callback: () => {
+ 				router.replace(router.asPath);
+ 				toast({
+ 					title: 'Successfully deleted',
+ 					status: 'info',
+ 					position: 'top-right',
+ 					isClosable: true,
+ 				});
+ 			},
+ 		});
+ 	};
  	return (
  		<TableContainer>
  			<Table variant='striped' colorScheme='teal'>
@@ -36,30 +75,40 @@ import { AdminInstructorProps } from './admin-instructor-table.props';
  						<Th>Actions</Th>
  					</Tr>
  				</Thead>
- 				<Tbody>
- 					{instructors.map((user, idx) => (
- 						<Tr key={idx}>
- 							<Td>{idx + 1}</Td>
- 							<Td>{user.author.email}</Td>
- 							<Td>{user.fullName}</Td>
- 							<Td>{user.jop}</Td>
- 							<Td>{user.socialMedia}</Td>
- 							<Td>
- 								<ButtonGroup variant='outline'>
- 									{approved ? (
- 										<Button size={'sm'} colorScheme={'red'}>
- 											Del
- 										</Button>
- 									) : (
- 										<Button size={'sm'} colorScheme='facebook'>
- 											Appr
- 										</Button>
- 									)}
- 								</ButtonGroup>
- 							</Td>
- 						</Tr>
- 					))}
- 				</Tbody>
+ 						<Tbody>
+ 						{instructors.map((instructor, idx) => (
+ 							<Tr key={idx}>
+ 								<Td>{idx + 1}</Td>
+ 								<Td>{instructor.author.email}</Td>
+ 								<Td>{instructor.author.fullName}</Td>
+ 								<Td>{instructor.author.jop}</Td>
+ 								<Td>{instructor.socialMedia}</Td>
+ 								<Td>
+ 									<ButtonGroup variant='outline'>
+ 										{approved ? (
+ 											<Button
+ 												isLoading={isLoading}
+ 												size={'sm'}
+ 												colorScheme={'red'}
+ 												onClick={() => deleteInstructorHandler(instructor._id)}
+ 											>
+ 												Del
+ 											</Button>
+ 										) : (
+ 											<Button
+ 												size={'sm'}
+ 												colorScheme='facebook'
+ 												isLoading={isLoading}
+ 												onClick={() => approveInstructorHandler(instructor._id)}
+ 											>
+ 												Appr
+ 											</Button>
+ 										)}
+ 									</ButtonGroup>
+ 								</Td>
+ 							</Tr>
+ 						))}
+ 					</Tbody>
  			</Table>
  		</TableContainer>
  	);
