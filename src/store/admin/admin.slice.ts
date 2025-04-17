@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { CourseType } from 'src/interfaces/course.interface';
 import { InstructorType } from 'src/interfaces/instructor.interface';
 import { UserType } from 'src/interfaces/user.interface';
-import { approveInstructor, deleteInstructor, moreAdminUser, searchAdminUsers } from './admin.action';
+import { approveInstructor, deleteAdminCourse, deleteInstructor, moreAdminUser, searchAdminUsers } from './admin.action';
 import { AdminIntialStateType } from './admin.interface';
 
 const initialState: AdminIntialStateType = {
@@ -84,7 +84,20 @@ export const adminSlice = createSlice({
  			.addCase(searchAdminUsers.rejected, (state, { payload }) => {
  				state.isLoading = false;
  				state.error = payload;
- 			});
+ 			})
+			.addCase(deleteAdminCourse.pending, state => {
+ 				state.isLoading = true;
+ 				state.error = null;
+ 			})
+ 			.addCase(deleteAdminCourse.fulfilled, (state, { payload }) => {
+ 				state.isLoading = false;
+ 				state.error = null;
+ 				state.courses = payload;
+ 			})
+ 			.addCase(deleteAdminCourse.rejected, (state, { payload }) => {
+ 				state.isLoading = false;
+ 				state.error = payload;
+ 			})
 	},
 });
 

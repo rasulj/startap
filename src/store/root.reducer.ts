@@ -4,6 +4,7 @@ import { courseReducer } from './course/course.slice'
 import { sectionReducer} from './section/section.slice'
 import { lessonReducer } from './lesson/lesson.slice'
 import { adminReducer } from './admin/admin.slice'
+import { booksReducer } from './books/books.slice'
 
 
 export const reducer={
@@ -13,4 +14,5 @@ export const reducer={
     section:sectionReducer,
     lesson:lessonReducer,
     admin: adminReducer,
+    books: booksReducer,
 }

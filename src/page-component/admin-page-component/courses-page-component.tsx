@@ -3,8 +3,12 @@ import { Box, Card, CardBody, Flex, Grid, HStack } from '@chakra-ui/react';
  import { LaunchCourseIcon } from 'src/icons';
  import { useTypedSelector } from 'src/hooks/useTypedSelector';
 import { AdminCourseCard } from 'src/components';
+import { useActions } from 'src/hooks/useActions';
+
  const CoursesPageComponent = () => {
-	const { courses } = useTypedSelector(state => state.admin);
+	const { courses, error} = useTypedSelector(state => state.admin);
+
+ 	const { clearAdminError } = useActions();
  	return (
  		<>
  			<Card mt={10}>

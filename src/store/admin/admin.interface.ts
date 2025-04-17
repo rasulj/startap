@@ -22,3 +22,7 @@ export interface ApproveAndDeleteBodyResponse {
  	query: string;
  	limit: string;
  }
+ export interface DeleteCourseResponse {
+ 	courseId: string;
+ 	callback: () => void;
+ }
