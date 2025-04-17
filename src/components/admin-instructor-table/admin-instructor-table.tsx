@@ -32,7 +32,7 @@ import { useActions } from 'src/hooks/useActions';
  			callback: () => {
  				router.replace(router.asPath);
  				toast({
- 					title: 'Successfully approve',
+ 			title: t('successfully_approve', { ns: 'admin' }),
  					status: 'success',
  					position: 'top-right',
  					isClosable: true,
@@ -40,14 +40,14 @@ import { useActions } from 'src/hooks/useActions';
  			},
  		});
  	};
- 
+
  	const deleteInstructorHandler = (instructorId: string) => {
  		deleteInstructor({
  			instructorId,
  			callback: () => {
  				router.replace(router.asPath);
  				toast({
- 					title: 'Successfully deleted',
+ 					 title: t('successfully_deleted', { ns: 'instructor' }),
  					status: 'info',
  					position: 'top-right',
  					isClosable: true,
@@ -60,7 +60,7 @@ import { useActions } from 'src/hooks/useActions';
  			<Table variant='striped' colorScheme='teal'>
  				<TableCaption>
  					<Button colorScheme={'facebook'} variant={'outline'} rightIcon={<AiOutlineReload />}>
- 						more...
+ 						{t('more', { ns: 'instructor' })}...
  					</Button>
  				</TableCaption>
  				<Thead>
@@ -68,11 +68,11 @@ import { useActions } from 'src/hooks/useActions';
  						<Th isNumeric>
  							<AiOutlineFieldNumber fontSize={20} />
  						</Th>
- 						<Th>Email</Th>
- 						<Th>FullName</Th>
- 						<Th>Job</Th>
- 						<Th>Social media</Th>
- 						<Th>Actions</Th>
+ 						<Th>{t('email', { ns: 'instructor' })}</Th>
+ 							<Th>{t('full_name', { ns: 'instructor' })}</Th>
+ 							<Th>{t('job', { ns: 'admin' })}</Th>
+ 							<Th>{t('social_media', { ns: 'admin' })}</Th>
+ 							<Th>{t('actions', { ns: 'admin' })}</Th>
  					</Tr>
  				</Thead>
  						<Tbody>
@@ -92,7 +92,7 @@ import { useActions } from 'src/hooks/useActions';
  												colorScheme={'red'}
  												onClick={() => deleteInstructorHandler(instructor._id)}
  											>
- 												Del
+ 												{t('del', { ns: 'admin' })}
  											</Button>
  										) : (
  											<Button
@@ -101,7 +101,7 @@ import { useActions } from 'src/hooks/useActions';
  												isLoading={isLoading}
  												onClick={() => approveInstructorHandler(instructor._id)}
  											>
- 												Appr
+ 											{t('appr', { ns: 'admin' })}
  											</Button>
  										)}
  									</ButtonGroup>

@@ -106,5 +106,8 @@
 	"embed_video_is_required": "Videoni joylashtirish talab qilinadi",
 	"hour_is_required": "Soat talab qilinadi",
 	"minute_is_required": "Daqiqa talab qilinadi",
-	"second_is_required": "soniyalar talab qilinadi"
+	"second_is_required": "soniyalar talab qilinadi",
+	"job_required": "Kasbingizni kiritng",
+ 	"preview_img_is_requried": "Rasmni oldindan koʻrish talab qilinadi",
+ 	"pdf_is_requried": "PDF talab qilinadi"
 }

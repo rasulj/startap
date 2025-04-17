@@ -10,6 +10,7 @@ import {
  	TabPanels,
  	Tabs,
  } from '@chakra-ui/react';
+import { useTranslation } from 'react-i18next';
  import { AdminInstructorTable } from 'src/components';
  import SectionTitle from 'src/components/section-title/section-title';
 import { useTypedSelector } from 'src/hooks/useTypedSelector';
@@ -17,7 +18,7 @@ import { useTypedSelector } from 'src/hooks/useTypedSelector';
  
  const InstructorPageComponent = () => {
 	const { instructors } = useTypedSelector(state => state.admin);
-	
+	const { t } = useTranslation();
 	
  	return (
  		<>
@@ -25,7 +26,8 @@ import { useTypedSelector } from 'src/hooks/useTypedSelector';
  				<CardBody>
  					<HStack>
  						<Box w={'30%'}>
- 							<SectionTitle title='Instructors' subtitle='Managing instructors on platform' />
+ 							<SectionTitle title={t('instructors_section_title', { ns: 'admin' })}
+ 								subtitle={t('instructors_section_descr', { ns: 'admin' })} />
  						</Box>
  						<Flex w={'70%'} justify={'flex-end'}>
  							<RecordVideoIcon />
@@ -36,8 +38,8 @@ import { useTypedSelector } from 'src/hooks/useTypedSelector';
  			<Box mt={10} mx={'auto'}>
  				<Tabs isFitted variant='solid-rounded' colorScheme={'facebook'}>
  					<TabList mb='1em'>
- 						<Tab>Approved instructors</Tab>
- 						<Tab>Applied instructors</Tab>
+ 						<Tab>{t('approved_instructors', { ns: 'admin' })}</Tab>
+ 						<Tab>{t('applied_instructors', { ns: 'admin' })}</Tab>
  					</TabList>
  					<TabPanels>
  						<TabPanel>
