@@ -11,13 +11,13 @@ import axios from 'axios';
  	},
  
  	async update(body: BooksType) {
- 		const { data } = await $axios.post<BooksType>(`${getBooksUrl('update')}/${body._id}`, body);
+ 		const { data } = await $axios.patch<BooksType>(`${getBooksUrl('update')}/${body._id}`, body);
  
  		return data;
  	},
  
  	async delete(id: string) {
- 		const { data } = await $axios.post<BooksType>(`${getBooksUrl('delete')}/${id}`);
+ 		const { data } = await $axios.delete<BooksType>(`${getBooksUrl('delete')}/${id}`);
  
  		return data;
  	},

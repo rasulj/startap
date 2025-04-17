@@ -9,3 +9,7 @@ import { BooksType } from 'src/interfaces/books.interface';
  export interface ActionBody extends BooksType {
  	callback: () => void;
  }
+ export interface DeleteBooksBody {
+ 	callback: () => void;
+ 	booksId: string;
+ }

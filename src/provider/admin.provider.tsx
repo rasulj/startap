@@ -1,5 +1,6 @@
 import { FC, ReactNode, useEffect } from 'react';
  import { useActions } from 'src/hooks/useActions';
+import { BooksType } from 'src/interfaces/books.interface';
  import { CourseType } from 'src/interfaces/course.interface';
  import { InstructorType } from 'src/interfaces/instructor.interface';
  import { UserType } from 'src/interfaces/user.interface';
@@ -9,10 +10,11 @@ import { FC, ReactNode, useEffect } from 'react';
  	courses: CourseType[];
  	instructors: InstructorType[];
  	users: UserType[];
+	books: BooksType[]
  }
  
- const AdminProvider: FC<Props> = ({ children, courses, instructors, users }): JSX.Element => {
- 	const { getAdminCourses, getAdminInstructors, getAdminUsers } = useActions();
+ const AdminProvider: FC<Props> = ({ children, courses, instructors, users ,books}): JSX.Element => {
+ 	const { getAdminCourses, getAdminInstructors, getAdminUsers ,getBooks } = useActions();
     
 	
  	useEffect(() => {
@@ -31,6 +33,11 @@ import { FC, ReactNode, useEffect } from 'react';
  			getAdminUsers(users);
  		} else {
  			getAdminUsers([]);
+ 		}
+			if (books?.length) {
+ 			getBooks(books);
+ 		} else {
+ 			getBooks([]);
  		}
  	}, [courses, instructors, users]);
  
