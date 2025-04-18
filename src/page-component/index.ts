@@ -23,5 +23,5 @@ export { default as CurriculumPageComponent}from "./instructor-page-component/cu
 export { default as AdminBooksPageComponent } from './admin-page-component/books-page-component';
  export { default as AdminCoursesPageComponent } from './admin-page-component/courses-page-component';
  export { default as InstructorPageComponent } from './admin-page-component/instructor-page-component';
- export { default as UserPageComponent } from './admin-page-component/user-page-component'
- 
+ export { default as UserPageComponent } from './admin-page-component/user-page-component';
+ export { default as CartPageComponent } from './shop-page-component/shop-page-component';

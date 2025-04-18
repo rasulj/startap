@@ -1,5 +1,6 @@
 import {
 	Avatar,
+	Badge,
 	Box,
 	Button,
 	Flex,
@@ -22,18 +23,21 @@ import { language } from 'src/config/constants';
 import { useTranslation } from 'react-i18next';
 import { TbFileSettings, TbWorld,  } from 'react-icons/tb';
 import { useRouter } from 'next/router';
-import { AiOutlineLogin } from 'react-icons/ai';
+import { AiOutlineLogin, AiOutlineShoppingCart } from 'react-icons/ai';
 import { useAuth } from 'src/hooks/useAuth';
 import { useActions } from 'src/hooks/useActions';
 import { BsFillMoonFill, BsFillSunFill } from 'react-icons/bs';
 import { RiAdminFill } from 'react-icons/ri';
+import { useTypedSelector } from 'src/hooks/useTypedSelector';
 
 const Header = ({ onToggle }: HeaderProps) => {
 	const { toggleColorMode, colorMode } = useColorMode();
 	const { i18n, t } = useTranslation();
 	const { logout} = useActions()
 	const router = useRouter();
- const { user }= useAuth()
+     const { user }= useAuth()
+const { courses, books } = useTypedSelector(state => state.cart);
+
 	const onLanguage = (lng: string) => {
 		router.replace(router.asPath);
 		i18n.changeLanguage(lng);
@@ -71,6 +75,28 @@ const logoutHandler = () => {
 					</Link>
 				</HStack>
 				<HStack>
+					<Box pos={'relative'}>
+ 						<IconButton
+ 							aria-label='cart'
+ 							onClick={() => router.push('/shop/cart')}
+ 							icon={<AiOutlineShoppingCart />}
+ 							colorScheme={'facebook'}
+ 							variant={'solid'}
+ 						/>
+ 						{[...courses, ...books].length ? (
+ 							<Badge
+ 								pos={'absolute'}
+ 								backgroundColor={'green.500'}
+ 								top={-2}
+ 								left={-3}
+ 								colorScheme={'green'}
+ 								px={2}
+ 								py={1}
+ 							>
+ 								{[...courses, ...books].length}
+ 							</Badge>
+ 						) : null}
+ 					</Box>
 				<Menu placement='bottom'>
 						<MenuButton
 							as={Button}

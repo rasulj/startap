@@ -5,6 +5,7 @@ import { sectionReducer} from './section/section.slice'
 import { lessonReducer } from './lesson/lesson.slice'
 import { adminReducer } from './admin/admin.slice'
 import { booksReducer } from './books/books.slice'
+import { cartReducer } from './cart/cart-slice'
 
 
 export const reducer={
@@ -15,4 +16,5 @@ export const reducer={
     lesson:lessonReducer,
     admin: adminReducer,
     books: booksReducer,
+    cart: cartReducer,
 }
