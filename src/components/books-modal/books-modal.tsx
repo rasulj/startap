@@ -18,7 +18,7 @@ import Image from 'next/image';
 import { FC, useEffect, useState } from 'react';
 import { FileUploader } from 'react-drag-drop-files';
 import { FaTimes } from 'react-icons/fa';
-import { coursePrice } from 'src/config/constants';
+import { coursePrice ,createBooksCategory} from 'src/config/constants';
 import { loadImage } from 'src/helpers/image.helper';
 import { useActions } from 'src/hooks/useActions';
 import { useTypedSelector } from 'src/hooks/useTypedSelector';
@@ -61,7 +61,9 @@ const BooksModal: FC<BookModalProps> = ({ isOpen, onClose, booksValue }): JSX.El
 			createBooks({
 				price: fomrikValues.price,
 				title: fomrikValues.title,
+				category: fomrikValues.category,
 				pdf: fomrikValues.pdf,
+
 				image: imageUrl as string,
 				callback: () => {
 					toast({
@@ -80,6 +82,7 @@ const BooksModal: FC<BookModalProps> = ({ isOpen, onClose, booksValue }): JSX.El
 				title: fomrikValues.title,
 				pdf: fomrikValues.pdf,
 				_id: booksValue._id,
+				category: fomrikValues.category,
 				image: imageUrl as string,
 				callback: () => {
 					toast({
@@ -130,6 +133,12 @@ const BooksModal: FC<BookModalProps> = ({ isOpen, onClose, booksValue }): JSX.El
 									arrOptions={coursePrice}
 								/>
 								<TextFiled name='pdf' label={t('pdf_link', { ns: 'admin' })} />
+									<SelectField
+ 									name='category'
+ 									label={t('category', { ns: 'instructor' })}
+ 									placeholder='-'
+ 									arrOptions={createBooksCategory}
+ 								/>
 								{file ? (
 									<Box pos={'relative'} w={'full'} h={200}>
 										<Image
@@ -188,4 +197,5 @@ const data = {
 	title: '',
 	pdf: '',
 	price: 0,
+	category: '',
 };

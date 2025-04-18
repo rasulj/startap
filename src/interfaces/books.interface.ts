@@ -3,5 +3,7 @@ export interface BooksType {
  	price: number;
  	pdf: string;
  	image: string;
- 	_id?: string;
+ 	category: string;
+	_id?: string;
+
  }

@@ -513,3 +513,11 @@ export const instructorUsers = [
  		route: 'books',
  	},
  ];
+ export const createBooksCategory = [
+ 	'programming',
+ 	'design',
+ 	'business',
+ 	'history',
+ 	'writing',
+ 	'lifestyle',
+ ];
