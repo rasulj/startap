@@ -15,6 +15,7 @@ import { CartInitialState } from './cart-interface';
  	reducers: {
  		addBookToCart: (state, { payload }: PayloadAction<BooksType>) => {
  			state.books = [...state.books, payload];
+			
  		},
  		addCourseToCart: (state, { payload }: PayloadAction<CourseType>) => {
  			state.courses = [...state.courses, payload];

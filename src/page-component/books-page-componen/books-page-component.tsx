@@ -41,7 +41,7 @@ const BooksPageComponent = () => {
 	}, [filter,books]);
 
 const addToCart = (book: BooksType) => {
-	cart
+	
  		const existingProduct = cart.books.find(c => c._id === book._id);
  		if (existingProduct) {
  			toast({ title: 'Book already exist in cart', position: 'bottom', status: 'warning' });
