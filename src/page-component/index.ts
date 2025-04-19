@@ -25,3 +25,4 @@ export { default as AdminBooksPageComponent } from './admin-page-component/books
  export { default as InstructorPageComponent } from './admin-page-component/instructor-page-component';
  export { default as UserPageComponent } from './admin-page-component/user-page-component';
  export { default as CartPageComponent } from './shop-page-component/shop-page-component';
+export { default as CheckoutPageComponent } from './shop-page-component/checkout-page-component';

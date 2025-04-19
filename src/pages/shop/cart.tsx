@@ -7,3 +7,4 @@ import { NextPage } from 'next';
  };
  
  export default withLayout(CartPage);
+ //https://docs.stripe.com/payments/quickstart?client=next

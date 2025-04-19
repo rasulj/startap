@@ -38,7 +38,7 @@ const BooksPageComponent = () => {
 			default:
 				return books;
 		}
-	}, [filter]);
+	}, [filter,books]);
 
 const addToCart = (book: BooksType) => {
 	cart

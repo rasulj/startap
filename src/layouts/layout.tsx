@@ -16,7 +16,7 @@ const Layout = ({children ,...props}:LayautProps) => {
     <Box maxW={"full"} overflow={"hidden"}>
   <Header onToggle={onTogle}/>
   <Sidebar  toggle={toggle}/>
-  <Box mt={'11vh'} pl={{ base: 0, lg: '320px' }}minH={'90vh'} transition={'all .4s ease'} >
+  <Box mt={'11vh'} pl={{ base: 0, lg: '220px' }}minH={'90vh'} transition={'all .4s ease'} >
     <Container maxW={'container.lg'}>
       {children}
     </Container>
