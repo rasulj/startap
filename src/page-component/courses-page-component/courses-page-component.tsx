@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { Accordion, AccordionButton, AccordionIcon, AccordionItem, AccordionPanel, Box, Button, Flex,  Input, Radio, RadioGroup, Spinner, Stack, Text, useColorModeValue } from "@chakra-ui/react"
 import ReactStars from "react-stars"
 import SectionTitle from "src/components/section-title/section-title"
@@ -44,6 +45,23 @@ const CoursesPageComponent = () => {
  		setAllCourses(courses);
  	}, [courses]);
 	 
+=======
+import { Accordion, AccordionButton, AccordionIcon, AccordionItem, AccordionPanel, Box, Button, Flex,  Input, Radio, RadioGroup, Stack, Text, useColorModeValue } from "@chakra-ui/react"
+import ReactStars from "react-stars"
+import SectionTitle from "src/components/section-title/section-title"
+import {  coursesFilter } from "src/config/constants"
+import { FilterItemPRrops } from "./courses-page-props"
+import { AllCoursesCard } from "src/components"
+import { useTranslation } from "react-i18next"
+import { useTypedSelector } from "src/hooks/useTypedSelector"
+
+
+const CoursesPageComponent = () => {
+	const {t} = useTranslation()
+	const { courses } = useTypedSelector(state => state.instructor);
+	console.log(courses);
+	
+>>>>>>> 25889e5ed2447fe1262d2b1f9685c2f8c5e8b06a
   return (
     <>
     <SectionTitle  title={t("title",{ns:'courses'})} subtitle={t("description",{ns:'courses'})}/>
@@ -67,6 +85,7 @@ const CoursesPageComponent = () => {
 					 borderRadius={'lg'}
 					  color={useColorModeValue('gray.700','gray.200')}
 					  >
+<<<<<<< HEAD
 					{isLoading ? (
  						<Flex h={'60vh'} justify={'center'} align={'center'}>
  							<Spinner />
@@ -78,6 +97,9 @@ const CoursesPageComponent = () => {
  							))}
  						</>
  					)}
+=======
+						{coursesFilter.map( (item,idx)=>( <FilterItem item={item} idx={idx} key={idx} />)) }
+>>>>>>> 25889e5ed2447fe1262d2b1f9685c2f8c5e8b06a
 					</Box>
                     <Box w={{base:"100%",md:'70%'}}>
 						{ courses.map((item ,idx) => <AllCoursesCard course ={item} key={idx}/>)}
@@ -91,6 +113,7 @@ const CoursesPageComponent = () => {
 
 export default CoursesPageComponent
 
+<<<<<<< HEAD
 const FilterItem = ({
 	item,
 	idx,
@@ -140,3 +163,40 @@ const FilterItem = ({
 		</Accordion>
 	);
 };
+=======
+const FilterItem = ({item,idx}:{item:FilterItemPRrops,idx:number})=>{
+	const {t} = useTranslation()
+	const renderFilterItem =()=>{
+		return(
+			<RadioGroup>
+						<Stack>
+							{item.categoryList.map(c =>(
+								<Radio value={c.id} colorScheme={'facebook'}>
+									<Flex gap={2}>
+										{ item.id === 'rating' && <ReactStars value={Number(c.id)} edit={false} color2="#e59819"/>}
+										{t(c.name,{ns:'courses'})}	
+									</Flex>
+										
+								</Radio>
+								))}	
+						</Stack>
+					</RadioGroup>
+		)
+	}
+	return(
+        <Accordion key={idx}  defaultIndex={ idx == 0 ? 0 : idx} allowToggle>
+            <AccordionItem borderTop={'none'}>
+    			<AccordionButton borderTop={'none'}>
+       				<Text fontSize={'xl'} flex='1' textAlign='left'>
+   						 { t( item.title,{ns:'courses'}) }
+    				</Text>
+     				<AccordionIcon />
+    			</AccordionButton>
+  				 <AccordionPanel pb={4}>
+			        { renderFilterItem()}
+ 	  			</AccordionPanel>
+            </AccordionItem>
+		 </Accordion>
+	)
+}
+>>>>>>> 25889e5ed2447fe1262d2b1f9685c2f8c5e8b06a

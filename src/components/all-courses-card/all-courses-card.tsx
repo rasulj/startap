@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import { Avatar, Box, Button, Divider, Flex, Heading, HStack, Icon, Stack, Text, useToast } from '@chakra-ui/react';
+=======
+import { Box, Button, Divider, Flex, Heading, HStack, Icon, Image, Stack, Text } from '@chakra-ui/react';
+>>>>>>> 25889e5ed2447fe1262d2b1f9685c2f8c5e8b06a
 import { AiOutlineClockCircle } from 'react-icons/ai';
 import { BsMinecartLoaded } from 'react-icons/bs';
 import { CiViewList } from 'react-icons/ci';
@@ -6,6 +10,7 @@ import { SiGoogleanalytics } from 'react-icons/si';
 import ReactStars from 'react-stars';
 import { AllCoursesCardProps } from './all-courses-card.props';
 import { useRouter } from 'next/router';
+<<<<<<< HEAD
 import Image from 'next/image';
 import { loadImage } from 'src/helpers/image.helper';
 import { useState } from 'react';
@@ -31,10 +36,19 @@ const router = useRouter()
  		addCourseToCart(course);
  		toast({ title: 'Course added successfully', position: 'bottom' });
  	};
+=======
+
+const AllCoursesCard = ({ course }: AllCoursesCardProps) => {
+
+	const router = useRouter()
+  
+	const onDetailedCourse = ()=> router.push(`/courses/${course.slug}`)
+>>>>>>> 25889e5ed2447fe1262d2b1f9685c2f8c5e8b06a
 	return (
 		<>
 			<Box py={4}>
 				<Flex gap={4} direction={{ base: 'column', md: 'row' }}>
+<<<<<<< HEAD
 				<Image
   src={loadImage(course.previewImage)}
   alt={course.title}
@@ -49,12 +63,31 @@ const router = useRouter()
 							<Text color={'#e59819'}>5</Text>
  							<ReactStars edit={false} value={5} color2={'#e59819'} />
  							<Text opacity={'.8'}>(5)</Text>
+=======
+					<Image  onClick={onDetailedCourse}
+						src={course.previewImage}
+						alt={course.title}
+						w={{ base: 'full', md: '250px' }}
+						h={'250px'}
+						borderRadius={'lg'}
+						objectFit={'cover'}
+					/>
+					<Stack>
+						<HStack>
+							<Text color={'#e59819'}>{course?.reviewAvarage.toFixed(1)}</Text>
+							<ReactStars edit={false} value={course?.reviewAvarage} color2={'#e59819'} />
+							<Text opacity={'.8'}>({course?.reviewCount})</Text>
+>>>>>>> 25889e5ed2447fe1262d2b1f9685c2f8c5e8b06a
 						</HStack>
 						<Heading fontSize={'xl'}>{course.title}</Heading>
 						<Text>Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium nostrum laboriosam est ut.</Text>
 						<Flex gap={2} fontSize={'14px'} direction={{ base: 'column', sm: 'row' }}>
 							<HStack align={'center'}>
+<<<<<<< HEAD
 								<Avatar src={course.author.avatar} name={course.author.fullName} />
+=======
+								<Image src={course.author.avatar} alt={course.author.fullName} w={50} h={50} borderRadius={'full'} />
+>>>>>>> 25889e5ed2447fe1262d2b1f9685c2f8c5e8b06a
 								<Text>
 									{course.author.fullName}.
 								</Text>
@@ -84,6 +117,7 @@ const router = useRouter()
 								{course.price.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}
 							</Text>
 							<Flex gap={4} mt={{ base: 5, md: 0 }}>
+<<<<<<< HEAD
 							<Button
  									rightIcon={<BsMinecartLoaded />}
  									colorScheme={'facebook'}
@@ -92,6 +126,11 @@ const router = useRouter()
  								>
  									Add to cart
  								</Button>
+=======
+								<Button rightIcon={<BsMinecartLoaded />} colorScheme={'facebook'}>
+									Add to cart
+								</Button>
+>>>>>>> 25889e5ed2447fe1262d2b1f9685c2f8c5e8b06a
 								<Button onClick={onDetailedCourse} colorScheme={'facebook'} variant={'outline'}>
 									Detail
 								</Button>

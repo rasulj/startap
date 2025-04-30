@@ -14,7 +14,12 @@ interface Props {
 
 const AppProvider: FC<Props> = ({ children, course, courses, instructors,books }): JSX.Element => {
 	const { getCourses, getCourse, getInstructors ,getBooks} = useActions();
+<<<<<<< HEAD
      
+=======
+       console.log(courses);
+	      console.log(instructors);
+>>>>>>> 25889e5ed2447fe1262d2b1f9685c2f8c5e8b06a
 	useEffect(() => {
 		if (courses !== undefined) {
 			getCourses(courses);
@@ -24,7 +29,11 @@ const AppProvider: FC<Props> = ({ children, course, courses, instructors,books }
 		if (instructors) {
 			getInstructors(instructors);
 		} else {
+<<<<<<< HEAD
 			getInstructors([]);
+=======
+			getCourses([]);
+>>>>>>> 25889e5ed2447fe1262d2b1f9685c2f8c5e8b06a
 		}
 		if (course) {
 			getCourse(course);

@@ -3,10 +3,13 @@ import { useTranslation } from 'react-i18next';
 import { withLayout } from 'src/layouts/layout'
 import Seo from 'src/layouts/seo/seo';
 import { CoursesPageComponent } from 'src/page-component'
+<<<<<<< HEAD
 import {GetServerSideProps} from 'next'
 import { API_URL } from 'src/config/api.config';
 import { AppService } from 'src/services/app.service';
 import { CourseType } from 'src/interfaces/course.interface';
+=======
+>>>>>>> 25889e5ed2447fe1262d2b1f9685c2f8c5e8b06a
 
 const Courses = () => {
  const { t } = useTranslation();
@@ -27,6 +30,7 @@ const Courses = () => {
 	);
 }
 
+<<<<<<< HEAD
 export default withLayout(Courses)
 
 
@@ -41,3 +45,6 @@ export default withLayout(Courses)
  interface MainPageProps {
  	courses: CourseType[];
  }
+=======
+export default withLayout(Courses)
+>>>>>>> 25889e5ed2447fe1262d2b1f9685c2f8c5e8b06a

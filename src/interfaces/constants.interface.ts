@@ -4,6 +4,7 @@ export enum Language {
 	UZ = 'uz',
 	TR = 'tr',
 }
+<<<<<<< HEAD
 export type RoleUser ='ADMIN'|'USER'|'INSTRUCTOR'
 export interface CardType {
  	id: string;
@@ -36,3 +37,6 @@ export interface CardType {
  	id: string;
  	name: string;
  }
+=======
+export type RoleUser ='ADMIN'|'USER'|'INSTRUCTOR'
+>>>>>>> 25889e5ed2447fe1262d2b1f9685c2f8c5e8b06a

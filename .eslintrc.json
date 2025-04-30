@@ -7,8 +7,12 @@
 		"@typescript-eslint/semi": ["warn"],
 		"@typescript-eslint/no-empty-interface": ["error", { "allowSingleExtends": true }],
 		"@typescript-eslint/no-inferrable-types": "off",
+<<<<<<< HEAD
 		"@typescript-eslint/no-empty-function": "off",
  		"@typescript-eslint/ban-ts-comment": "off"
+=======
+		"@typescript-eslint/no-empty-function": "off"
+>>>>>>> 25889e5ed2447fe1262d2b1f9685c2f8c5e8b06a
 	},
 	"extends": [
 		"eslint:recommended",
