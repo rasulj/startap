@@ -10,12 +10,10 @@ interface Props {
 
 const InstructorProvider: FC<Props> = ({ children, course, courses }): JSX.Element => {
 	const { instructorAllCourses, instructorDetailedCourse } = useActions();
-  
+
 	useEffect(() => {
-		if (courses) {
+		if (courses?.length) {
 			instructorAllCourses(courses);
-		}else{
-				instructorAllCourses([]);
 		}
 		if (course) {
 			instructorDetailedCourse(course);

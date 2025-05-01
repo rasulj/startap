@@ -12,37 +12,22 @@ interface Props {
 	books: BooksType[];
 }
 
-const AppProvider: FC<Props> = ({ children, course, courses, instructors,books }): JSX.Element => {
-	const { getCourses, getCourse, getInstructors ,getBooks} = useActions();
-<<<<<<< HEAD
-     
-=======
-       console.log(courses);
-	      console.log(instructors);
->>>>>>> 25889e5ed2447fe1262d2b1f9685c2f8c5e8b06a
+const AppProvider: FC<Props> = ({ children, course, courses, instructors, books }): JSX.Element => {
+	const { getCourses, getCourse, getInstructors, getBooks } = useActions();
+
 	useEffect(() => {
-		if (courses !== undefined) {
+		if (courses?.length) {
 			getCourses(courses);
-		} else {
-			getCourses([]);
 		}
-		if (instructors) {
+		if (instructors?.length) {
 			getInstructors(instructors);
-		} else {
-<<<<<<< HEAD
-			getInstructors([]);
-=======
-			getCourses([]);
->>>>>>> 25889e5ed2447fe1262d2b1f9685c2f8c5e8b06a
 		}
 		if (course) {
 			getCourse(course);
 		}
 		if (books?.length) {
- 			getBooks(books);
- 		} else {
- 			getBooks([]);
- 		}
+			getBooks(books);
+		}
 	}, [courses, course]);
 
 	return <>{children}</>;

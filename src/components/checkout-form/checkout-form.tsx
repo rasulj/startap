@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import {
 	Box,
 	Button,
@@ -9,6 +8,7 @@ import {
 	Text,
 	useColorMode,
 	useColorModeValue,
+	useToast,
 } from '@chakra-ui/react';
 import {
 	AddressElement,
@@ -37,10 +37,11 @@ export default function CheckoutForm({ cards }: { cards: CardType[] }) {
 	const [isLoading, setIsLoading] = useState<boolean>(false);
 	const [radioValue, setRadioValue] = useState<string>('0');
 
-	const { courses, books } = useTypedSelector(state => state.cart);
+	const { courses, books, product } = useTypedSelector(state => state.cart);
 	const { colorMode } = useColorMode();
 	const router = useRouter();
 	const { getBooks } = useActions();
+	const toast = useToast();
 
 	const cardStyles = {
 		base: {
@@ -66,11 +67,12 @@ export default function CheckoutForm({ cards }: { cards: CardType[] }) {
 		const addressElement = elements.getElement('address') as StripeAddressElement;
 
 		const { value } = await addressElement.getValue();
-        const cardElement = elements.getElement(CardNumberElement);
+if (!stripe || !elements) return;
 
-   if (!cardElement) {
-       setError("Card elementi topilmadi!");
-       return;
+const cardElement = elements.getElement(CardNumberElement);
+if (!cardElement) {
+  console.error("Card element not found");
+  return;
 }
 		const { error, paymentMethod } = await stripe.createPaymentMethod({
 			// @ts-ignore
@@ -100,22 +102,68 @@ export default function CheckoutForm({ cards }: { cards: CardType[] }) {
 		if (!stripe) return;
 
 		try {
-			const { data } = await $axios.post(`/payment/books`, {
-				price: getTotalPrice(courses, books),
-				paymentMethod: paymentMethod,
-			});
+			if (product.id) {
+				await $axios.post(`/payment/create-subscription`, {
+					price: product.default_price.id,
+					paymentMethod: paymentMethod,
+				});
 
-			const payload = await stripe.confirmCardPayment(data);
-
-			if (payload.error) {
-				setIsLoading(false);
-				setError(`Your payment details couldn't be verified: ${payload.error.message}`);
-			} else {
-				for (const book of books) {
-					await $axios.post(`${getMailUrl('books')}/${book._id}`);
-				}
-				getBooks([]);
+				toast({
+					title: 'Successfully purchased',
+					position: 'top-right',
+				});
 				router.push('/shop/success');
+			} else {
+				if (books.length) {
+					const { data } = await $axios.post(`/payment/books`, {
+						price: getTotalPrice(courses, books),
+						paymentMethod: paymentMethod,
+					});
+
+					const payload = await stripe.confirmCardPayment(data);
+
+					if (payload.error) {
+						setIsLoading(false);
+						setError(`Your payment details couldn't be verified: ${payload.error.message}`);
+					} else {
+						for (const book of books) {
+							await $axios.post(`${getMailUrl('books')}/${book._id}`);
+						}
+						getBooks([]);
+						if (!courses.length) {
+							router.push('/shop/success');
+						}
+					}
+				}
+
+				if (courses.length) {
+					let counter = courses.length;
+					for (const course of courses) {
+						const { data } = await $axios.post(`/payment/courses`, {
+							price: course.price,
+							paymentMethod: paymentMethod,
+							courseId: course._id,
+						});
+
+						const payload = await stripe.confirmCardPayment(data);
+
+						if (payload.error) {
+							setIsLoading(false);
+							setError(`Your payment details couldn't be verified: ${payload.error.message}`);
+						} else {
+							counter -= 1;
+							toast({
+								title: course.title,
+								description: 'Successfully purchased',
+								position: 'top-right',
+							});
+						}
+
+						if (counter == 0) {
+							router.push('/shop/success');
+						}
+					}
+				}
 			}
 		} catch (error) {
 			const result = error as Error;
@@ -157,10 +205,15 @@ export default function CheckoutForm({ cards }: { cards: CardType[] }) {
 										colorScheme={'facebook'}
 									>
 										Pay now{' '}
-										{getTotalPrice(courses, books).toLocaleString('en-US', {
-											style: 'currency',
-											currency: 'USD',
-										})}
+										{product.id
+											? (product.default_price.unit_amount / 100).toLocaleString('en-US', {
+													style: 'currency',
+													currency: 'USD',
+											  })
+											: getTotalPrice(courses, books).toLocaleString('en-US', {
+													style: 'currency',
+													currency: 'USD',
+											  })}
 									</Button>
 								</Box>
 							)}
@@ -241,114 +294,18 @@ export default function CheckoutForm({ cards }: { cards: CardType[] }) {
 						onClick={handleSubmit}
 					>
 						Pay now{' '}
-						{getTotalPrice(courses, books).toLocaleString('en-US', {
-							style: 'currency',
-							currency: 'USD',
-						})}
+						{product.id
+							? (product.default_price.unit_amount / 100).toLocaleString('en-US', {
+									style: 'currency',
+									currency: 'USD',
+							  })
+							: getTotalPrice(courses, books).toLocaleString('en-US', {
+									style: 'currency',
+									currency: 'USD',
+							  })}
 					</Button>
 				</>
 			)}
 		</Stack>
 	);
 }
-
-
-
-=======
-import { Button } from '@chakra-ui/react';
-import { AddressElement, PaymentElement, useElements, useStripe } from '@stripe/react-stripe-js';
-import { FormEvent, useEffect, useState } from 'react';
-import { getTotalPrice } from 'src/helpers/total-price.helper';
-import { useTypedSelector } from 'src/hooks/useTypedSelector';
-import ErrorAlert from '../error-alert/error-alert';
-
-export default function CheckoutForm() {
-	const stripe = useStripe();
-	const elements = useElements();
-
-	const [message, setMessage] = useState<string | null>(null);
-	const [isLoading, setIsLoading] = useState<boolean>(false);
-
-	const { courses, books } = useTypedSelector(state => state.cart);
-
-	useEffect(() => {
-		if (!stripe) {
-			return;
-		}
-
-		const clientSecret = new URLSearchParams(window.location.search).get(
-			'payment_intent_client_secret'
-		);
-
-		if (!clientSecret) {
-			return;
-		}
-
-		stripe.retrievePaymentIntent(clientSecret).then(({ paymentIntent }) => {
-			switch (paymentIntent?.status) {
-				case 'succeeded':
-					setMessage('Payment succeeded!');
-					break;
-				case 'processing':
-					setMessage('Your payment is processing.');
-					break;
-				case 'requires_payment_method':
-					setMessage('Your payment was not successful, please try again.');
-					break;
-				default:
-					setMessage('Something went wrong.');
-					break;
-			}
-		});
-	}, [stripe]);
-
-	const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-		e.preventDefault();
-
-		if (!stripe || !elements) {
-			return;
-		}
-
-		setIsLoading(true);
-
-		const { error } = await stripe.confirmPayment({
-			elements,
-			confirmParams: {
-				return_url: `${process.env.NEXT_PUBLIC_CLIENT_DOMAIN}/shop/success`,
-			},
-		});
-
-		if (error.type === 'card_error' || error.type === 'validation_error') {
-			setMessage(error.message as string);
-		} else {
-			setMessage('An unexpected error occurred.');
-		}
-
-		setIsLoading(false);
-	};
-
-	return (
-		<form id='payment-form' onSubmit={handleSubmit}>
-			{message && <ErrorAlert title={message} clearHandler={() => setMessage(null)} />}
-
-			<PaymentElement id='payment-element' options={{ layout: 'tabs' }} />
-			<AddressElement options={{ mode: 'billing' }} />
-			<Button
-				w={'full'}
-				h={'14'}
-				mt={5}
-				isDisabled={isLoading || !stripe || !elements}
-				isLoading={isLoading}
-				boxShadow={'xl'}
-				type={'submit'}
-			>
-				Pay now{' '}
-				{getTotalPrice(courses, books).toLocaleString('en-US', {
-					style: 'currency',
-					currency: 'USD',
-				})}
-			</Button>
-		</form>
-	);
-}
->>>>>>> 25889e5ed2447fe1262d2b1f9685c2f8c5e8b06a
