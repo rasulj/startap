@@ -8,6 +8,6 @@ export interface UserType{
 	password?: string;
 	avatar?: string;
 	jop?:string;
-	
+	courses: string[];
     
 }
