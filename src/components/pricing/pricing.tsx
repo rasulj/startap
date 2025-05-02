@@ -1,36 +1,34 @@
-
-import { Button, Heading, List, ListIcon, ListItem, Stack, useColorModeValue } from '@chakra-ui/react';
+import {
+	Button,
+	Heading,
+	List,
+	ListIcon,
+	ListItem,
+	Stack,
+	useColorModeValue,
+} from '@chakra-ui/react';
+import { useRouter } from 'next/router';
 import { useTranslation } from 'react-i18next';
 import { FaCheckCircle } from 'react-icons/fa';
-import { PricingProps } from './pricing.props';
-<<<<<<< HEAD
-import { useRouter } from 'next/router';
 import { useActions } from 'src/hooks/useActions';
+import { PricingProps } from './pricing.props';
 
-const Pricing = ({ options, price, title, checked ,product}: PricingProps) => {
-=======
-
-const Pricing = ({ options, price, title, checked }: PricingProps) => {
->>>>>>> 25889e5ed2447fe1262d2b1f9685c2f8c5e8b06a
+const Pricing = ({ options, price, title, checked, product }: PricingProps) => {
 	const { t } = useTranslation();
+	const { addProductToCart } = useActions();
+	const router = useRouter();
 
 	const colorTextLight = checked ? 'white' : 'facebook.600';
 	const bgColorLight = checked ? 'facebook.400' : 'gray.300';
 
 	const colorTextDark = checked ? 'white' : 'facebook.500';
 	const bgColorDark = checked ? 'facebook.400' : 'gray.300';
-<<<<<<< HEAD
-const { addProductToCart } = useActions();
-const router = useRouter()
 
- 	
 	const addProductToCartHandler = () => {
- 		addProductToCart(product);
- 		router.push('/shop/checkout');
- 	};
-=======
+		addProductToCart(product);
+		router.push('/shop/checkout');
+	};
 
->>>>>>> 25889e5ed2447fe1262d2b1f9685c2f8c5e8b06a
 	return (
 		<Stack
 			p={3}
@@ -48,16 +46,15 @@ const router = useRouter()
 					</ListItem>
 				))}
 			</List>
-			<Heading size={'xl'}>{price.toLocaleString('en-US', { currency: 'USD', style: 'currency' })}</Heading>
+			<Heading size={'xl'}>
+				{price.toLocaleString('en-US', { currency: 'USD', style: 'currency' })}
+			</Heading>
 			<Stack>
 				<Button
 					size='md'
 					color={useColorModeValue(colorTextLight, colorTextDark)}
 					bgColor={useColorModeValue(bgColorLight, bgColorDark)}
-<<<<<<< HEAD
 					onClick={addProductToCartHandler}
-=======
->>>>>>> 25889e5ed2447fe1262d2b1f9685c2f8c5e8b06a
 				>
 					{t('pricing_btn', { ns: 'global' })}
 				</Button>

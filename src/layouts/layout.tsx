@@ -1,14 +1,14 @@
 
 import { FunctionComponent, useState } from 'react'
-import Header from './header/header'
-import { AppProviderProps, LayautProps } from './layouts.props'
+import { AppProviderProps, LayoutProps, } from './layouts.props'
 import { Box, Container } from '@chakra-ui/react'
 import Sidebar from './sidebar/sidebar'
 import Footer from './footer/footer'
 import AppProvider from 'src/provider/app.provider'
+import Header from './header/header'
 
 
-const Layout = ({children ,...props}:LayautProps) => {
+const Layout = ({children ,...props}:LayoutProps) => {
   const [ toggle ,setTogle]= useState<boolean>(false)
 
   const onTogle =()=> setTogle( prev => !prev)

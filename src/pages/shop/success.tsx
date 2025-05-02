@@ -9,16 +9,7 @@ const SuccessPage = () => {
 export default withLayout(SuccessPage);
 
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
-<<<<<<< HEAD
-	// if (!query.payment_intent && !query.payment_intent_client_secret && !query.redirect_status) {
-	// 	return {
-	// 		redirect: {
-	// 			destination: '/',
-	// 			permanent: false,
-	// 		},
-	// 	};
-	// }
-=======
+
 	if (!query.payment_intent && !query.payment_intent_client_secret && !query.redirect_status) {
 		return {
 			redirect: {
@@ -27,7 +18,7 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
 			},
 		};
 	}
->>>>>>> 25889e5ed2447fe1262d2b1f9685c2f8c5e8b06a
+
 
 	return {
 		props: {},
