@@ -18,9 +18,11 @@ export interface CourseType{
 	_id: string;
    isActive:boolean;
   language: string;
+  updatedAt: Date;
 	   
 }
 export interface AuthorType{
     	fullName:string
 		avatar:string,
+		job:string
 }
