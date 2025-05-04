@@ -14,6 +14,7 @@ export interface InstructorType {
 	socialMedia: string;
  	author: UserType;
       _id: string;
+	  completed: string[];
 
 }
 export interface InstructorProvideProps {
@@ -34,6 +35,7 @@ export interface LessonType {
 	minute: number;
 	second: number;
 	_id: string;
+	completed:string[]
 }
 
  export interface BalanceType {
