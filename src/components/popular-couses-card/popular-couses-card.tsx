@@ -11,7 +11,7 @@ import { loadImage } from "src/helpers/image.helper"
 
 const PopularCousesCard = ({item}:PopularCousesCardProps):JSX.Element => {
 	
-	console.log(item);
+
 	
   return (
     <Stack key={item.title} spacing={3} p={3} 

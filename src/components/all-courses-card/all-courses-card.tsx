@@ -93,19 +93,26 @@ const AllCoursesCard = ({ course }: AllCoursesCardProps) => {
 							<Text fontSize={'xl'} fontWeight={'bold'}>
 								{course.price.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}
 							</Text>
-							<Flex gap={4} mt={{ base: 5, md: 0 }}>
-								<Button
+					               <Flex gap={4} mt={{ base: 5, md: 0 }}>
+								{course.price === 0 ? (
+									<Box color="green.500" fontWeight="bold">
+									Bepul kurs
+									</Box>
+								) : (
+									<Button
 									rightIcon={<BsMinecartLoaded />}
-									colorScheme={'facebook'}
+									colorScheme="facebook"
 									onClick={addCourseToCardHandler}
-									isDisabled={courses.map(c => c._id).includes(course._id) ? true : false}
-								>
+									isDisabled={courses.map(c => c._id).includes(course._id)}
+									>
 									Add to cart
-								</Button>
-								<Button onClick={onDetailedCourse} colorScheme={'facebook'} variant={'outline'}>
+									</Button>
+								)}
+
+								<Button onClick={onDetailedCourse} colorScheme="facebook" variant="outline">
 									Detail
 								</Button>
-							</Flex>
+								</Flex>
 						</Flex>
 					</Stack>
 				</Flex>

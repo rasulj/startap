@@ -1,3 +1,5 @@
+import { LessonType } from "src/interfaces/instructor.interface";
+
 export interface LessonBodyType{
     sectionId?: string
     lessonId?:string
@@ -7,4 +9,5 @@ export interface LessonBodyType{
 export interface LessonInitialStateType{
       isLoading: boolean,
       error: string | null | unknown;
+      lesson: LessonType;
 }

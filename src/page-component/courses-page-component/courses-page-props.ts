@@ -1,3 +1,4 @@
+import { BoxProps } from "@chakra-ui/react";
 
 
 export interface categoryListProps{
@@ -15,3 +16,5 @@ export interface categoryListProps{
 	categoryList: categoryListProps[];
 }
 
+
+ export interface CourseDashboardProps extends BoxProps {}

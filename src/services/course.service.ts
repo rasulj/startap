@@ -1,6 +1,8 @@
 import $axios from 'src/api/axios';
-import { getCourseUrl } from 'src/config/api.config';
+import { API_URL, getCourseUrl, getReviewUrl } from 'src/config/api.config';
 import { CourseType } from 'src/interfaces/course.interface';
+import { ReviewType } from '../interfaces/course.interface';
+import axios from 'axios';
 
 export const CourseService = {
 	async createCourse(body: CourseType) {
@@ -31,4 +33,37 @@ export const CourseService = {
    
 		return response.data;
 	},
+	async createReview(data) {
+		const response = await axios.post(
+			`${API_URL}${getReviewUrl('create')}`,
+			data
+		);
+
+		return response.data;
+	},
+
+	async editReview(data, reivewId: string) {
+		const response = await axios.put(
+			`${API_URL}${getReviewUrl('edit')}/${reivewId}`,
+			data
+		);
+
+		return response.data;
+	},
+
+	async getReviewByUser(data) {
+		const response = await axios.post(
+			`${API_URL}${getReviewUrl('get-by-user')}`,
+			data
+		);
+
+		return response.data;
+	},
+
+	async getReviews(courseId) {
+		const response = await axios.get(
+			`${API_URL}${getReviewUrl('get')}/${courseId}`
+		)
+		return response.data
+	}
 };

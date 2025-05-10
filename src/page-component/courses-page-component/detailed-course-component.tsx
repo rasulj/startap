@@ -60,26 +60,31 @@ const DetailedCourseComponent = () => {
 	};
 
 	const navigateUser = () => {
- 		if (user?.courses.includes(course?._id as string)) {
- 			push(`/courses/dashboard/${course?.slug}`);
- 		} else {
- 			const existingProduct = courses.find(c => c._id == course?._id);
- 
- 			if (existingProduct) {
- 				toast({
- 					title: 'Course already exist in cart',
- 					position: 'bottom',
- 					status: 'warning',
- 				});
- 				return;
- 			}
- 			addCourseToCart(course as CourseType);
- 			toast({
- 				title: 'Course added successfully',
- 				position: 'bottom',
- 			});
- 		}
- 	};
+	const isOwned = user?.courses.includes(course?._id as string);
+	const isFree = course?.price === 0;
+
+	if (isOwned || isFree) {
+		push(`/courses/dashboard/${course?.slug}`);
+		return;
+	}
+
+	const existingProduct = courses.find(c => c._id == course?._id);
+
+	if (existingProduct) {
+		toast({
+			title: 'Course already exist in cart',
+			position: 'bottom',
+			status: 'warning',
+		});
+		return;
+	}
+
+	addCourseToCart(course as CourseType);
+	toast({
+		title: 'Course added successfully',
+		position: 'bottom',
+	});
+};
 	return (
 		<>
 			{/* Header content */}
@@ -148,17 +153,19 @@ const DetailedCourseComponent = () => {
 											})}
 										</Heading>
 									</Stack>
-									<Button
+																	<Button
 										mt={5}
 										w={'full'}
 										h={14}
 										colorScheme={'facebook'}
 										onClick={navigateUser}
-									>
+										>
 										{user?.courses.includes(course?._id as string)
- 											? 'Go'
- 											: 'Add to cart'}
-									</Button>
+											? 'Go'
+											: course?.price === 0
+											? 'Enroll for Free'
+											: 'Add to cart'}
+										</Button>
 									<Box mt={3}>
 										<Flex
 											justify={'space-between'}

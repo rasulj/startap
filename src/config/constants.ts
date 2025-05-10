@@ -535,7 +535,7 @@ export const instructorUsers = [
 	},
 ];
 
-export const coursePrice = [10, 20, 30, 40, 50];
+export const coursePrice = [0 ,10, 20, 30, 40, 50];
 
 export const courseLng = ['en', 'uz', 'ru', 'tr'];
 
