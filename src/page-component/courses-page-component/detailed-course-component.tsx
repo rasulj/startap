@@ -102,9 +102,11 @@ const DetailedCourseComponent = () => {
 								gap={1}
 							>
 								<Flex fontSize={'sm'} align={'flex-end'} gap={1}>
-									<Text>5.0</Text>
-									<ReactStars edit={false} value={5} />
-									<Text>(10)</Text>
+								<ReactStars
+										edit={false}
+										value={course?.reviewAvg || 5}
+									/>
+									<Text>({course?.reviewCount})</Text>
 								</Flex>
 								<Flex align={'center'} fontSize={'sm'} gap={1}>
 									<Icon as={FaUserGraduate} />

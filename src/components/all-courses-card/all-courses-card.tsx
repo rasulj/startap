@@ -58,9 +58,13 @@ const AllCoursesCard = ({ course }: AllCoursesCardProps) => {
 					/>
 					<Stack>
 						<HStack>
-							<Text color={'#e59819'}>5</Text>
-							<ReactStars edit={false} value={5} color2={'#e59819'} />
-							<Text opacity={'.8'}>(5)</Text>
+						<Text color={'#e59819'}>{course.reviewAvg || 0}</Text>
+							<ReactStars
+								edit={false}
+								value={course.reviewAvg || 5}
+								color2={'#e59819'}
+							/>
+							<Text opacity={'.8'}>({course.reviewCount})</Text>
 						</HStack>
 						<Heading fontSize={'xl'}>{course.title}</Heading>
 						<Text>

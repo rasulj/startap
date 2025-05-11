@@ -19,6 +19,8 @@ export interface CourseType{
    isActive:boolean;
   language: string;
   updatedAt: Date;
+  allStudents: number;
+  reviewAvg:number
 	   
 }
 export interface AuthorType{

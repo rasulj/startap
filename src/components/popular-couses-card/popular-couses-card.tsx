@@ -27,9 +27,13 @@ const PopularCousesCard = ({item}:PopularCousesCardProps):JSX.Element => {
  				/>
  			</Box>
            <HStack>
-            <Text color={'#e59819'}> 4</Text>
-            <ReactStars edit={false} value={2} color2={'#e59819'}/>
-            <Text opacity={'.8'}> 2</Text>
+		   <Text color={'#e59819'}>{item.reviewAvg || 0}</Text>
+				<ReactStars
+					edit={false}
+					value={item.reviewAvg || 5}
+					color2={'#e59819'}
+				/>
+				<Text opacity={'.8'}>({item.reviewCount})</Text>
            </HStack>
            	<Heading fontSize={'xl'}>{item.title}</Heading>
 						<HStack>
