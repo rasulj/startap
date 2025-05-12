@@ -60,7 +60,7 @@ const DetailedCourseComponent = () => {
 	};
 
 	const navigateUser = () => {
-	const isOwned = user?.courses.includes(course?._id as string);
+	const isOwned = (user?.courses as string[]).includes(course?._id as string);
 	const isFree = course?.price === 0;
 
 	if (isOwned || isFree) {
@@ -162,7 +162,7 @@ const DetailedCourseComponent = () => {
 										colorScheme={'facebook'}
 										onClick={navigateUser}
 										>
-										{user?.courses.includes(course?._id as string)
+										{(user?.courses as string[]).includes(course?._id as string)
 											? 'Go'
 											: course?.price === 0
 											? 'Enroll for Free'

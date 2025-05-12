@@ -1,5 +1,6 @@
 import axios from 'axios';
 import Cookies from 'js-cookie';
+import $axios from 'src/api/axios';
 import { API_URL, getAuthUrl, getMailUrl, getUserUrl} from 'src/config/api.config';
 import { removeTokensCookie,saveTokenCookies } from 'src/helpers/auth.helper';
 import { AuthUserResponse } from 'src/store/user/user.interface';
@@ -87,4 +88,49 @@ export const AuthService = {
  			console.log(error);
  		}
  	},
+	 async updateUser(body) {
+		try {
+			const { data } = await $axios.put(
+				`${getUserUrl('update')}`,
+				body
+			);
+
+			return data;
+		} catch (error) {
+			console.log(error);
+		}
+	},
+	async getTransactions() {
+		try {
+			const { data } = await $axios.get(
+				`${getUserUrl('transactions')}`
+			);
+
+			return data;
+		} catch (error) {
+			console.log(error);
+		}
+	},
+
+	async getMyCourses() {
+		try {
+			const { data } = await $axios.get(
+				`${getUserUrl('my-courses')}`
+			);
+
+			return data;
+		} catch (error) {
+			console.log(error);
+		}
+	},
+
+	async getSavedCards() {
+		try {
+			const { data } = await $axios.get(`/customer/saved-cards`);
+
+			return data;
+		} catch (error) {
+			console.log(error);
+		}
+	},
 };

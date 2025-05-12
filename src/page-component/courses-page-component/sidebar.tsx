@@ -197,7 +197,7 @@ const Sidebar: FC<CourseDashboardProps> = ({ ...props }) => {
 																onComplete(e, lesson._id)
 															}
 															defaultChecked={lesson.completed.includes(
-																user.id
+																user.id as string
 															)}
 															cursor={
 																isComplete ? 'progress' : 'pointer'

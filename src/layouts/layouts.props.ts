@@ -1,4 +1,5 @@
 import { ReactNode } from 'react';
+import { ArticleType } from 'src/interfaces/article.interface';
 import { BooksType } from 'src/interfaces/books.interface';
 import { CardType, ProductsType } from 'src/interfaces/constants.interface';
 import { CourseType } from 'src/interfaces/course.interface';
@@ -15,4 +16,7 @@ export interface AppProviderProps {
 	books: BooksType[];
 	cards: CardType[];
 	products: ProductsType[];
+	articles:ArticleType[];
+	article:ArticleType[];
+
 }

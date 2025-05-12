@@ -23,19 +23,27 @@ import { useActions } from 'src/hooks/useActions';
 import { useTypedSelector } from 'src/hooks/useTypedSelector';
 import { AllCoursesCardProps } from './all-courses-card.props';
 
-const AllCoursesCard = ({ course }: AllCoursesCardProps) => {
+const AllCoursesCard = ({
+	course,
+	isMyCourse,
+}: AllCoursesCardProps) => {
 	const router = useRouter();
 	const { addCourseToCart } = useActions();
 	const { courses } = useTypedSelector(state => state.cart);
 	const toast = useToast();
 
-	const onDetailedCourse = () => router.push(`/courses/${course.slug}`);
+	const onDetailedCourse = () =>
+		router.push(`/courses/${course.slug}`);
 
 	const addCourseToCardHandler = () => {
 		const existingProduct = courses.find(c => c._id === course._id);
 
 		if (existingProduct) {
-			toast({ title: 'Course already exist in cart', position: 'bottom', status: 'warning' });
+			toast({
+				title: 'Course already exist in cart',
+				position: 'bottom',
+				status: 'warning',
+			});
 			return;
 		}
 		addCourseToCart(course);
@@ -57,37 +65,45 @@ const AllCoursesCard = ({ course }: AllCoursesCardProps) => {
 						cursor={'pointer'}
 					/>
 					<Stack>
-						<HStack>
-						<Text color={'#e59819'}>{course.reviewAvg || 0}</Text>
-							<ReactStars
-								edit={false}
-								value={course.reviewAvg || 5}
-								color2={'#e59819'}
-							/>
-							<Text opacity={'.8'}>({course.reviewCount})</Text>
-						</HStack>
-						<Heading fontSize={'xl'}>{course.title}</Heading>
-						<Text>
-							Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium nostrum
-							laboriosam est ut.
-						</Text>
-						<Flex gap={2} fontSize={'14px'} direction={{ base: 'column', sm: 'row' }}>
-							<Avatar src={course.author.avatar} name={course.author.fullName} />
+						{!isMyCourse && (
 							<HStack>
-								<Flex align={'center'} gap={1}>
-									<Icon as={CiViewList} />
-									<Text>{course.lessonCount} lesson</Text>
-								</Flex>
-								<Flex align={'center'} gap={1}>
-									<Icon as={AiOutlineClockCircle} />
-									<Text>{course.totalHour} hours</Text>
-								</Flex>
-								<Flex align={'center'} gap={1}>
-									<Icon as={SiGoogleanalytics} />
-									<Text>{course.level}</Text>
-								</Flex>
+								<Text color={'#e59819'}>{course.reviewAvg || 0}</Text>
+								<ReactStars
+									edit={false}
+									value={course.reviewAvg || 5}
+									color2={'#e59819'}
+								/>
+								<Text opacity={'.8'}>({course.reviewCount})</Text>
 							</HStack>
-						</Flex>
+						)}
+						<Heading fontSize={'xl'}>{course.title}</Heading>
+						<Text>{course.exerpt}</Text>
+						{!isMyCourse && (
+							<Flex
+								gap={2}
+								fontSize={'14px'}
+								direction={{ base: 'column', sm: 'row' }}
+							>
+								<Avatar
+									src={course.author.avatar}
+									name={course.author.fullName}
+								/>
+								<HStack>
+									<Flex align={'center'} gap={1}>
+										<Icon as={CiViewList} />
+										<Text>{course.lessonCount} lesson</Text>
+									</Flex>
+									<Flex align={'center'} gap={1}>
+										<Icon as={AiOutlineClockCircle} />
+										<Text>{course.totalHour} hours</Text>
+									</Flex>
+									<Flex align={'center'} gap={1}>
+										<Icon as={SiGoogleanalytics} />
+										<Text>{course.level}</Text>
+									</Flex>
+								</HStack>
+							</Flex>
+						)}
 						<Divider />
 						<Flex
 							align={{ base: 'flex-start', md: 'center' }}
@@ -95,28 +111,34 @@ const AllCoursesCard = ({ course }: AllCoursesCardProps) => {
 							direction={{ base: 'column', md: 'row' }}
 						>
 							<Text fontSize={'xl'} fontWeight={'bold'}>
-								{course.price.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}
+								{course.price.toLocaleString('en-US', {
+									style: 'currency',
+									currency: 'USD',
+								})}
 							</Text>
-					               <Flex gap={4} mt={{ base: 5, md: 0 }}>
-								{course.price === 0 ? (
-									<Box color="green.500" fontWeight="bold">
-									Bepul kurs
-									</Box>
-								) : (
+							<Flex gap={4} mt={{ base: 5, md: 0 }}>
+								{!isMyCourse && (
 									<Button
-									rightIcon={<BsMinecartLoaded />}
-									colorScheme="facebook"
-									onClick={addCourseToCardHandler}
-									isDisabled={courses.map(c => c._id).includes(course._id)}
+										rightIcon={<BsMinecartLoaded />}
+										colorScheme={'facebook'}
+										onClick={addCourseToCardHandler}
+										isDisabled={
+											courses.map(c => c._id).includes(course._id)
+												? true
+												: false
+										}
 									>
-									Add to cart
+										Add to cart
 									</Button>
 								)}
-
-								<Button onClick={onDetailedCourse} colorScheme="facebook" variant="outline">
+								<Button
+									onClick={onDetailedCourse}
+									colorScheme={'facebook'}
+									variant={'outline'}
+								>
 									Detail
 								</Button>
-								</Flex>
+							</Flex>
 						</Flex>
 					</Stack>
 				</Flex>
