@@ -1,10 +1,12 @@
 import { Button, Card, CardBody, Grid, Heading, Icon, Stack, Text } from '@chakra-ui/react';
+import { useRouter } from 'next/router';
 import { useTranslation } from 'react-i18next';
 import { FaJava } from 'react-icons/fa';
 import { VscDebugStart } from 'react-icons/vsc';
 
 const Hero = () => {
 	const {t} =useTranslation()
+	const {push} = useRouter()
 	return (
 		<Card mt={10}>
 			<CardBody p={10}>
@@ -19,10 +21,11 @@ const Hero = () => {
 						<Heading>{t("hero_title",{ns:'home'})}</Heading>
 						<Text>{t("hero_description",{ns:'home'})}</Text>
 						<Grid gridTemplateColumns={{ base: '100%', md: '50% 50%' }} gap={5}>
-							<Button h={14} colorScheme={'facebook'} rightIcon={<VscDebugStart />}>
+							<Button h={14} colorScheme={'facebook'} rightIcon={<VscDebugStart />} onClick={()=>push('/courses')}>
 								{t("hero_start_learning_btn",{ns:'home'})}
 							</Button>
-							<Button h={14} colorScheme={'facebook'} variant={'outline'}>
+							<Button h={14} colorScheme={'facebook'} variant={'outline'} 
+							 onClick={()=>push('/become-instructor')}>
 								{t("hero_become_instructor_btn",{ns:'home'})}
 							</Button>
 						</Grid>

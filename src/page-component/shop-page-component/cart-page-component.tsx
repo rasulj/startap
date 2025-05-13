@@ -190,7 +190,7 @@ const ShoppingCartCard = ({ item, image }) => {
 	};
 
 	return (
-		<Flex justify={'space-between'}>
+		<Flex justify={{base:'flex-start' , md:'space-between'}} direction={{base:'column',md:'row'}}>
 			<HStack>
 				<Box pos={'relative'} w={'200px'} h={'100px'}>
 					<Image
@@ -215,11 +215,12 @@ const ShoppingCartCard = ({ item, image }) => {
 					</HStack>
 				</Stack>
 			</HStack>
-			<Stack spacing={0}>
+			<Stack spacing={0} mt={{base:5 ,md:0}}>
 				<Text
 					color={'facebook.300'}
 					fontSize={'2xl'}
 					fontWeight={'bold'}
+					textAlign={{base:'center'}}
 				>
 					{item.price.toLocaleString('en-US', {
 						style: 'currency',
@@ -230,6 +231,7 @@ const ShoppingCartCard = ({ item, image }) => {
 					aria-label='remove'
 					icon={<BsFillTrashFill />}
 					colorScheme={'red'}
+					h={'14'}
 					onClick={removeCartItem}
 				/>
 			</Stack>

@@ -6,16 +6,17 @@ import { AiOutlineClockCircle } from "react-icons/ai"
 import { CiViewList } from "react-icons/ci"
 import Image from "next/image"
 import { loadImage } from "src/helpers/image.helper"
+import { useRouter } from "next/router"
 
 
 
 const PopularCousesCard = ({item}:PopularCousesCardProps):JSX.Element => {
 	
-
+const {push}= useRouter()
 	
   return (
     <Stack key={item.title} spacing={3} p={3} 
-		cursor={'pointer'}
+		cursor={'pointer'} onClick={()=>push(`/courses/${item.slug}`)}
 		 
 		 > 
        <Box pos={'relative'} w={'full'} h={'210px'}>
@@ -53,7 +54,7 @@ const PopularCousesCard = ({item}:PopularCousesCardProps):JSX.Element => {
 						<Divider />
               <Flex justifyContent={'space-between'} alignItems={'center'}>
                 <HStack>
-                 <Avatar src={item.author.avatar} name={item.author.fullName} />
+                 <Avatar src={loadImage(item.author.avatar)} name={item.author.fullName} />
  					<Text>{item.author.fullName}</Text>
                 </HStack>
                   <Text> {item.price.toLocaleString('en-US',{style:'currency', currency:'USD'})}</Text>
@@ -61,6 +62,6 @@ const PopularCousesCard = ({item}:PopularCousesCardProps):JSX.Element => {
         </Stack>
   )
 }
-// item.avatar ? loadImage(item.avatar) : '/images/altimag.webp'
+
 
 export default PopularCousesCard

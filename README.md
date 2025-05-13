@@ -1,39 +1,105 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 🚀 Startap - Online Education Platform
 
-## Getting Started
+**Startap** is a modern, full-featured online learning platform that enables users to access courses, books, and educational resources. It features responsive design, multi-language support, secure payments, user authentication, and an admin panel with analytics.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+## 🧑‍💻 Technologies Used
+
+### Frontend:
+- **Next.js + TypeScript** – Fast, SEO-friendly React framework
+- **Tailwind CSS + Chakra UI** – Flexible and modern UI design
+- **Redux Toolkit** – Global state management
+- **i18next** – Internationalization (i18n)
+- **Stripe** – Secure payment integration
+- **Formik + Yup** – Form handling and validation
+- **Chart.js** – Interactive charts and statistics
+- **NextAuth** – Authentication and session management
+
+### Backend:
+The backend is located in a separate repository:  
+🔗 **[Startap-server (NestJS backend)](https://github.com/rasulj/Startap-server.git)**
+
+- **NestJS + TypeScript** – Scalable backend architecture
+- **JWT authentication**
+- **Stripe integration**
+- **MongoDB or PostgreSQL** – Flexible database setup
+- **REST API** – Fully connected with frontend
+
+---
+
+## 📁 Project Structure
+
+```
+root/
+├── startap-main/         # Frontend (Next.js)
+├── Startap-server/       # Backend (NestJS): hosted externally
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+## 🚀 Getting Started
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+### Run the Frontend
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+```bash
+git clone https://github.com/rasulj/startap-main.git
+cd startap-main
+yarn install          # or npm install
+yarn dev              # or npm run dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Frontend will run on: [http://localhost:3000](http://localhost:3000)
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+### Run the Backend
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+git clone https://github.com/rasulj/Startap-server.git
+cd Startap-server
+yarn install          # or npm install
+yarn start:dev        # or npm run start:dev
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Backend API will be available at: `http://localhost:8000` (configurable via `.env`)
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🌍 Multi-language Support
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
-"# startap" 
+The platform supports multiple languages using **i18next**. All translations are stored in `public/locales/`.
+
+---
+
+## 💳 Payments with Stripe
+
+Users can securely pay for courses using Stripe. Payments are fully integrated with both frontend and backend.
+
+---
+
+## 📊 Admin Dashboard
+
+Admins can monitor statistics, manage users, and view platform activity via interactive charts powered by `Chart.js`.
+
+---
+
+## ✅ Key Features
+
+- 🔐 Authentication (NextAuth + JWT)
+- 🌐 Multi-language support
+- 💳 Stripe payment integration
+- 📚 Course and book management
+- ⭐ Reviews and ratings
+- 📈 Admin dashboard and analytics
+
+---
+
+## 🤝 Author
+
+This project was developed for portfolio and practical experience purposes. It features clean, modular code and follows modern web development standards.
+
+📧 Email: `rasulkamilov93@gmail.com`  
+🌐 Portfolio:
+
+---

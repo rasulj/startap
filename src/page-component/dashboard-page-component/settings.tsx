@@ -171,7 +171,7 @@ const Settings = () => {
 				enableReinitialize
 			>
 				<Form>
-					<Flex gap={5}>
+					<Flex gap={{base:1,md:5}} direction={{base:'column',md:'row'}}>
 						<TextFiled
 							name='firstName'
 							label='Ismingiz'
@@ -183,7 +183,7 @@ const Settings = () => {
 							placeholder='Osman'
 						/>
 					</Flex>
-					<Flex gap={5}>
+					<Flex gap={{base:1,md:5}} direction={{base:'column',md:'row'}}>
 						<TextFiled
 							name='birthday'
 							label="Tug'ilgan sana"

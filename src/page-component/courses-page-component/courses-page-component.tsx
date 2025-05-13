@@ -15,7 +15,7 @@ import {
 	Text,
 	useColorModeValue,
 } from '@chakra-ui/react';
-import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { ChangeEvent, Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import ReactStars from 'react-stars';
 import { AllCoursesCard } from 'src/components';
@@ -31,7 +31,7 @@ const CoursesPageComponent = () => {
 	const [filter, setFilter] = useState<FilterCourseType>({ id: '', category: '' });
 	const [allCourses, setAllCourses] = useState<CourseType[]>([]);
 	const [isLoading, setIsLoading] = useState<boolean>(false);
-
+	const [searchValue, setSearchValue] = useState<string>('');
 	const { t } = useTranslation();
 	const { courses } = useTypedSelector(state => state.course);
 
@@ -54,7 +54,10 @@ const CoursesPageComponent = () => {
 			});
 		}
 	}, [filter]);
-
+ const searchHandle = (e:ChangeEvent<HTMLInputElement>)=>{
+ setSearchValue(e.target.value)
+ setAllCourses(courses.filter(c => c.title.toLowerCase().indexOf(e.target.value.toLowerCase()) !== -1 ))
+ }
 	useEffect(() => {
 		setAllCourses(courses);
 	}, [courses]);
@@ -73,10 +76,10 @@ const CoursesPageComponent = () => {
 					color={'gray.900'}
 					placeholder={t('search_input_placeholder', { ns: 'courses' }) || ''}
 					_placeholder={{ color: 'gray.500' }}
+					value={searchValue}
+					onChange={searchHandle}
 				/>
-				<Button pos={'absolute'} right={2} top={2} colorScheme={'facebook'} zIndex={999}>
-					{t('search_input_btn', { ns: 'courses' })}
-				</Button>
+			
 			</Box>
 			<Flex mt={5} gap={5} direction={{ base: 'column', lg: 'row' }}>
 				<Box
