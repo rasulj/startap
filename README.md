@@ -4,6 +4,12 @@
 
 ---
 
+## 🔗 Live Demo
+
+👉 [Click here to view the live demo](https://startap-xe4v.vercel.app)
+
+---
+
 ## 🧑‍💻 Technologies Used
 
 ### Frontend:
@@ -29,6 +35,8 @@ The backend is located in a separate repository:
 ---
 
 ## 📁 Project Structure
+
+
 
 ```
 root/
