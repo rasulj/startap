@@ -19,10 +19,10 @@ const Account = () => {
 
 	return (
 		<>
-			<Box maxW='7xl' mx={'auto'} px={{ base: 2, sm: 12, md: 17 }}>
+			<Box maxW='7xl' mx={'auto'}>
 				<chakra.h1
 					textAlign={'center'}
-					fontSize={'4xl'}
+					fontSize={{base:'2xl' ,md:'4xl'}}
 					pb={6}
 					fontWeight={'bold'}
 				>

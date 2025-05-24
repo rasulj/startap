@@ -82,7 +82,7 @@ const CartPageComponent = () => {
 				title={'Shopping cart'}
 				subtitle={getSubtitle()}
 			/>
-			<Grid gridTemplateColumns={'70% 30%'} gap={5}>
+			<Grid gridTemplateColumns={{base:'1fr' , md:'70% 30%'}} gap={5}>
 				<GridItem>
 					<Divider my={5} />
 					{cart.books.map(book => (

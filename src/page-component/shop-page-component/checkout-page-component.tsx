@@ -30,7 +30,7 @@ const CheckoutPageComponent = ({ cards }: { cards: CardType[] }) => {
 				title={'Checkout'}
 				subtitle={'We’re on a mission to deliver engaging, curated courses at a reasonable price.'}
 			/>
-			<Grid gridTemplateColumns={'70% 30%'} gap={5}>
+			<Grid gridTemplateColumns={{base:'1fr' ,md:'70% 30%'}} gap={5}>
 				<GridItem>
 					<Divider my={5} />
 

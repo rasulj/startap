@@ -46,7 +46,7 @@ const DangerZone = () => {
 		<>
 			<Text fontSize={'2xl'}>Change password</Text>
 			<Divider my={5} />
-			<Box maxW={{base:'100%',md:"70%"}}>
+			<Box w={{base:'100%',md:"70%"}}>
 				<Formik
 					onSubmit={onSubmit}
 					initialValues={{ password: '', confirmPassword: '' }}
