@@ -3,7 +3,7 @@ import { FC, FunctionComponent, useState } from 'react'
 import { Box, Container } from '@chakra-ui/react'
 import Header from '../header/header'
 import Footer from '../footer/footer'
-import { LayautProps } from '../layouts.props'
+import { LayoutProps } from '../layouts.props'
 import InstructorSidebar from '../sidebar/instructor-sidebar'
 import InstructorProvider from 'src/provider/instructor.provider'
 import { InstructorProvideProps } from './instructor.props'
@@ -11,7 +11,7 @@ import { InstructorProvideProps } from './instructor.props'
 
 
 
-const Layout: FC<LayautProps>= ({children }) => {
+const Layout: FC<LayoutProps>= ({children }) => {
   const [ toggle ,setTogle]= useState<boolean>(false)
 
   const onTogle =()=> setTogle( prev => !prev)

@@ -1,11 +1,11 @@
 import { Box, Container } from '@chakra-ui/react';
  import { FC, FunctionComponent } from 'react';
-import { LayautProps } from '../layouts.props';
+import { LayoutProps } from '../layouts.props';
 import AdminSidebar from '../sidebar/admin-sidebat';
 import {AdminProps} from './admin.props';
 import AdminProvider from 'src/provider/admin.provider';
  
- const Layout: FC<LayautProps> = ({ children }): JSX.Element => {
+ const Layout: FC<LayoutProps> = ({ children }): JSX.Element => {
  	return (
  		<>
  			<AdminSidebar />

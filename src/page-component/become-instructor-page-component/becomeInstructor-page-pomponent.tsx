@@ -50,8 +50,8 @@ const BecomeInstructorPageComponent = () => {
   const { applyInstructor,clearInstroctorError} = useActions()
   const{isLoading ,error } = useTypedSelector( state => state.instructor)
 
-	const onSubmit = (formData) => {
-	
+	const onSubmit = (formData:any) => { 
+	   
 		
 		 applyInstructor({...formData, callback:()=>{
 				toast({

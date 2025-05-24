@@ -178,7 +178,7 @@ const CartPageComponent = () => {
 
 export default CartPageComponent;
 
-const ShoppingCartCard = ({ item, image }) => {
+const ShoppingCartCard = ({ item, image }: { item: any; image: string }) => {
 	const { removeBookFromCart, removeCourseFromCart } = useActions();
 
 	const removeCartItem = () => {

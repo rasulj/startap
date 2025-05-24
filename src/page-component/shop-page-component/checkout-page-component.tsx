@@ -93,7 +93,7 @@ const CheckoutPageComponent = ({ cards }: { cards: CardType[] }) => {
 
 export default CheckoutPageComponent;
 
-const OrderedDetailedCart = ({ item, image }) => (
+const OrderedDetailedCart = ({ item, image }: { item: any; image: string }) => (
 	<HStack justify={'space-between'}>
 		<HStack>
 			<Box pos={'relative'} w={'40px'} h={'30px'}>

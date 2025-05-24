@@ -28,21 +28,20 @@ const Layout = ({children ,...props}:LayoutProps) => {
 
 export default Layout 
 
-export const withLayout = <T extends Record< string,unknown> & AppProviderProps>(Component:FunctionComponent<T>)=>{
-
- return function withLayoutComponent(props:T){
-
-    return <Layout>
-     
-         	<AppProvider
- 					course={props.course}
- 					courses={props.courses}
- 					instructors={props.instructors}
- 					books={props.books}
- 				>
- 					<Component {...props} />
- 				</AppProvider>
-   
-        </Layout>
- }
-}
+export const withLayout = <T extends Record<string, unknown> & Partial<AppProviderProps>>(Component: React.FC<T>) => {
+  return function withLayoutComponent(props: T) {
+    return (
+      <Layout>
+        <AppProvider
+          course={props.course}
+          courses={props.courses}
+          instructors={props.instructors}
+          books={props.books}
+         
+        >
+          <Component {...props} />
+        </AppProvider>
+      </Layout>
+    );
+  };
+};

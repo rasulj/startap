@@ -37,5 +37,5 @@ export const AuthValidation = {
 			confirmPassword: Yup.string()
 				.oneOf([Yup.ref('password')], "password_didn't_match")
 				.required('confirm_password_is_required')
-		})
+		});
 }}

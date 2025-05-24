@@ -1,15 +1,18 @@
 import { FC, ReactNode, useEffect } from 'react';
 import { useActions } from 'src/hooks/useActions';
+import { ArticleType } from 'src/interfaces/article.interface';
 import { BooksType } from 'src/interfaces/books.interface';
+import { CardType } from 'src/interfaces/constants.interface';
 import { CourseType } from 'src/interfaces/course.interface';
 import { InstructorType } from 'src/interfaces/instructor.interface';
 
 interface Props {
 	children: ReactNode;
-	courses: CourseType[];
-	course: CourseType;
-	instructors: InstructorType[];
-	books: BooksType[];
+	courses?: CourseType[];
+	course?: CourseType;
+	instructors?: InstructorType[];
+	books?: BooksType[];
+
 }
 
 const AppProvider: FC<Props> = ({ children, course, courses, instructors, books }): JSX.Element => {

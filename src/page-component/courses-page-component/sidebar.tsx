@@ -44,6 +44,7 @@ const Sidebar: FC<CourseDashboardProps> = ({ ...props }) => {
 
 	const onLesson = (lesson: LessonType) => {
 		getLesson(lesson);
+		if(lesson._id)
 		localStorage.setItem(`${course?._id}`, lesson._id);
 		const link = `/courses/dashboard/${course?.slug}`;
 
@@ -70,7 +71,7 @@ const Sidebar: FC<CourseDashboardProps> = ({ ...props }) => {
 
 	const onComplete = async (
 		evt: ChangeEvent<HTMLInputElement>,
-		lessonID: string
+		lessonID: string 
 	) => {
 		setIsComplete(true);
 

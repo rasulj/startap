@@ -118,8 +118,8 @@ const Header = () => {
 					});
 				} else {
 					await CourseService.createReview({
-						course: course._id,
 						author: user.id,
+						course: course._id,
 						rating: formikValues.rating,
 						summary: formikValues.summary,
 					});

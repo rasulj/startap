@@ -11,12 +11,12 @@ export interface LayoutProps {
 
 export interface AppProviderProps {
 	courses: CourseType[];
-	course: CourseType;
-	instructors: InstructorType[];
-	books: BooksType[];
-	cards: CardType[];
-	products: ProductsType[];
-	articles:ArticleType[];
-	article:ArticleType[];
+	course?: CourseType;
+	instructors?: InstructorType[];
+	books?: BooksType[];
+	cards?: CardType[];
+	products?: ProductsType[];
+	articles?:ArticleType[];
+	article?:ArticleType[];
 
 }

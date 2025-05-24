@@ -1,25 +1,15 @@
-
-import { CourseType } from 'src/interfaces/course.interface';
 import { UserType } from './user.interface';
 
-
 export interface InstructorType {
-    fullName: string;
- 	avatar: string;
- 	coursesCount: number;
- 	studentsCount: number;
+	fullName: string;
+	_id: string;
+	avatar: string;
 	totalCourses: number;
- 	jop: string;
-	approved:boolean
+	studentsCount: number;
+	job: string;
 	socialMedia: string;
- 	author: UserType;
-      _id: string;
-	  completed: string[];
-
-}
-export interface InstructorProvideProps {
-	courses: CourseType[];
-	course: CourseType;
+	author: UserType;
+	approved: boolean;
 }
 
 export interface SectionType {
@@ -27,6 +17,7 @@ export interface SectionType {
 	title: string;
 	lessons: LessonType[];
 }
+
 export interface LessonType {
 	name: string;
 	material: string;
@@ -35,15 +26,15 @@ export interface LessonType {
 	minute: number;
 	second: number;
 	_id: string;
-	completed:string[]
+	completed: string[];
 }
 
- export interface BalanceType {
- 	available: AmountBalanceType[];
- 	instant_available: AmountBalanceType[];
- 	pending: AmountBalanceType[];
- }
- 
- interface AmountBalanceType {
- 	amount: number;
- }
+export interface BalanceType {
+	available: AmountBalanceType[];
+	instant_available: AmountBalanceType[];
+	pending: AmountBalanceType[];
+}
+
+interface AmountBalanceType {
+	amount: number;
+}

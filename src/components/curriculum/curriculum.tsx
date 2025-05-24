@@ -95,9 +95,9 @@ const Curriculum = () => {
 											</Flex>
 											<Text fontSize={'sm'}>
 												{getLessonTime(
-													lesson.hour,
-													lesson.minute,
-													lesson.second
+													lesson.hour??0,
+													lesson.minute??0,
+													lesson.second??0
 												)}
 											</Text>
 										</Flex>

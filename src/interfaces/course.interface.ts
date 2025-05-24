@@ -30,9 +30,10 @@ export interface AuthorType{
 }
 
 export interface ReviewType {
-	author: AuthorType;
-	createdAt: Date;
-	updatedAt: Date;
+	author: string,
+	course:string,
+	createdAt?: Date;
 	rating: number;
 	summary: string;
+	updatedAt?: Date;
 }

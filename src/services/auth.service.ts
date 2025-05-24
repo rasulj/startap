@@ -3,6 +3,7 @@ import Cookies from 'js-cookie';
 import $axios from 'src/api/axios';
 import { API_URL, getAuthUrl, getMailUrl, getUserUrl} from 'src/config/api.config';
 import { removeTokensCookie,saveTokenCookies } from 'src/helpers/auth.helper';
+import { UserType } from 'src/interfaces/user.interface';
 import { AuthUserResponse } from 'src/store/user/user.interface';
 
 export const AuthService = {
@@ -88,7 +89,7 @@ export const AuthService = {
  			console.log(error);
  		}
  	},
-	 async updateUser(body) {
+	 async updateUser(body:UserType) { 
 		try {
 			const { data } = await $axios.put(
 				`${getUserUrl('update')}`,

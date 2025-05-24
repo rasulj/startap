@@ -41,10 +41,10 @@ const LessonAccordionItem = ({ lesson , sectionId ,lessonIdx}:LessonAccordionIte
 		const movingItem = allLessons[movingLessonIndex];
 		allLessons.splice(movingLessonIndex, 1);
 		allLessons.splice(lessonIdx, 0, movingItem);
-		const editedIdx = allLessons.map(c => c._id);
+		const editedIdx = allLessons.map(c => c._id).filter((id): id is string => id !== undefined);
 		editSection({
 			sectionId,
-			lessons: editedIdx,
+			lessons: editedIdx ,
 			callback: () => {},
 		});
 	};

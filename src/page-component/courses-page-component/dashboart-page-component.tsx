@@ -34,7 +34,7 @@ const DashboardPageComponent = () => {
 						<CardBody>
 							<Box
 								dangerouslySetInnerHTML={{
-									__html: lesson.embedVideo,
+									__html: lesson.embedVideo|| ''
 								}}
 							/>
 						</CardBody>
@@ -51,7 +51,7 @@ const DashboardPageComponent = () => {
 							li: { listStyle: 'none' },
 						}}
 						dangerouslySetInnerHTML={{
-							__html: lesson.material,
+							__html: lesson.embedVideo || "",
 						}}
 					/>
 					<Sidebar

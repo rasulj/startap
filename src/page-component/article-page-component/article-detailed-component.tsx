@@ -55,7 +55,7 @@ const ArticleDetailedComponent = ({ article }: ArticleDetailedProps) => {
 			item => item.lang === currentLanguage?.codes
 		);
 
-		setMyVoice(currentVoice);
+		//setMyVoice(currentVoice);
 	}, [voices, router]);
 
 

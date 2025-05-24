@@ -6,7 +6,7 @@ import Seo from 'src/layouts/seo/seo';
 import { PricingPageComponent } from 'src/page-component';
 import { PaymentService } from 'src/services/payment.service';
 
-const PricingPage = ({ products }) => {
+const PricingPage = ({ products }:PricingPageType) => {
 	const { t } = useTranslation();
 
 	console.log(products);

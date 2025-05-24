@@ -33,16 +33,16 @@ export const CourseService = {
    
 		return response.data;
 	},
-	async createReview(data) {
+	async createReview(data:ReviewType) { 
 		const response = await axios.post(
 			`${API_URL}${getReviewUrl('create')}`,
 			data
 		);
 
 		return response.data;
-	},
+	}, 
 
-	async editReview(data, reivewId: string) {
+	async editReview(data:Partial<ReviewType>, reivewId: string) {
 		const response = await axios.put(
 			`${API_URL}${getReviewUrl('edit')}/${reivewId}`,
 			data
@@ -51,7 +51,7 @@ export const CourseService = {
 		return response.data;
 	},
 
-	async getReviewByUser(data) {
+	async getReviewByUser(data:{course:string ,user:string}) {
 		const response = await axios.post(
 			`${API_URL}${getReviewUrl('get-by-user')}`,
 			data
@@ -60,7 +60,7 @@ export const CourseService = {
 		return response.data;
 	},
 
-	async getReviews(courseId) {
+	async getReviews(courseId:string) {
 		const response = await axios.get(
 			`${API_URL}${getReviewUrl('get')}/${courseId}`
 		)
