@@ -7,7 +7,7 @@ import {
 	Heading,
 	HStack,
 	Icon,
-	Image,
+	
 	Stack,
 	Text,
 	useToast,
@@ -22,6 +22,7 @@ import { loadImage } from 'src/helpers/image.helper';
 import { useActions } from 'src/hooks/useActions';
 import { useTypedSelector } from 'src/hooks/useTypedSelector';
 import { AllCoursesCardProps } from './all-courses-card.props';
+import Image from 'next/image';
 
 const AllCoursesCard = ({
 	course,
@@ -52,18 +53,25 @@ const AllCoursesCard = ({
 
 	return (
 		<>
-			<Box py={4}>
+			<Box py={4} >
 				<Flex gap={4} direction={{ base: 'column', md: 'row' }}>
-					<Image
-						src={loadImage(course.previewImage)}
-						alt={course.title}
-						w={{ base: 'full', md: '250px' }}
+					<Box
+					position={'relative'}
+					 w={{ base: 'full', md: '30%' }}
 						h={'250px'}
 						borderRadius={'lg'}
 						objectFit={'cover'}
 						onClick={onDetailedCourse}
-						cursor={'pointer'}
+						cursor={'pointer'}>
+                      <Image
+						src={loadImage(course.previewImage)}
+						alt={course.title}
+						fill
+						style={{objectFit:"cover" , borderRadius:'10px'}}
+						
 					/>
+					</Box>
+					
 					<Stack>
 						{!isMyCourse && (
 							<HStack>
