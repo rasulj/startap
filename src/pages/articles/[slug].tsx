@@ -42,4 +42,10 @@
 // interface ArticleDetailedPageProps extends Record<string, unknown> {
 // 	article: ArticleType;
 // }
-export{}
+import React from 'react';
+
+const ArticlePage = () => {
+  return <div>Article</div>;
+};
+
+export default ArticlePage;

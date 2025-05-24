@@ -33,4 +33,10 @@
 // 	articles: ArticleType[];
 // }
 
-export{}
+import React from 'react';
+
+const ArticlePagee= () => {
+  return <div>Article</div>;
+};
+
+export default ArticlePagee;
