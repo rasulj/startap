@@ -83,7 +83,7 @@ const AdminSidebar = () => {
 				<Divider my={5} />
 				{adminSidebar.map((item, idx) => {
 					const active = `/admin/${router.pathname.split('/')[2]}` == `/admin/${item.route}`;
-
+                console.log(item.route)
 					return (
 						<Link href={`/admin/${item.route}`} key={idx}>
 							<Button

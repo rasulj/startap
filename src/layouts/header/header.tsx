@@ -145,6 +145,16 @@ const logoutHandler = () => {
  										{t('instructor_admin', { ns: 'instructor' })}
  									</MenuItem>
  								)}
+									{user.role === 'ADMIN' && (
+ 									<MenuItem
+ 										h={14}
+ 										onClick={() => router.push('admin/instructors')}
+ 										fontWeight={'bold'}
+ 										icon={<RiAdminFill fontSize={17} />}
+ 									>
+ 										Admin Ponel
+ 									</MenuItem>
+ 								)}
 								<MenuItem
 									h={14}
 									onClick={() => router.push('/dashboard')}
