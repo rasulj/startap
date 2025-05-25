@@ -21,8 +21,9 @@ import { BsFillMoonFill, BsFillSunFill } from 'react-icons/bs';
 import { TbWorld } from 'react-icons/tb';
 import { adminSidebar, language } from 'src/config/constants';
 import { DarkLogo, LightLogo } from 'src/icons';
+import { SidebarProps } from './sidebar.props';
 
-const AdminSidebar = () => {
+const AdminSidebar = ({toggle}:SidebarProps) => {
 	const { toggleColorMode, colorMode } = useColorMode();
 	const { i18n, t } = useTranslation();
 	const router = useRouter();
@@ -34,53 +35,27 @@ const AdminSidebar = () => {
 
 	return (
 		<Box
-			width={'420px'}
-			h={'100vh'}
-			pos={'fixed'}
-			left={0}
-			top={0}
-			borderRightColor={useColorModeValue('gray.200', 'gray.700')}
-			bg={useColorModeValue('gray.50', 'gray.900')}
-			color={useColorModeValue('gray.700', 'gray.200')}
+		zIndex={1001}
+		w={{ base: 'full', lg: '300px' }}
+		h={'90vh'}
+		bg={useColorModeValue('gray.50', 'gray.900')}
+		color={useColorModeValue('gray.700', 'gray.200')}
+		borderRight={'1px'}
+		borderRightColor={useColorModeValue('gray.200', 'gray.700')}
+		pos={'fixed'}
+		left={{ base: toggle ? 0 : '-100%', lg: 0 }}
+		top={'10vh'}
+		overflowY={'scroll'}
+		css={{
+			'&::-webkit-scrollbar': { width: '1px' },
+			'&::-webkit-scrollbar-track': { width: '1px' },
+			'&::-webkit-scrollbar-thumb': { background: 'transparent' },
+		}}
+		transition={'all .4s ease'}
 		>
 			<Container mt={5}>
-				<HStack justify={'space-between'}>
-					<Link href={'/'}>{colorMode === 'light' ? <DarkLogo /> : <LightLogo />}</Link>
-					<HStack>
-						<Menu placement='bottom'>
-							<MenuButton
-								as={Button}
-								rightIcon={<TbWorld />}
-								textTransform={'capitalize'}
-								colorScheme={'gray'}
-								variant={'outline'}
-								display={{ base: 'none', md: 'block' }}
-							>
-								{i18n.resolvedLanguage}
-							</MenuButton>
-							<MenuList p={0}>
-								{language.map(item => (
-									<MenuItem
-										key={item.lng}
-										onClick={() => onLanguage(item.lng)}
-										icon={<item.icon />}
-										backgroundColor={i18n.resolvedLanguage === item.lng ? 'facebook.500' : ''}
-									>
-										{item.nativeLng}
-									</MenuItem>
-								))}
-							</MenuList>
-						</Menu>
-						<IconButton
-							icon={colorMode == 'light' ? <BsFillMoonFill /> : <BsFillSunFill />}
-							colorScheme={'facebook'}
-							variant={'ghost'}
-							aria-label={'color-mode'}
-							onClick={toggleColorMode}
-						/>
-					</HStack>
-				</HStack>
-				<Divider my={5} />
+				
+			
 				{adminSidebar.map((item, idx) => {
 					const active = `/admin/${router.pathname.split('/')[2]}` == `/admin/${item.route}`;
                 console.log(item.route)

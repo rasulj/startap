@@ -25,7 +25,7 @@ import { useTranslation } from 'react-i18next';
  					</HStack>
  				</CardBody>
  			</Card>
-			<Grid gridTemplateColumns={'repeat(3, 1fr)'} gap={4}>
+			<Grid gridTemplateColumns={{base:'1fr',md:'repeat(3, 1fr)'}} gap={4}>
  				{courses.map(c => (
  					<AdminCourseCard key={c._id} course={c} />
  				))}
